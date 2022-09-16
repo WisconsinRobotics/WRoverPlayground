@@ -1,0 +1,8 @@
+prefix=/home/nomorenickels/Documents/WRoverMock/install
+
+Name: gui
+Description: Description of gui
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

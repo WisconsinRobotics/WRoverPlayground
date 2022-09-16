@@ -1,0 +1,4 @@
+<launch>
+    <node name="mocked_rover" pkg="wrover_mock" type="Robot.py"/>
+    <node name="gui" pkg="gui" type="gui.py"/>
+</launch>

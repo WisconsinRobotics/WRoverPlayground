@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from curses import nonl
 import rospy, std_msgs, math, os
 import tkinter as tk
 from geometry_msgs.msg import Pose2D
@@ -15,8 +14,8 @@ def update_gui(msg):
     y = msg.y
     print(get_status_str())
 
-    center = (x + width/2, y + height/2)
-    coord = rotate_rect((25*botScale, 25*botScale), -theta)
+    center = (x + width/2, height/2-y)
+    coord = rotate_rect((25*botScale, 25*botScale), math.pi+theta)
 
     w.delete('all')
 
@@ -30,8 +29,8 @@ def update_gui(msg):
 
     w.create_line(
         center[0], center[1],
-        center[0]+math.sin(theta)*50*botScale,
-        center[1]+math.cos(theta)*50*botScale,
+        center[0]+math.sin(math.pi-theta)*50*botScale,
+        center[1]+math.cos(math.pi-theta)*50*botScale,
         fill="red",
         width=10
     )
@@ -51,7 +50,7 @@ def update_gui(msg):
     w.create_text(50,60,text=get_status_str(), anchor=tk.NW, font=30)
 
 def get_status_str():
-    return "x: {0}\ny: {1}\n\u03B8: {2}".format(x,y,theta)
+    return "x: {0}\ny: {1}\n\u03B8: {2}".format(round(x,3),round(y,3),round(theta*180/math.pi,3))
 
 def rotate_rect(coord, theta):
     return (
@@ -114,7 +113,7 @@ root.geometry("%dx%d" % (width, height))
 w = tk.Canvas (root, bg="white", height=height, width=width)
 w.pack()
 
-rospy.init_node('rover')
+rospy.init_node('gui')
 rospy.on_shutdown(root.destroy)
 root.protocol("WM_DELETE_WINDOW", lambda: rospy.signal_shutdown("Window closed"))
 

@@ -53,9 +53,9 @@ class Robot:
             r = self.wheelBase * (self.leftWheel + self.rightWheel) / 2 / abs(self.leftWheel - self.rightWheel)
             dist = targetVelocity * self.dt
             h = math.sqrt(r*r - dist*dist/4)
-            dtheta = 2 * math.atan(dist/2/h)
+            dtheta = 2 * math.atan(dist/2/h) * (1 if self.leftWheel > self.rightWheel else -1)
 
-        self.theta += dtheta % (math.pi * 2)
+        self.theta = (self.theta + dtheta) % (math.pi * 2)
 
         if self.acceleration > abs(targetVelocity - self.velocity):
             self.velocity = targetVelocity

@@ -24,11 +24,6 @@ def main():
 
     while not rospy.is_shutdown():
 
-        if rospy.get_time() > 2000:
-            pass
-            # rover.setLeft(0)
-            # rover.setRight(0)
-
         rover.update()
 
         left_enc_publisher.publish(rover.getLeftDistance())

@@ -21,7 +21,7 @@ def update_gui(msg):
         -coord[1] + center[0], coord[0] + center[1],
         -coord[0] + center[0], -coord[1] + center[1],
         coord[1] + center[0], -coord[0] + center[1],
-        fill="red"
+        fill="red", outline='black'
     )
 
     w.create_line(
@@ -43,9 +43,14 @@ def update_gui(msg):
     
     for i in range(1,len(trail)):
         w.create_line(trail[i-1][0], trail[i-1][1], trail[i][0], trail[i][1], fill="red",  width=5)
+    
+    w.create_text(50,60,text=getStatusStr())
 
     #ganatt
 
+
+def getStatusStr():
+    return "x: {0}\ny: {1}\n\u03B8: {2}".format(x,y,theta)
 
 def rotate_rect(coord, theta):
     return (

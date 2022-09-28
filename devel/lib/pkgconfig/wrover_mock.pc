@@ -1,8 +1,0 @@
-prefix=/home/nomorenickels/Documents/WRoverMock/devel
-
-Name: wrover_mock
-Description: Description of wrover_mock
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

@@ -20,9 +20,8 @@ def main():
     pose_publisher = rospy.Publisher('rover/pose', std_msgs.msg.Float64MultiArray, queue_size=10) # top secret - do not subscribe!
 
     sleeper = rospy.Rate(20)
+
     while not rospy.is_shutdown():
-        rover.setLeft(1)
-        rover.setRight(0.5)
         rover.update()
 
         left_enc_publisher.publish(rover.getLeftDistance())

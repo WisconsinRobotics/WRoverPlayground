@@ -1,0 +1,16 @@
+# ros build output
+build/
+devel/
+
+# python env
+/venv/
+
+# ide
+/.vscode/*
+# except recommended extensions
+!/.vscode/extensions.json
+!/.vscode/settings.json
+
+# potential clang excludes
+compile_commands.json
+.cache

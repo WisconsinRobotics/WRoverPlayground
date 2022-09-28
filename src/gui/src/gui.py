@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 
-import rospy, std_msgs, math
+from curses import nonl
+import rospy, std_msgs, math, os
 import tkinter as tk
+from geometry_msgs.msg import Pose2D
+
 
 
 def update_gui(msg):
-    global ticks
+    global ticks, x, y, theta
 
-    theta = msg.data[2]
-    x = msg.data[0]
-    y = msg.data[1]
+    theta = msg.theta
+    x = msg.x
+    y = msg.y
+    print(get_status_str())
 
     center = (x + width/2, y + height/2)
     coord = rotate_rect((25*botScale, 25*botScale), -theta)
@@ -44,12 +48,9 @@ def update_gui(msg):
     for i in range(1,len(trail)):
         w.create_line(trail[i-1][0], trail[i-1][1], trail[i][0], trail[i][1], fill="red",  width=5)
     
-    w.create_text(50,60,text=getStatusStr())
+    w.create_text(50,60,text=get_status_str(), anchor=tk.NW, font=30)
 
-    #ganatt
-
-
-def getStatusStr():
+def get_status_str():
     return "x: {0}\ny: {1}\n\u03B8: {2}".format(x,y,theta)
 
 def rotate_rect(coord, theta):
@@ -59,6 +60,39 @@ def rotate_rect(coord, theta):
         # coord[2]*math.cos(theta) - coord[3]*math.sin(theta),
         # coord[2]*math.sin(theta) + coord[3]*math.cos(theta),
     )
+
+def key_down(e):
+    global keys
+    print('down: ' + str(e.keycode))
+
+    if e.keycode == 111: #up
+        keys |= 8
+    elif e.keycode == 116: #down
+        keys |= 4
+    elif e.keycode == 113: #left
+        keys |= 2
+    elif e.keycode == 114: #right
+        keys |= 1
+    
+    print(keys)
+    key_publisher.publish(keys)
+    
+
+
+def key_up(e):
+    global keys
+    print('up: ' + str(e.keycode))
+    if e.keycode == 111: # up
+        keys &= 15-8
+    elif e.keycode == 116: #down
+        keys &= 15-4
+    elif e.keycode == 113: #left
+        keys &= 15-2
+    elif e.keycode == 114: #right
+        keys &= 15-1
+    
+    print(keys)
+    key_publisher.publish(keys)
 
 x = 0.0
 y = 0.0
@@ -82,7 +116,15 @@ w.pack()
 
 rospy.init_node('rover')
 rospy.on_shutdown(root.destroy)
-pos_subscriber = rospy.Subscriber('/rover/pose', std_msgs.msg.Float64MultiArray, update_gui)
+root.protocol("WM_DELETE_WINDOW", lambda: rospy.signal_shutdown("Window closed"))
+
+keys = 0 #0000,up,down,left,right
+os.system('xset r off')
+root.bind("<KeyPress>", key_down)
+root.bind("<KeyRelease>",key_up)
+
+pos_subscriber = rospy.Subscriber('/rover/pose', Pose2D, update_gui)
+key_publisher = rospy.Publisher('/gui/keys', std_msgs.msg.Int8, queue_size=10)
 
 root.mainloop()
 rospy.spin()

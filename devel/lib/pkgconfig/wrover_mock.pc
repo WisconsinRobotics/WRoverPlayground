@@ -1,4 +1,4 @@
-prefix=/home/nomorenickels/Documents/WRoverMock/devel
+prefix=/home/arya/Documents/GitHub/WRoverPlayground/devel
 
 Name: wrover_mock
 Description: Description of wrover_mock

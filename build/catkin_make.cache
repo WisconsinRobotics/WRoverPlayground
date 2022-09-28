@@ -1,2 +1,2 @@
 gui:wrover_mock
--DCATKIN_DEVEL_PREFIX=/home/nomorenickels/Documents/WRoverMock/devel -DCMAKE_INSTALL_PREFIX=/home/nomorenickels/Documents/WRoverMock/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/arya/Documents/GitHub/WRoverPlayground/devel -DCMAKE_INSTALL_PREFIX=/home/arya/Documents/GitHub/WRoverPlayground/install -G Unix Makefiles

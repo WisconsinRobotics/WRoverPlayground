@@ -7,9 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/nomorenickels/Documents/WRoverMock/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/nomorenickels/Documents/WRoverMock/devel/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/nomorenickels/Documents/WRoverMock/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PWD='/home/nomorenickels/Documents/WRoverMock/build'
-export ROSLISP_PACKAGE_DIRECTORIES='/home/nomorenickels/Documents/WRoverMock/devel/share/common-lisp'
-export ROS_PACKAGE_PATH="/home/nomorenickels/Documents/WRoverMock/src:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/arya/Documents/GitHub/WRoverPlayground/devel:$CMAKE_PREFIX_PATH"
+export PWD='/home/arya/Documents/GitHub/WRoverPlayground/build'
+export ROSLISP_PACKAGE_DIRECTORIES='/home/arya/Documents/GitHub/WRoverPlayground/devel/share/common-lisp'
+export ROS_PACKAGE_PATH="/home/arya/Documents/GitHub/WRoverPlayground/src:$ROS_PACKAGE_PATH"

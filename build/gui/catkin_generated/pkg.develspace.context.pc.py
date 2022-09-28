@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "gui"
-PROJECT_SPACE_DIR = "/home/nomorenickels/Documents/WRoverMock/devel"
+PROJECT_SPACE_DIR = "/home/arya/Documents/GitHub/WRoverPlayground/devel"
 PROJECT_VERSION = "0.0.0"

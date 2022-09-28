@@ -1,4 +1,4 @@
-prefix=/home/nomorenickels/Documents/WRoverMock/install
+prefix=/home/arya/Documents/GitHub/WRoverPlayground/install
 
 Name: gui
 Description: Description of gui

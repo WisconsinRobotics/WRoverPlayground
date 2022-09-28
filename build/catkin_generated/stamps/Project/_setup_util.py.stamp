@@ -1,4 +1,4 @@
-#!/home/nomorenickels/Documents/WRover_Software/venv/bin/python3
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # Software License Agreement (BSD License)

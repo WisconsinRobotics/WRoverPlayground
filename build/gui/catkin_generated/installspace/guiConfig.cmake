@@ -67,14 +67,14 @@ set(gui_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(gui_SOURCE_PREFIX /home/nomorenickels/Documents/WRoverMock/src/gui)
-  set(gui_DEVEL_PREFIX /home/nomorenickels/Documents/WRoverMock/devel)
+  set(gui_SOURCE_PREFIX /home/arya/Documents/GitHub/WRoverPlayground/src/gui)
+  set(gui_DEVEL_PREFIX /home/arya/Documents/GitHub/WRoverPlayground/devel)
   set(gui_INSTALL_PREFIX "")
   set(gui_PREFIX ${gui_DEVEL_PREFIX})
 else()
   set(gui_SOURCE_PREFIX "")
   set(gui_DEVEL_PREFIX "")
-  set(gui_INSTALL_PREFIX /home/nomorenickels/Documents/WRoverMock/install)
+  set(gui_INSTALL_PREFIX /home/arya/Documents/GitHub/WRoverPlayground/install)
   set(gui_PREFIX ${gui_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/nomorenickels/Documents/WRoverMock/install/lib;/opt/ros/noetic/lib)
+    foreach(path /home/arya/Documents/GitHub/WRoverPlayground/install/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

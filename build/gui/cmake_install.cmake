@@ -1,8 +1,8 @@
-# Install script for directory: /home/nomorenickels/Documents/WRoverMock/src/gui
+# Install script for directory: /home/arya/Documents/GitHub/WRoverPlayground/src/gui
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/nomorenickels/Documents/WRoverMock/install")
+  set(CMAKE_INSTALL_PREFIX "/home/arya/Documents/GitHub/WRoverPlayground/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/nomorenickels/Documents/WRoverMock/build/gui/catkin_generated/installspace/gui.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/arya/Documents/GitHub/WRoverPlayground/build/gui/catkin_generated/installspace/gui.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gui/cmake" TYPE FILE FILES
-    "/home/nomorenickels/Documents/WRoverMock/build/gui/catkin_generated/installspace/guiConfig.cmake"
-    "/home/nomorenickels/Documents/WRoverMock/build/gui/catkin_generated/installspace/guiConfig-version.cmake"
+    "/home/arya/Documents/GitHub/WRoverPlayground/build/gui/catkin_generated/installspace/guiConfig.cmake"
+    "/home/arya/Documents/GitHub/WRoverPlayground/build/gui/catkin_generated/installspace/guiConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gui" TYPE FILE FILES "/home/nomorenickels/Documents/WRoverMock/src/gui/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gui" TYPE FILE FILES "/home/arya/Documents/GitHub/WRoverPlayground/src/gui/package.xml")
 endif()
 

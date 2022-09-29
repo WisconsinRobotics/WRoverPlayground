@@ -14,3 +14,6 @@ devel/
 # potential clang excludes
 compile_commands.json
 .cache
+
+# python caches
+**/__pycache__/*

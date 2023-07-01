@@ -17,11 +17,11 @@ Subscriber:
 Publisher: 
 * Left and right motor powesr
 
-### Ros services
+### ROS services
 * Signaling done by mocking status lights
 * Waiting for some amount of time before going to next beacon
 
-### Ros debugging/tooling
+### ROS debugging/tooling
 * Using rviz to visualize robot and beacon position
 * Using rqt_plot to monitor topic data
 

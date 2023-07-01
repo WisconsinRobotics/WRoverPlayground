@@ -5,10 +5,10 @@ This is the planning document for the WRoverPlayground exercise repo. This docum
 ## Topics
 WRoverPlayground needs to encompass the following topics: 
 
-### Ros setup
+### ROS setup
 TBD
 
-### Ros topics
+### ROS topics
 Subscriber:
 * Mock navigation data which would be formatting like a lidar, or some coordinate system (would need a lot more math under the hood this way)
 * Robot heading

@@ -5,12 +5,13 @@ Your software will allow WRunt to detect beacons and navigate between them. The 
 
 ## WRunt specifications
 #### Drive system
-WRunt will have two drive wheels. There will be a ROS topic associated with the drive system. You will publish the desired motor powers to this topic to make the robot move.
+WRunt will have two drive wheels. The drive system used is called a tank drive. This means that each side of the robot is controlled independently. When both sides are commanded to go forward, the robot will move forward. When one side is commanded forward and the other backward, the robot spins. You can get creative with this and put one side at a slightly lower power to move the robot on a curve.
 
 #### Target finding sensor
-The target finding sensor will tell you where the target is through a ROS topic. You will need to subscribe to this topic to figure out where to drive WRunt.
+The target finding sensor is a laser rangefinding sensor. It will give you the heading of the target relative to the robot. You'll need to use this information to figure out where to drive WRunt.
 
 #### Status light
-The status light lights up when WRunt has reached the target. This is a ROS service.
+The status light lights up when WRunt has reached the target. This allows observers to know when WRunt knows it has reached its target. During a competition setting, this lets the judges know that the robot actually completed the task and did not just accidentally get to the right spot. 
 
 #### Continue to next beacon signal
+Once WRunt has reached the first beacon, you will need to give it a manual signal that it can move on to the next beacon. In real life, this signal would be transmitted over a network connection. For our pursposes, it will be a button on a Graphical User Interface (GUI).

@@ -15,3 +15,9 @@ The status light lights up when WRunt has reached the target. This allows observ
 
 #### Continue to next beacon signal
 Once WRunt has reached the first beacon, you will need to give it a manual signal that it can move on to the next beacon. In real life, this signal would be transmitted over a network connection. For our pursposes, it will be a button on a Graphical User Interface (GUI).
+
+## WRunt behavior flowchart
+1. WRunt determines the closest beacon that hasn't been visited yet
+2. WRunt move to and reaches the target beacon 
+3. WRunt marks the beacon as visited, changes its own status light, and awaits a certain number of seconds
+4. Repeat steps 1-3 until all beacons have been reached

@@ -25,14 +25,14 @@ Publisher:
 * Using rviz to visualize robot and beacon position
 * Using rqt_plot to monitor topic data
 
-## Steps and instructions
+## Lesson Steps and instructions
 
 Ideally each step should take one meeting session, so studenets should be able to complete the playground tutorial by the end of the second week. 
 
 ### Step 1: Development environment and ROS setup
-Input: Installing a VM software, setting up Linux, and installing ROS and other dependencies OR using docker environment provided by the team and running the code from there.
+Input: Installing a VM software, setting up Linux, and installing ROS and other dependencies OR using docker environment provided by the team and running the code from there. Experiment around with using rviz and rqt_graph and rqt_plot. 
 
-Ouput: Students should be able to pull the student version of the playground code, compile, and run the program. Students should also be able to see the robot and various beacons on Rviz. Students should also be familiar like concepts including ROS launching and ROS parameters
+Ouput: Students should be able to pull the student version of the playground code, compile, and run the program. Students should also be able to see the robot and various beacons on rviz. Students should also be familiar like concepts including ROS launching and ROS parameters
 
 ### Step 2: Moving the robot around
 Input: Students will learn about ROS topics, how to subscribe to topics to receive navigation data and publish to topics to set drive data. 

@@ -33,7 +33,7 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
 }
 
 /**
- * The main function that contains the creation of the 
+ * The main method that contains the creation of the 
  * node, Publisher, Subcriber, and topic. It also 
  * describes what we will do with the data/message.
  */
@@ -65,7 +65,7 @@ auto main(int argc, char **argv) -> int
      a specific topic. State the name of the topic 
      ("chatter"), the queue size (1000), and the function 
      that will be called when a message is received 
-     (chatterCallBack()). */
+     (chatterCallBack(msg)). */
   ros::Subscriber sub = nhandle.subscribe("chatter", QUEUE_SIZE, chatterCallback);
 
   /* Specify the frequency we would like to loop at 

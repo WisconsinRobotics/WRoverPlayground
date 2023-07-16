@@ -118,28 +118,21 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
    ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#    src/talker.cpp src/listener.cpp
-# )
+# add_library(${PROJECT_NAME})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-## Declare a C++ executable
+## Declare a C++ executable ///////////////////////////////////////////////////////////////////////////
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/topic_training_node.cpp)
-# add_executable(PubSubDemo src/PubSubDemo.cpp)
-add_executable(PubSubDemo src/PubSubDemo.cpp)
-add_executable(talker src/talker.cpp)
-add_executable(listener src/listener.cpp)
+# add_executable(PubSubDemoCPP src/PubSubDemoCPP.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -147,20 +140,17 @@ add_executable(listener src/listener.cpp)
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
 
-## Add cmake target dependencies of the executable
+## Add cmake target dependencies of the executable ////////////////////////////////////////////////////
 ## same as for the library above
-add_dependencies(PubSubDemo ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(talker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(listener ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
+# add_dependencies(PubSubDemoCPP 
+#    ${${PROJECT_NAME}_EXPORTED_TARGETS} 
+#    ${catkin_EXPORTED_TARGETS}
 # )
-# target_link_libraries(PubSubDemo ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-target_link_libraries(PubSubDemo ${catkin_LIBRARIES})
-target_link_libraries(talker ${catkin_LIBRARIES})
-target_link_libraries(listener ${catkin_LIBRARIES})
+
+## Specify libraries to link a library or executable target against ///////////////////////////////////
+# target_link_libraries(PubSubDemoCPP 
+#    ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -169,9 +159,9 @@ target_link_libraries(listener ${catkin_LIBRARIES})
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
-## Mark executable scripts (Python etc.) for installation
+## Mark executable scripts (Python etc.) for installation /////////////////////////////////////////////
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS src/talker.py src/listener.py
+# catkin_install_python(PROGRAMS src/PubSubDemoPY.py
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 

@@ -37,6 +37,13 @@ This project uses Docker to efficiently containerize the workspace and make cros
 
 ### Windows
 
+Tools:
+
+* [git](https://git-scm.com/)
+* [VS Code](https://code.visualstudio.com/)
+* [VcXsrv (Xlaunch)](https://sourceforge.net/projects/vcxsrv/)
+* [WSL 2](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10)
+
 ### Mac
 
 TODO (@Tzanccc): how to do this on mac

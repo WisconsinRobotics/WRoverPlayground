@@ -21,3 +21,14 @@ Once WRunt has reached the first beacon, you will need to give it a manual signa
 2. WRunt move to and reaches the target beacon 
 3. WRunt marks the beacon as visited, changes its own status light, and awaits a certain number of seconds
 4. Repeat steps 1-3 until all beacons have been reached
+
+## How To Open The Project
+
+This project uses Docker to efficiently containerize the workspace and make cross-platform development easier.  Find your host platform below to see how to start development:
+
+### Linux
+
+### Windows
+
+### Mac
+TODO (@Tzanccc): how to do this on mac

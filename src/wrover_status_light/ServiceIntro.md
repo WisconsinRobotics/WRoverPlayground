@@ -8,7 +8,7 @@ ROS services follow a client/server structure, where one node acts as a client t
 
 Here is a list of key components involved in services:
 * Service definition: services are defined using a srv file. Similar to msg files for ROS topics, the srv file defines the name of a service, the data structure of the request message, and the data structure of the response message. 
-* Client node: the client node in responsible for initiating the service request. It creates the request message, populates it with the required data, and sends it to the server node. the client then waits for the server to process the request and replies with a response.
+* Client node: the client node in responsible for initiating the service request. It creates the request message, populates it with the required data, and sends it to the server node. The client then waits for the server to process the request and replies with a response.
 * Server node: the server node receives and handles the service request calls from client nodes. It retrieves data from the request message, performs the necessary actions, and generates a response message which is sent back to the client. 
 * Request and response messages: these messages are structured data containers that are defined by the service definition. The client and server use these messages to exchange information.
 

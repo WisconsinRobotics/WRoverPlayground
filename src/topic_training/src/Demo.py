@@ -1,6 +1,6 @@
 ''' Import rospy to use ROS with python. '''
 import rospy
-''' Include the message type we will be publishing. '''
+''' Import the message type we will be publishing. '''
 from std_msgs.msg import String
 
 ''' Constant variables to be used below. '''

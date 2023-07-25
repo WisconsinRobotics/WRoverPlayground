@@ -133,6 +133,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(Demo src/Demo.cpp)
+# add_executable(PlotDemo src/PlotDemo.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -146,9 +147,16 @@ include_directories(
 #    ${${PROJECT_NAME}_EXPORTED_TARGETS} 
 #    ${catkin_EXPORTED_TARGETS}
 # )
+# add_dependencies(PlotDemo 
+#    ${${PROJECT_NAME}_EXPORTED_TARGETS} 
+#    ${catkin_EXPORTED_TARGETS}
+# )
 
 ## Specify libraries to link a library or executable target against 
-# target_link_libraries(Demo 
+# target_link_libraries(Demo
+#    ${catkin_LIBRARIES}
+# )
+# target_link_libraries(PlotDemo
 #    ${catkin_LIBRARIES}
 # )
 
@@ -159,9 +167,9 @@ include_directories(
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
-## Mark executable scripts (Python etc.) for installation 
-## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS src/Demo.py
+# Mark executable scripts (Python etc.) for installation 
+# in contrast to setup.py, you can choose the destination
+# catkin_install_python(PROGRAMS src/Demo.py src/PlotDemo.py
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 

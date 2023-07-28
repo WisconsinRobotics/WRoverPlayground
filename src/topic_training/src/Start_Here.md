@@ -1,19 +1,23 @@
 # WRoverPlayground - Topic Training
 Now that you have completed the Setup Training, you are ready to learn about ROS topics. From the Setup Training, you should be familiar with:
-(*list out what newcomers should already know*)
-- ROS Nodes
-- etc.
-- these ROS commands:
-    - .
+- the basics of ROS Nodes
+- rosnode
+- and roscore.
+
 Once you complete this training, you should be familiar with:
-(*list out what newcomers should learn*)
-- topics
-- pub/sub relationship
-- these ROS commands:
-    - .
+- the purpose of topics
+- the relationship between Publishers and Subscribers
+- setting up Publishers and Subscribers
+- running Publishers and Subscribers
+- rqt_graph
+- rqt_plot
+- custom topic types
+- and rostopic type {topic}.
 
 ## The Purpose of Topics
-The word "topic" sounds very general, but it is actually a specific concept that allows ROS nodes to communicate with each other. 
+The word "topic" sounds very general, but it is actually a specific concept that allows ROS nodes to communicate with each other. This is extremely important because one node cannot possibly contain all the information a rover would need.
+
+Topics allow us to specialize nodes, so they can execute their own code/tasks, while also sending and receiving information. For example, a node could receive data and send it to another one, a node could receive and analyze data and have another node do some action with it, a node could receive data from multiple nodes, etc.
 
 ## Publisher/Subscriber Relationship
 The Publisher and Subscriber are both nodes that are connected by a topic, allowing them to send messages between themselves. The Publisher node publishes messages on the topic, while the Subscriber node subscribes to the same topic to receive the Publisher's messages. 
@@ -29,7 +33,7 @@ One file will be written in C++, and the other will be in Python. I recommend di
 
 Go through one of the files, making sure you understand all the code and comments. Come back to this file once you feel ready to move on.
 
-### Running a Publisher and Subscriber
+## Running a Publisher and Subscriber
 Before you are able to run the example code, find the CMakeLists.txt file that is outside of the src directory but still inside of the topic_training directory. 
 
 This file is mostly commented out. Make sure these are uncommented:
@@ -101,3 +105,4 @@ A topic's type is determined by the type of the message being published. If you 
 A topic can have messages of type int8, int16, int32, int64, uint*, float32, float64, String, time, duration, other msg files, and array[] of variable length or fixed length. The message in the example code is of type String. To message a different type, just change the Strings to your desired type and update the includes (C++) or imports (Python).
 
 ## Challenge
+Once you have completed the training from WRoverPlayground, you should have some working code that will be put into a simulation. The simulation will have a rover that your code is meant to control its drive through mock navigation data. 

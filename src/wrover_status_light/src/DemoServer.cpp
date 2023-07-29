@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "double_server");
     ros::NodeHandle nh;
 
-    ros::ServiceServer service = nh.advertiseService("add_two_ints", addTwoIntsCallback);
+    ros::ServiceServer service = nh.advertiseService("double_service", addTwoIntsCallback);
 
     ros::spin();
 

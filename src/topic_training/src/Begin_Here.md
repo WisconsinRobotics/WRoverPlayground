@@ -105,4 +105,10 @@ A topic's type is determined by the type of the message being published. If you 
 A topic can have messages of type int8, int16, int32, int64, uint*, float32, float64, String, time, duration, other msg files, and array[] of variable length or fixed length. The message in the example code is of type String. To message a different type, just change the Strings to your desired type and update the includes (C++) or imports (Python).
 
 ## Challenge
-Once you have completed the training from WRoverPlayground, you should have some working code that will be put into a simulation. The simulation will have a rover that your code is meant to control its drive through mock navigation data. 
+Once you have completed the training from WRoverPlayground, you should have some working code that will be put into a simulation. The simulation will have a rover that your code is meant to control its drive through mock navigation data to reach some target/beacon. 
+
+You will take in sensor data as a 180-element array of floats that represents a 180 degree view of the robot. Each element is a degree-sized slice of the robot's view. One element will contain a float, while the other elements will be undefined. The float in this array represents the distance from the head of the robot to the head of the target. The location of the element in the array represents its position relative to the robot. If the float is in the 90th element, the target is straight ahead. If the float is before the 90th element, the target is to the robot's left, and vice versa. 
+
+Using this information, you will output speeds, on the interval [-1, 1], for the robot until it reaches its target. There will be two separate values controlling the speed of the left side and the speed of right side. (*talk about turning logistics from diagram*)
+
+Go into the ___ (.cpp or .py). This is where you will be writing your code. Feel free to use the examples provided in this training and any other resources that will be useful.

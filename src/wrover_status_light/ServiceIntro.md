@@ -1,6 +1,6 @@
 # About ROS Services
 ## What is a ROS Service?
-Services are another form of communication between different software componenents, or more fomally known as nodes, that ROS offers. Common uses of services include sending requests for specific pieces of data, or notify another node to perform specific actions.  A good way to conceptualize a service is as a remote function call.
+Services are another form of communication between different ROS nodes. Common uses of services include sending requests for specific pieces of data, or notify another node to perform specific actions.  A good way to conceptualize a service is as a remote function call.
 
 ## What is the Makeup of a ROS Service?
 
@@ -44,41 +44,41 @@ def example_service_server():
     s = rospy.Service('example_service', ExamplePackage.srv.ExampleService, example_service_execution)
     rospy.spin()
 
-def example_service_execution(request):
+def example_service_execution(request: ExampleServiceRequest) -> ExampleServiceResponse:
     return ExamplePackage.srv.ExampleServiceResponse(0.0)
 
 example_service_server()
 ```
 To break the code down, the function `example_service_server()` initializes the node.
-```
+``` Python
 rospy.init_node('example_service_server')
 ```
 Creates a new node with the name of `example_service_server`.
-```
+``` Python
 rospy.Service('example_service', ExamplePackage.srv.ExampleService, example_service_execution)
 ```
 Creates a new service with the name of `example_service` that is defined by the `ExamplePackage.srv.ExampleService` class. When the service is called, the `example_service_execution` method will be called to handle the request. 
-```
+``` Python
 rospy.spin()
 ```
 Keeps the code running by entering a loop that listens for incoming requests. 
 
 The function `example_service_execution()` is the handler function for this service and is called whenever the node receives a new request message. Handler functions are responsible for carrying out the actual logics of the service and send a response back to the client. Handler functions always take in a single argument of the request message type, and returns an instance of the response message type.
 
-```
+``` Python
 return ExamplePackage.srv.ExampleServiceResponse(0.0)
 ```
 In this example, the handler function always returns a hardcoded response of 0.0. If the handler function wants to use the request inputs, they can be accessed with `request.input1` or `request.input2`.
 
 Returning response messages can also be streamlined by not having to manually create a new instance. In this case, simply 
-```
+``` Python
 return 0.0
 ``` 
 would also work. 
 
 ### C++
 A server node can be initialized with
-```
+``` c++
 bool ExampleServiceServer::callback(ExamplePackage::ExampleService::Request& request, ExamplePackage::ExampleService::Response& response) {
     return 0.0;
 }
@@ -88,7 +88,7 @@ ros::NodeHandle nh;
 ros::ServiceServer service = nh.advertiseService("example_service", &ExampleServiceServer::callback, &exampleService);
 ```
 To break the code down, the function `ExampleServiceServer::callback()` is the handler function of the server, and is ran every time the server receives a new request. The handler function must take in two arguments, a request and a response.
-```
+``` C++
 ExamplePackage::ExampleService exampleService;
 ros::NodeHandle nh;
 ros::ServiceServer service = nh.advertiseService("example_service", &ExampleServiceServer::callback, &exampleService);
@@ -98,31 +98,31 @@ The code sets up the service server using a `NodeHandle` instance. NodeHandles p
 ## Writing a Client Node
 ### Python
 Services can be called by 
-```
+``` python
 rospy.wait_for_service('example_service')
 example_service = rospy.ServiceProxy('example_service', ExamplePackage.srv.ExampleService)
 response = example_service(ExamplePackage.srv.ExampleServiceRequest(..., ...))
 ```
 To break the code down,
-```
-rospy.wait_for_service('exmaple_service')
+``` Python
+rospy.wait_for_service('example_service')
 ```
 This is a blocking operation that waits until a service with the name `example_service` is created. 
-```
+``` Python
 example_service = rospy.ServiceProxy('example_service', ExamplePackage.srv.ExampleService)
 ```
 Creates a new callable object for the service named `example_service` and defined by `ExamplePackage.srv.ExampleService`.
-```
+``` Python
 response = example_service(ExamplePackage.srv.ExampleServiceRequest(..., ...))
 ```
 Calls the service using an instance of the request message class and saves the response in a local variable. Similar to before, the service can also be called without explicitly making a new instance with
-```
+``` Python
 response = example_service(..., ...)
 ```
 
 ### C++
 Services can be called by
-```
+``` c++
 ros::NodeHandle nh;
 ros::ServiceClient client = nh.serviceClient<Example_Package::Example_Service>("example_service");
 
@@ -136,18 +136,18 @@ if (client.call(srv)) {
 }
 ```
 To break the code down
-```
+``` C++
 ros::NodeHandle nd;
 ros::ServiceClient client = nh.serviceClient<Example_Package::Example_Service>("example_service");
 ```
 The code first creates a new NodeHandle instance. Here the NodeHandle instance creates a new ServiceClient using the type `Example_Package::Example_Service` and service name `example_service`.
-```
+``` C++
 Example_Package::Example_Service srv;
 srv.request.input1 = ...
 srv.request.input2 = ...
 ```
 The code then creates a new `Example_Service` instance and populates the request variables.
-```
+``` C++
 if (client.call(srv)) {
     ...
 } else {

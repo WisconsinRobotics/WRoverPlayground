@@ -83,7 +83,7 @@ bool ExampleServiceServer::callback(ExmaplePackage::ExampleService::Request& req
     return 0.0;
 }
 
-ExmaplePackage::ExampleService exampleService;
+ExamplePackage::ExampleService exampleService;
 ros::NodeHandle nh;
 ros::ServiceServer service = nh.advertiseService("example_service", &ExampleServiceServer::callblack, &exampleService);
 ```

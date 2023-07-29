@@ -91,7 +91,7 @@ To break the code down, the function `ExampleServiceServer::callback()` is the h
 ```
 ExmaplePackage::ExampleService exampleService;
 ros::NodeHandle nh;
-ros::ServiceServer service = nh.advertiseService("example_service", &ExampleServiceServer::callblack, &exampleService);
+ros::ServiceServer service = nh.advertiseService("example_service", &ExampleServiceServer::callback, &exampleService);
 ```
 The code sets up the service server using a `NodeHandle` instance. NodeHandles provide functions for creating, managing, and interacting using ROS nodes. Here the `NodeHandle` creates a new server with `example_service` as the server name, `ExmapleServiceServer::callback` as the handler function for service calls, and `exmapleService` defines teh service type. 
 

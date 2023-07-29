@@ -44,7 +44,7 @@ def example_service_server():
     s = rospy.Service('example_service', ExamplePackage.srv.ExampleService, example_service_execution)
     rospy.spin()
 
-def example_service_execution(reqest):
+def example_service_execution(request):
     return ExamplePackage.srv.ExampleServiceResponse(0.0)
 
 example_service_server()

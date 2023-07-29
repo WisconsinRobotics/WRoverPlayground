@@ -79,7 +79,7 @@ would also work.
 ### C++
 A server node can be initialized with
 ```
-bool ExampleServiceServer::callback(ExmaplePackage::ExampleService::Request& request, ExmaplePackage::ExampleService::Response& response) {
+bool ExampleServiceServer::callback(ExamplePackage::ExampleService::Request& request, ExamplePackage::ExampleService::Response& response) {
     return 0.0;
 }
 

@@ -37,7 +37,7 @@ After defining a message, ROS would convert the srv file into three classes: ser
 
 ## Writing a Server Node
 ### Python
-A server code can be initailized with
+A server code can be initialized with
 ```
 def example_service_server():
     rospy.init_node('example_service_server')

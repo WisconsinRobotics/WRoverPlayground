@@ -16,7 +16,7 @@ Here is a list of key components involved in services:
 
 While both services and topics work to allow communication between nodes, they differ in terms of their data exchange patterns and the types of interactions they support. 
 
-Unlike publishers and subscribers over topics, which operate asynchronously, service calls provide synchronous communication. The client node waits for the server node to process the request and receive a response before continuing its execution. This synchronous behavior is beneficial in cases where a response is required before proceeding with the next steps of a program.
+Unlike topics, which operate asynchronously, service calls provide synchronous communication. The client node waits for the server node to process the request and receive a response before continuing its execution. This synchronous behavior is beneficial in cases where a response is required before proceeding with the next steps of a program.  It is not acceptable for a server to not exist or to never return a response; these will generate exceptions for the service client to handle.
 
 In addition, topics are designed for data streaming and broadcasting continuous streams of information, such as sensor data or robot state updates. They are ideal when nodes require a constant flow of information and do not require immediate responses. On the other hand, services are typically used for accessing functionality that is provided by another node. They are well-suited for situations where nodes need to invoke specific actions or request information from another node, and a response is expected.
 

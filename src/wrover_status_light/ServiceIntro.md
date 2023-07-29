@@ -12,7 +12,7 @@ Here is a list of key components involved in services:
 * Server node: the server node receives and handles the service request calls from client nodes. It retrieves data from the request message, performs the necessary actions, and generates a response message which is sent back to the client. 
 * Request and response messages: these messages are structured data containers that are defined by the service definition. The client and server use these messages to exchange information.
 
-## (Optional) Why do we use Services when there's already Topics?
+## Why do we use Services when there's already Topics?
 
 While both services and topics work to allow communication between nodes, they differ in terms of their data exchange patterns and the types of interactions they support. 
 

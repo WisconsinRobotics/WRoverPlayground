@@ -1,6 +1,6 @@
 # About ROS Services
 ## What is a ROS Service?
-Services are another form of communication between different software componenents, or more fomally known as nodes, that ROS offers. Common uses of services include sending requests for specific pieces of data, or notify another node to perform specific actions. 
+Services are another form of communication between different software componenents, or more fomally known as nodes, that ROS offers. Common uses of services include sending requests for specific pieces of data, or notify another node to perform specific actions.  A good way to conceptualize a service is as a remote function call.
 
 ## What is the Makeup of a ROS Service?
 

@@ -32,7 +32,7 @@ float32 output
 ```
 After defining a message, ROS would convert the srv file into three classes: service definition, request messages, and response messages. Suppose we have `ExampleService.srv` in an package called `ExamplePackage`, then the names of these packages would be:
 * Service definition: `ExamplePackage.srv.ExampleService` for Python and `ExamplePackage::ExampleService` for C++
-* Request messages: `ExamplePackage.srv.ExampleServiceRequest` for Python and `ExmaplePackage::ExampleService::Request` for C++
+* Request messages: `ExamplePackage.srv.ExampleServiceRequest` for Python and `ExamplePackage::ExampleService::Request` for C++
 * Response messages: `ExamplePackage.srv.ExampleServiceResponse` for Python and `ExamplePackage::ExampleService::Request` for C++
 
 ## Writing a Server Node

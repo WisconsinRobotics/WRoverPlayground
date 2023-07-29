@@ -113,7 +113,7 @@ example_service = rospy.ServiceProxy('example_service', ExamplePackage.srv.Examp
 ```
 Creates a new callable proxy object for the service named `example_service` and defined by `ExmaplePackage.srv.ExampleService`.
 ```
-response = example_service(ExamplePackage.srv.ExmapleServiceRequest(..., ...))
+response = example_service(ExamplePackage.srv.ExampleServiceRequest(..., ...))
 ```
 Calls the service using an instance of the request message class and saves the response in a local variable. Similar to before, the service can also be called without explicitly making a new instance with
 ```

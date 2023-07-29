@@ -34,5 +34,10 @@
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
 	"remoteUser": "devcontainer",
 
-	"postAttachCommand": "sudo chown -R devcontainer /workspaces/WRoverPlayground;/workspaces/WRoverPlayground/onStart.sh"
+	"postAttachCommand": "sudo chown -R devcontainer /workspaces/WRoverPlayground;/workspaces/WRoverPlayground/onStart.sh",
+
+	"runArgs": [
+		"-e DISPLAY",
+		"--env=QT_X11_NO_MITSHM=1"
+	]
 }

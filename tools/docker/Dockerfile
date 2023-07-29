@@ -25,6 +25,6 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> /home/devcontainer/.bashrc
 RUN echo "source /workspaces/WRoverPlayground/devel/setup.bash" >> /home/devcontainer/.bashrc
 RUN echo "export PATH=$PATH:/home/devcontainer/clangd/clangd_16.0.2/bin" >> /home/devcontainer/.profile
 
-ENV DISPLAY host.docker.internal:0.0
-
 USER devcontainer
+
+ENV SHELL /bin/bash

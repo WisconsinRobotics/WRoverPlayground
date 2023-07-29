@@ -35,15 +35,58 @@ This project uses Docker to efficiently containerize the workspace and make cros
 
 ### Linux
 
-### Windows
-
-Tools:
+#### Tools:
 
 * [git](https://git-scm.com/)
 * [VS Code](https://code.visualstudio.com/)
-* [VcXsrv (Xlaunch)](https://sourceforge.net/projects/vcxsrv/)
+* [Docker Engine](https://docs.docker.com/engine/)
+
+#### Instructions:
+
+These instructions are written for Ubuntu, steps may vary if using a different distribution.
+
+1. Install git: `sudo apt install git`
+2. Install VS Code: https://code.visualstudio.com/docs/setup/linux
+3. Install Docker: https://docs.docker.com/engine/install/ubuntu/
+4. Set up SSH keys
+5. Clone the repository
+6. Open the repository with VSCode
+7. Reopen the folder in container
+
+#### Troubleshooting:
+
+### Windows
+
+#### Tools:
+
+* [git](https://git-scm.com/)
+* [VS Code](https://code.visualstudio.com/)
 * [WSL 2](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+#### Instructions:
+
+1. Install tools
+2. Set up SSH keys on Windows and in WSL
+3. Clone the repository inside WSL
+4. Open the repository with VSCode
+5. Launch Docker
+6. Reopen the folder in container
+
+#### Troubleshooting:
+
+Unable to execute git push or pull in container: https://superuser.com/questions/1726204/get-agent-identities-ssh-agent-bind-hostkey-communication-with-agent-failed
 
 ### Mac
 
 TODO (@Tzanccc): how to do this on mac
+#### Tools:
+
+* [git](https://git-scm.com/)
+* [VS Code](https://code.visualstudio.com/)
+* [XQuartz](https://www.xquartz.org/)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+#### Instructions:
+
+#### Troubleshooting:

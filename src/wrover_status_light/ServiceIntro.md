@@ -89,7 +89,7 @@ ros::ServiceServer service = nh.advertiseService("example_service", &ExampleServ
 ```
 To break the code down, the function `ExampleServiceServer::callback()` is the handler function of the server, and is ran every time the server receives a new request. The handler function must take in two arguments, a request and a response.
 ```
-ExmaplePackage::ExampleService exampleService;
+ExamplePackage::ExampleService exampleService;
 ros::NodeHandle nh;
 ros::ServiceServer service = nh.advertiseService("example_service", &ExampleServiceServer::callback, &exampleService);
 ```

@@ -111,7 +111,7 @@ This is a blocking operation that waits until a service with the name `example_s
 ```
 example_service = rospy.ServiceProxy('example_service', ExamplePackage.srv.ExampleService)
 ```
-Creates a new callable proxy object for the service named `example_service` and defined by `ExamplePackage.srv.ExampleService`.
+Creates a new callable object for the service named `example_service` and defined by `ExamplePackage.srv.ExampleService`.
 ```
 response = example_service(ExamplePackage.srv.ExampleServiceRequest(..., ...))
 ```

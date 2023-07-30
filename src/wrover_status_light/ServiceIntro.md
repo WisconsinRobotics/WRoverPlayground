@@ -35,6 +35,12 @@ After defining a message, ROS would convert the srv file into three classes: ser
 * Request messages: `ExamplePackage.srv.ExampleServiceRequest` for Python and `ExamplePackage::ExampleService::Request` for C++
 * Response messages: `ExamplePackage.srv.ExampleServiceResponse` for Python and `ExamplePackage::ExampleService::Request` for C++
 
+| \                  | C++                                     | Python                                    |
+|---                 | ---                                     | ---   |
+| Service definition |`ExamplePackage::ExampleService`          |`ExamplePackage.srv.ExampleService`        |
+| Request message    |`ExamplePackage::ExampleService::Request` |`ExamplePackage.srv.ExampleServiceRequest` |
+| Response message   |`ExamplePackage::ExampleService::Response`|`ExamplePackage.srv.ExampleServiceResponse`|
+
 ## Writing a Server Node
 ### Python
 A server code can be initialized with

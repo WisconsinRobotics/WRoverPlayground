@@ -31,10 +31,6 @@ int32 input2
 float32 output
 ```
 After defining a message, ROS would convert the srv file into three classes: service definition, request messages, and response messages. Suppose we have `ExampleService.srv` in an package called `ExamplePackage`, then the names of these packages would be:
-* Service definition: `ExamplePackage.srv.ExampleService` for Python and `ExamplePackage::ExampleService` for C++
-* Request messages: `ExamplePackage.srv.ExampleServiceRequest` for Python and `ExamplePackage::ExampleService::Request` for C++
-* Response messages: `ExamplePackage.srv.ExampleServiceResponse` for Python and `ExamplePackage::ExampleService::Request` for C++
-
 | \                  | C++                                     | Python                                    |
 |---                 | ---                                     | ---   |
 | Service definition |`ExamplePackage::ExampleService`          |`ExamplePackage.srv.ExampleService`        |
@@ -93,7 +89,7 @@ ExamplePackage::ExampleService exampleService;
 ros::NodeHandle nh;
 ros::ServiceServer service = nh.advertiseService("example_service", &ExampleServiceServer::callback, &exampleService);
 ```
-To break the code down, the function `ExampleServiceServer::callback()` is the handler function of the server, and is run every time the server receives a new request. The handler function must take in two arguments: a request and a response.
+To break the code down, the function `ExampleServiceServer::callback()` is the handler function of the server, and is ran every time the server receives a new request. The handler function must take in two arguments, a request and a response.
 ``` C++
 ExamplePackage::ExampleService exampleService;
 ros::NodeHandle nh;

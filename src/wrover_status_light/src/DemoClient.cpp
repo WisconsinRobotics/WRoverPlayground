@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     srv.request.input = 1;
 
     ros::service::waitForService("double_service");
-    while (!ros::isShuttingDown()) {
+    while (ros::ok()) {
         if (client.call(srv)) {
             std::cout << srv.response.output << std::endl;
             srv.request.input = srv.response.output;

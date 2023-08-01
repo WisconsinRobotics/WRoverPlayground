@@ -160,3 +160,5 @@ Lastly, the code calls the service using the `call()` function. If the service c
 
 ## Notes
 ROS's wiki page on services: http://wiki.ros.org/Services
+ROS tutorial on writing a service and client in C++: http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28c%2B%2B%29
+ROS tutorial on writing a service and client in Python: http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29

@@ -8,10 +8,10 @@
 /* Include math functions (such as sin). */
 #include "cmath"
 
-const int QUEUE_SIZE = 1000;
-const int FREQUENCY = 10;
+constexpr int QUEUE_SIZE = 1000;
+constexpr int FREQUENCY = 10;
 /* The rate of incrementation. */
-const float increment = 0.1;
+constexpr float increment = 0.1;
 
 auto main(int argc, char **argv) -> int
 {

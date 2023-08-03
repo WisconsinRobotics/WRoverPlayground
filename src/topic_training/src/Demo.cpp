@@ -14,10 +14,9 @@
    if the message is of type String)*/
 #include <sstream>
 
-/* C++ does not like "magic numbers," so it is better 
-   if we make them variables. */
-const int QUEUE_SIZE = 1000;
-const int FREQUENCY = 10;
+/* Avoid unexplained literal numbers in code. */
+constexpr int QUEUE_SIZE = 1;
+constexpr int FREQUENCY = 10;
 
 /**
  * This function will get called when a new message has 
@@ -39,6 +38,7 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
  */
 auto main(int argc, char **argv) -> int
 {
+
    /* Initialize ROS and specify the name of the node 
       (which is the name of the file in this case). 
       Requires the parameters from the main function 

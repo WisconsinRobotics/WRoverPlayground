@@ -11,7 +11,7 @@ RATE = 10
 This function will get called when a new message has 
 arrived on the topic.
 '''
-def callback(data):
+def callback(data: String) -> None:
     ''' Print out the message to the terminal. '''
     rospy.loginfo('I heard: [%s]', data.data)
 

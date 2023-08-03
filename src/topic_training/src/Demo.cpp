@@ -36,7 +36,7 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
  * node, Publisher, Subcriber, and topic. It also 
  * describes what we will do with the data/message.
  */
-auto main(int argc, char **argv) -> int
+int main(int argc, char **argv)
 {
    /* Initialize ROS and specify the name of the node 
       (which is the name of the file in this case). 

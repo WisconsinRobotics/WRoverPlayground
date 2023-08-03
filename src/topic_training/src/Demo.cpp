@@ -14,8 +14,7 @@
    if the message is of type String)*/
 #include <sstream>
 
-/* C++ does not like "magic numbers," so it is better 
-   if we make them variables. */
+/* Avoid unexplained literal numbers in code */
 const int QUEUE_SIZE = 1000;
 const int FREQUENCY = 10;
 

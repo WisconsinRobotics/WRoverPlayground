@@ -96,7 +96,7 @@ You can also check out the package.xml file, which you also may need to tailor f
 
 In the terminal, run the command `roscore`. In a new terminal window, cd into the catkin workspace. In this case, use `cd WRoverPlayground`. Then, use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and s`ource devel/setup.bash`. These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 
 
-With everything hopefully set up properly, you may now run `rosrun topic_training Demo` or `rosrun topic_training Demo.py`. In the terminal, you should see the program continually print "hello world {count} I heard: [hello world {count}]" until the terminal receives Ctrl-C or the program crashes.
+With everything hopefully set up properly, you may now run `rosrun topic_training Demo` to execute the C++ version of the demo, or `rosrun topic_training Demo.py` to execute the Python version of the demo. In the terminal, you should see the program continually print "hello world {count} I heard: [hello world {count}]" until you exit the program by inputting `Ctrl+C` in the terminal or the program crashes.
 
 ### rqt_graph and rqt_plot
 In another terminal window, run `rosrun rqt_graph rqt_graph`. This will show a graph representation of the current topic you are running. The name of the file (+ the ID number if you are using Python) should be encircled with an arrow named after the topic (in this case "chatter") pointing to itself since the file contains both the Publisher and Subscriber.

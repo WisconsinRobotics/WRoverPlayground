@@ -127,10 +127,5 @@ auto main(int argc, char **argv) -> int
       ++count;
    }  
 
-   /* The function spin() enters a loop of message 
-      callbacks. It exits once the function ok() returns 
-      false. */
-   ros::spin();
-
    return 0;
 }

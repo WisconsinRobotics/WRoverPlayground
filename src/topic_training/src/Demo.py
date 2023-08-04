@@ -75,10 +75,6 @@ def main():
             before) '''
         count += 1
 
-    ''' The function spin() checks if the node has been 
-        shutdown. If it has, the node will exit. '''
-    rospy.spin()
-
 '''
 Run main. If a ROSInterruptException is thrown by sleep() 
 when a SIGINT (Ctrl-C) is detected or if the node is 

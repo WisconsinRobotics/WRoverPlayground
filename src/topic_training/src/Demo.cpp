@@ -82,7 +82,9 @@ auto main(int argc, char **argv) -> int
    while (ros::ok())
    /* The function ok() will return false if a SIGINT is 
       received (Ctrl-C), if a shutdown occurs, or if 
-      another issue arises. */
+      another issue arises. Also, loops waiting for 
+      'actual time' should always be conditioned on 
+      ros::ok. */
    {
       /* Declare the message as the type we specified 
          when we initialized the Publisher 

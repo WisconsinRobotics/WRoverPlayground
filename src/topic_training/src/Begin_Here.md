@@ -29,7 +29,7 @@ Within this directory, you will find two files called Demo(.cpp or .py). These f
 
 Note that there are quite a few sections of code that are marked as "Optional." You do not need to include everything in the examples when creating your own code. They are simply showing one way of setting up a Publisher and Subscriber in the same file.
 
-One file will be written in C++, and the other will be in Python. I recommend discussing with one of the Software Leads to determine which part of the rover you would like to be assigned to. This will help you decide which language to focus on for this training. However, being familiar with both languages will not hurt.
+One file will be written in C++, and the other will be in Python. It is recommended that you choose the language you are most comfortable with to complete the training. Afterwards, you should discuss with one of the Software Leads to determine which part of the rover you would like to be assigned to. You will be given small tasks first, working your way up to more difficult projects. If these tasks/projects require a different language, then you can look through this training again or take what you know from the first time and learn as you go.
 
 Go through one of the files, making sure you understand all the code and comments. Come back to this file once you feel ready to move on.
 

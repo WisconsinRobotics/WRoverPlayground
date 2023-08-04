@@ -34,67 +34,19 @@ One file will be written in C++, and the other will be in Python. It is recommen
 Go through one of the files, making sure you understand all the code and comments. Come back to this file once you feel ready to move on.
 
 ## Running a Publisher and Subscriber
-Before you are able to run the example code, find the CMakeLists.txt file that is outside of the src directory but still inside of the topic_training directory. 
+Before you are able to run the example code, find the CMakeLists.txt file that is outside of the src directory but still inside of the topic_training directory. This file will include the the configurations, builds, and installs required to run your program as well as the files you will be running. Do not change anything in the file as it should already be set up for the demo files to work. 
 
-This file is mostly commented out. Make sure these are uncommented:
+The `find_package`, `catkin_package`, and `include_directories` specifications are required for both the C++ and Python files to work. These provide the packages and directories needed for running ROS and ROS topics. 
 
-- find_package(catkin REQUIRED
-    roscpp
-    rospy
-    std_msgs
-    message_generation
-  )
+To run the C++ files, you will need the `add_executable`, `add_dependencies`, and `target_link_libraries` specifications. There will be three of each, representing the three C++ files in this section. `add_executable` determines which file you will use with the command `rosrun`, `add_dependencies` shows what the executable file depends on, and `target_link_libraries` links libraries or executable targets that may be used in the program. In larger projects, these specifications may contain different names, but since the code examples in this training are simple, they are all the same.
 
-- catkin_package(
-    CATKIN_DEPENDS message_runtime
-  )
+For the Python files, you will only need the `catkin_install_python` specification. This will list out the locations of the Python files being used.
 
-- include_directories(
-    ${catkin_INCLUDE_DIRS}
-  )
+In future projects, you might need to use other configurations, builds, and installs, but for the purposes of this training, you only need these for the example code to run.
 
-The C++ and the Python file both require these to work.
+You can also check out the package.xml file, which you also may need to tailor for future projects. However, everything should already be set up correctly, so do not change anything. At the top of the file, it should name the creator of the package. Then, it will include the license regarding open source policies. Right now, it should not specify a license because the license for the package for the WRoverPlayground training trickles down to this package. At the bottom, there should be various dependencies that allow us to use ROS and ROS topics, similar to the CMakeLists.txt `find_package`.
 
-If you chose C++, also uncomment these:
-
-- add_executable(Demo src/Demo.cpp)
-  add_executable(PlotDemo src/PlotDemo.cpp)
-  add_executable(MotorChallenge src/MotorChallenge.cpp)
-
-- add_dependencies(Demo 
-    ${${PROJECT_NAME}_EXPORTED_TARGETS} 
-    ${catkin_EXPORTED_TARGETS}
-  )
-  add_dependencies(PlotDemo 
-    ${${PROJECT_NAME}_EXPORTED_TARGETS} 
-    ${catkin_EXPORTED_TARGETS}
-  )
-  add_dependencies(MotorChallenge 
-    ${${PROJECT_NAME}_EXPORTED_TARGETS} 
-    ${catkin_EXPORTED_TARGETS}
-  )
-
-- target_link_libraries(Demo 
-    ${catkin_LIBRARIES}
-  )
-  target_link_libraries(PlotDemo
-    ${catkin_LIBRARIES}
-  )
-  target_link_libraries(MotorChallenge
-    ${catkin_LIBRARIES}
-  )
-
-If you chose Python, also uncomment this:
-
-- catkin_install_python(PROGRAMS src/Demo.py src/PlotDemo.py src/MotorChallenge.py
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  )
-
-In future projects, you might need to use some of the other configurations, builds, and installs, but for the purposes of this training, you only need these for the example code to run.
-
-You can also check out the package.xml file, which you also may need to tailor for future projects. However, everything should already be set up correctly, so do not change anything.
-
-In the terminal, run the command `roscore`. In a new terminal window, cd into the catkin workspace. In this case, use `cd WRoverPlayground`. Then, use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and s`ource devel/setup.bash`. These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 
+In the terminal, run the command `roscore`. In a new terminal window, cd into the catkin workspace. In this case, use `cd WRoverPlayground`. Then, use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and `source devel/setup.bash`. These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 
 
 With everything hopefully set up properly, you may now run `rosrun topic_training Demo` to execute the C++ version of the demo, or `rosrun topic_training Demo.py` to execute the Python version of the demo. In the terminal, you should see the program continually print "hello world {count} I heard: [hello world {count}]" until you exit the program by inputting `Ctrl+C` in the terminal or the program crashes.
 

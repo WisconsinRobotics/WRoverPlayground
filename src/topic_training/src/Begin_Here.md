@@ -15,9 +15,11 @@ Once you complete this training, you should be familiar with:
 - and `rostopic type {topic}`.
 
 ## The Purpose of Topics
-The word "topic" sounds very general, but it is actually a specific concept that allows ROS nodes to communicate with each other. This is extremely important because one node cannot possibly contain all the information a rover would need.
+Though possible, it is not feasible to have one node contain all the information a rover would need. We need to spread out the information into different files. This is where ROS topics come in. The word "topic" sounds very general, but it is actually a specific concept that allows ROS nodes to communicate with each other. They are a way to stream data in and out of a program.
 
-Topics allow us to specialize nodes, so they can execute their own code/tasks, while also sending and receiving information. For example, a node could receive data and send it to another one, a node could receive and analyze data and have another node do some action with it, a node could receive data from multiple nodes, etc.
+Using topics, our code now becomes 'hot-swappable.' Topics do not care which node is sending or receiving data, so we can easily create a node that serves data from a physical sensor as well as a mock node to test other nodes without needing to change those nodes. The reason is because the interfaces provided through the published data versus an actual sensor are equivalent.
+
+This allows us to specialize nodes, so they can execute their own code/tasks, while also sending and receiving information. For example, a node could receive data and send it to another one, a node could receive and analyze data and have another node do some action with it, a node could send data to multiple nodes, etc.
 
 ## Publisher/Subscriber Relationship
 The Publisher and Subscriber are both nodes that are connected by a topic, allowing them to send messages between each other. The Publisher node publishes messages on the topic, while the Subscriber node subscribes to the same topic to receive the Publisher's messages. 

@@ -24,7 +24,11 @@ This allows us to specialize nodes, so they can execute their own code/tasks, wh
 ## Publisher/Subscriber Relationship
 The Publisher and Subscriber are both nodes that are connected by a topic, allowing them to send messages between each other. The Publisher node publishes messages on the topic, while the Subscriber node subscribes to the same topic to receive the Publisher's messages. 
 
-Publishers and Subscribers do not need to be in separate files. In fact, if the Publisher and Subscriber rely on each other's data, it may be better to keep them in the same file. An example of the Publisher and Subscriber residing in the same file will be provided in the next section.
+Topics do not need to have a one-to-one relationship. For example, it is possible for a topic to have multiple Subscribers, which allows a single node to communicate with other nodes.
+
+Also, Publishers and Subscribers do not need to be in separate files. In fact, if the Publisher and Subscriber rely on each other's data, it may be better to keep them in the same file. However, they should not be on the same topic as this would be incredibly inefficient. A way to do this would be to have the Subscriber receive data from one topic, the data to be manipulated in some way, and the Publisher to send the result on another topic. 
+
+An example of a Publisher and Subscriber residing in the same file will be provided in the next section.
 
 ## Setting up a Publisher and Subscriber
 Within this directory, you will find two files called Demo(.cpp or .py). These files will show a basic class containing both a Publisher and Subscriber. There will be comments throughout the files that explain the purpose of specific sections of the code.

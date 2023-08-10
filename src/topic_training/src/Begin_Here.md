@@ -2,15 +2,15 @@
 Now that you have completed the Tools Training, you are ready to learn about ROS topics. From the Setup Training, you should be familiar with:
 - the basics of ROS Nodes
 - `rosnode`
-- and `roscore`.
+- `roscore`
+- `rqt_graph`
+- `rqt_plot`.
 
 Once you complete this training, you should be familiar with:
 - the purpose of topics
 - the relationship between Publishers and Subscribers
 - setting up Publishers and Subscribers
 - running Publishers and Subscribers
-- `rqt_graph`
-- `rqt_plot`
 - custom topic types
 - and `rostopic type {topic}`.
 
@@ -53,13 +53,13 @@ In the terminal, run the command `roscore`. In a new terminal window, cd into th
 With everything hopefully set up properly, you may now run `rosrun topic_training Demo` to execute the C++ version of the demo, or `rosrun topic_training Demo.py` to execute the Python version of the demo. In the terminal, you should see the program continually print "hello world {count} I heard: [hello world {count}]" until you exit the program by inputting `Ctrl+C` in the terminal or the program crashes.
 
 ### rqt_graph and rqt_plot
-In another terminal window, run `rosrun rqt_graph rqt_graph`. This will show a graph representation of the current topic you are running. The name of the file (+ the ID number if you are using Python) should be encircled with an arrow named after the topic (in this case "chatter") pointing to itself since the file contains both the Publisher and Subscriber.
+In another terminal window, run `rosrun rqt_graph rqt_graph`. You should already be familiar with this command from the ROS Debug/Tools Training. Make sure the graph representation is what is expected. It should show *TODO: update this once the code examples are fixed*.
 
-There is also another command that helps you visualize the nodes and topics. Type Ctrl-C to stop running Demo(.cpp or .py) and, instead, run `rosrun topic_training PlotDemo` or `rosrun topic_training PlotDemo.py`. You should not see anything print. The file PlotDemo(.cpp or .py) is a Publisher (no Subscriber) that sends sine values to the same topic ("chatter"). If you run `rosrun rqt_plot rqt_plot`, you should see a sine graph being plotted onto the screen. The command rqt_plot is only able to be used on topics with a numerical type. Using it with the file Demo(.cpp or .py) would not have worked. 
+You should have also learned about rqt_plot. Type Ctrl-C into the terminal to stop running Demo(.cpp or .py) and, instead, run `rosrun topic_training PlotDemo` or `rosrun topic_training PlotDemo.py`. Nothing should be printing in the terminal. If you run `rosrun rqt_plot rqt_plot`, you should see a sine graph being plotted onto the screen. Recall that rqt_plot can only be used with numerical values. Using it with the file Demo(.cpp or .py) would not have worked because that is dealing with Strings. Feel free to check this yourself.
 
-If you run rqt_graph on the PlotDemo(.cpp or .py) file, it should show just the name of the file (+ the ID number if you are using Python) by itself with no arrow. If you run rqt_graph when both files are running, there might be an error in the terminal, but the graph application should show both files. PlotDemo(.cpp or .py) will be by itself with no arrow, and Demo(.cpp or .py) will be by itself with or without an arrow depending on the order you executed the two files.
+You may also look through the file PlotDemo(.cpp or .py) to see how the math works and to see another example of a Publisher but with a different message type. For simplicity's sake, the comments in these files are only explaining the math since you should already understand the basic ROS functions from the previous section of this training.
 
-Feel free to look through the file PlotDemo(.cpp or .py) to see how the math works and to see another example of a Publisher but with a different message type. For simplicity's sake, the comments in these files are only explaining the math since you should already understand the basic ROS functions from the previous section of this training.
+While developing your code for the challenge, use rqt_graph and rqt_plot to make sure your nodes are working as expected
 
 ### Defining a Custom Topic Type
 A topic's type is determined by the type of the message being published. If you run the command `rostopic type chatter`, you should see the terminal print out "std_msgs/String" while roscore and rosrun are executing Demo(.cpp or .py). The command will print out "std_msgs/Float64" if you are executing PlotDemo(.cpp or .py).

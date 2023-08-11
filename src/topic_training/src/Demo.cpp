@@ -93,17 +93,17 @@ int main(int argc, char **argv)
 
       /* Since we are publishing a message with type 
          String, we will be following the next few steps 
-         using Stringstream. This will not be the case if 
-         our message type is different. The basic idea is 
-         the same regardless of message type though.*/
-    
-      /* Declare the Stringstream. */
+         using Stringstream. This will not be the case 
+         if our message type is different. The basic 
+         idea is 0the same regardless of message type 
+         though.
+         
+         Declare and initialize the Stringstream with 
+         the String (+count) we want to publish. Then, 
+         set the data of the message to be the stream 
+         we just created.*/
       std::stringstream sstream;
-      /* Initialize the stream with the String (+count) 
-         we want to publish. */
       sstream << "hello world " << count;
-      /* Set the data of the message to be the stream we 
-         just created. */
       msg.data = sstream.str();
 
       /* Print out the message to the terminal. */

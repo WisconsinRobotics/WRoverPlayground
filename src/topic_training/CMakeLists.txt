@@ -17,6 +17,12 @@ find_package(catkin REQUIRED
    message_generation
 )
 
+## Generate messages in the 'msg' folder
+add_message_files(
+  FILES
+  CustomType.msg
+)
+
 ###################################
 ## catkin specific configuration ##
 ###################################

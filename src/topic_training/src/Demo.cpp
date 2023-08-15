@@ -6,6 +6,9 @@
 #include "ros/subscriber.h"
 #include "ros/publisher.h"
 
+/* Include the message type we will be receiving/subscribing. */
+#include "std_msgs/Float64.h"
+
 /* Include the message type we will be publishing. */
 #include "std_msgs/String.h"
 
@@ -18,6 +21,8 @@
 constexpr int QUEUE_SIZE = 1;
 constexpr int FREQUENCY = 10;
 
+float pi;
+
 /**
  * This function will get called when a new message has 
  * arrived on the topic.
@@ -25,10 +30,9 @@ constexpr int FREQUENCY = 10;
  * @param msg - the message received by the Subscriber, 
  *              sent by the Publisher
  */
-void chatterCallback(const std_msgs::String::ConstPtr& msg)
+void chatterCallback(const std_msgs::Float64::ConstPtr& msg)
 {
-   /* Print out the message to the terminal. */
-   ROS_INFO("I heard: [%s]", msg->data.c_str());
+   pi = msg->data;
 }
 
 /**
@@ -66,16 +70,12 @@ int main(int argc, char **argv)
       ("chatter"), the queue size (1000), and the function 
       that will be called when a message is received 
       (chatterCallBack(msg)). */
-   ros::Subscriber sub = nhandle.subscribe("chatter", QUEUE_SIZE, chatterCallback);
+   ros::Subscriber sub = nhandle.subscribe("plot", QUEUE_SIZE, chatterCallback);
 
    /* Specify the frequency we would like to loop at 
       (10Hz). */
    ros::Rate loop_rate(FREQUENCY);
 
-   /* A counter of how many messages have been sent. 
-      (Optional: only used for this example to show the 
-      difference in messages) */
-   int count = 0;
    /* (Optional: a while loop is not required for
       Publishers. Only used in this case to show the 
       continuous timing of publishing messages.) */
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
          set the data of the message to be the stream 
          we just created.*/
       std::stringstream sstream;
-      sstream << "hello world " << count;
+      sstream << "currently at " << pi;
       msg.data = sstream.str();
 
       /* Print out the message to the terminal. */
@@ -124,9 +124,6 @@ int main(int argc, char **argv)
          until we reach our 10Hz publish rate. (Optional: 
          only used because we are looping.)*/
       loop_rate.sleep();
-
-      /* Increment count. (Optional: as stated before) */
-      ++count;
    }  
 
    return 0;

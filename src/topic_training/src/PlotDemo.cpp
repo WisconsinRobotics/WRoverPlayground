@@ -17,7 +17,7 @@ auto main(int argc, char **argv) -> int
 {
    ros::init(argc, argv, "PlotDemo");
    ros::NodeHandle nhandle;
-   ros::Publisher pub = nhandle.advertise<std_msgs::Float64>("chatter", QUEUE_SIZE);
+   ros::Publisher pub = nhandle.advertise<std_msgs::Float64>("plot", QUEUE_SIZE);
 
    ros::Rate loop_rate(FREQUENCY);
 

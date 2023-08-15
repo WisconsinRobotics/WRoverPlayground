@@ -2,18 +2,23 @@
 import rospy
 ''' Import the message type we will be publishing. '''
 from std_msgs.msg import String
+from std_msgs.msg import Float64
 
 ''' Constant variables to be used below. '''
-QUEUE_SIZE = 10
+QUEUE_SIZE = 1
 RATE = 10
+
+pi = 0.0
 
 '''
 This function will get called when a new message has 
 arrived on the topic.
 '''
-def callback(data: String) -> None:
+def callback(data: Float64) -> None:
     ''' Print out the message to the terminal. '''
-    rospy.loginfo('I heard: [%s]', data.data)
+    # rospy.loginfo('I heard: [%s]', data.data)
+    global pi 
+    pi = data.data
 
 ''' 
 The main method that contains the creation of the node, 
@@ -25,6 +30,14 @@ def main():
         (which is the name of the file in this case). '''
     rospy.init_node('Demo', anonymous=True)
     
+    ''' Initialize the Subscriber. State the name of the 
+        topic ('chatter'), the message type we will be 
+        publishing (String, which is, again, actually in 
+        the class std_msgs.msg.String), and the function 
+        that will be called when a message is received 
+        (callBack(data)). '''
+    rospy.Subscriber('plot', Float64, callback)
+
     ''' Initialize the Publisher. State the name of the 
         topic ('chatter'), the message type we will be 
         publishing (String, which is actually in the 
@@ -34,22 +47,10 @@ def main():
         old ones if we are publishing too quickly. '''
     pub = rospy.Publisher('chatter', String, queue_size=QUEUE_SIZE)
 
-    ''' Initialize the Subscriber. State the name of the 
-        topic ('chatter'), the message type we will be 
-        publishing (String, which is, again, actually in 
-        the class std_msgs.msg.String), and the function 
-        that will be called when a message is received 
-        (callBack(data)). '''
-    rospy.Subscriber('chatter', String, callback)
-
     ''' Specify the frequency we would like to loop at 
         (10Hz). '''
     rate = rospy.Rate(RATE)
 
-    ''' A counter of how many messages have been sent. 
-        (Optional: only used for this example to show 
-        the difference in messages) '''
-    count = 0
     ''' (Optional: a while loop is not required for
         Publishers. Only used in this case to show the 
         continuous timing of publishing messages.) '''
@@ -58,7 +59,7 @@ def main():
             should exit (Ctrl-C or another issue). '''
         
         ''' Create the message of type String. '''
-        hello_str = "hello world %s" % count
+        hello_str = "currently at %s" % pi
         ''' Print out the message to the terminal. '''
         rospy.loginfo(hello_str)
 
@@ -70,10 +71,6 @@ def main():
             remaining until we reach our 10Hz publish 
             rate. '''
         rate.sleep()
-        
-        ''' Increment count. (Optional: as stated 
-            before) '''
-        count += 1
 
 '''
 Run main. If a ROSInterruptException is thrown by sleep() 

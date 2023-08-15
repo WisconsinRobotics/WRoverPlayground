@@ -9,7 +9,7 @@ RATE = 10
 
 def main():
     rospy.init_node('PlotDemo', anonymous=True)
-    pub = rospy.Publisher('chatter', Float64, queue_size=QUEUE_SIZE)
+    pub = rospy.Publisher('plot', Float64, queue_size=QUEUE_SIZE)
     rate = rospy.Rate(RATE)
 
     ''' Start from 0 radians. '''

@@ -200,7 +200,7 @@ You may also look through the file PlotDemo(.cpp or .py) to see how the math wor
 
 While developing your code for the challenge, use rqt_graph and rqt_plot to make sure your nodes are working as expected
 
-### Defining a Custom Topic Type
+## Defining a Custom Topic Type
 A topic's type is determined by the type of the message being published. If you run the command `rostopic type chatter`, you should see the terminal print out "std_msgs/String" while roscore and rosrun are executing Demo(.cpp or .py). The command will print out "std_msgs/Float64" if you are executing PlotDemo(.cpp or .py).
 
 A topic can have messages of type int8, int16, int32, int64, uint*, float32, float64, String, time, duration, other msg files, and array[] of variable length or fixed length. To message a different type, just change where ever there would be a String in Demo(.cpp or .py) to your desired type and update the includes (C++) or imports (Python) at the top of the file. Remember though, use message types instead of variable types, that is, use std_msgs/String (for C++) or std_msgs.msg.String (for Python) instead of just String.

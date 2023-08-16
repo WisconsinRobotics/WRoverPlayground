@@ -37,7 +37,138 @@ Note that there are quite a few sections of code that are marked as "Optional." 
 
 One file will be written in C++, and the other will be in Python. It is recommended that you choose the language you are most comfortable with to complete the training. Afterwards, you should discuss with one of the Software Leads to determine which part of the rover you would like to be assigned to. You will be given small tasks first, working your way up to more difficult projects. If these tasks/projects require a different language, then you can look through this training again or take what you know from the first time and learn as you go.
 
-Go through one of the files, making sure you understand all the code and comments. Come back to this file once you feel ready to move on.
+Conintue reading here and go into one of the Demo files based on the language you chose. Make sure you understand what is being said. The general idea of the Demo (.cpp or .py) file is that it takes in data from a separate Publisher file (PlotDemo.cpp or .py) as a float on the topic `plot` and sends that data in the form of a String on the topic `chatter`.
+
+### C++
+
+A basic setup for ROS topics in C++ would look something like this:
+
+``` C++
+ros::init(argc, argv, "Demo");
+ros::NodeHandle nhandle;
+ros::Subscriber sub = nhandle.subscribe("plot", QUEUE_SIZE, chatterCallback);
+ros::Publisher pub = nhandle.advertise<std_msgs::String>("chatter", QUEUE_SIZE);
+```
+
+To break this down,
+
+``` C++
+ros::init(argc, argv, "Demo");
+```
+Initialize ROS and specify the name of the node (which is the name of the file in this case). This requires the parameters from the main function header (argc and argv).
+
+``` C++
+ros::NodeHandle nhandle;
+```
+Create a handle for the node. This will do the actually initialization of the node in the next few lines.
+
+``` C++
+ros::Subscriber sub = nhandle.subscribe("plot", QUEUE_SIZE, chatterCallback);
+```
+Initialize the Subscriber. The subscribe() function is how we tell ROS we want to receive messages on a specific topic. State the name of the topic ("plot"), the queue size (1), and the function that will be called when a message is received (`chatterCallBack(msg)`). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
+
+``` C++
+ros::Publisher pub = nhandle.advertise<std_msgs::String>("chatter", QUEUE_SIZE);
+```
+Initialize the Publisher. The advertise() function is how we tell ROS we want to publish on a topic. State the message type we will be publishing (std_msgs::String), the name of the topic ("chatter"), and the queue size (1).
+
+The callback function for a Subscriber looks something like this:
+
+``` C++
+void chatterCallback(const std_msgs::Float64::ConstPtr& msg)
+{
+   pi = msg->data;
+}
+```
+This function will get called when a new message has arrived on the topic `plot`. The message received by the Subscriber, sent by the Publisher, is denoted as `msg`.
+
+Publishing a message on a topic would look something like this:
+
+``` C++
+std_msgs::String msg;
+msg.data = sstream.str();
+pub.publish(msg);
+ros::spinOnce();
+```
+
+To break this down,
+
+``` C++
+std_msgs::String msg;
+```
+Initialize `msg` as the desired type, `std_msgs::String`.
+
+``` C++
+msg.data = sstream.str();
+```
+Set the data of `msg` as what you want the message to send. In this case, `sstream.str()` is a String concatenated with a float value.
+
+``` C++
+pub.publish(msg);
+```
+Publish the message using the previously initialized Publisher `pub`.
+
+``` C++
+ros::spinOnce();
+```
+There is also the function `ros::spin()`. The main difference is that `ros::spinOnce()` is used when other lines of code, and processing arriving messages, need to be executed along side each other, such as in a while loop. Whereas `ros::spin()` should be called at the end of a file.
+
+### Python
+
+A basic setup for ROS topics in Python would look something like this:
+
+``` Python
+rospy.init_node('Demo', anonymous=True)
+rospy.Subscriber('plot', Float64, callback)
+pub = rospy.Publisher('chatter', String, queue_size=QUEUE_SIZE)
+```
+
+To break this down,
+
+``` Python
+rospy.init_node('Demo', anonymous=True)
+```
+Initialize ROS and specify the name of the node (which is the name of the file in this case).
+
+``` Python
+rospy.Subscriber('plot', Float64, callback)
+```
+Initialize the Subscriber. State the name of the topic ('plot'), the message type we will be publishing (float, which is actually in the class std_msgs.msg.Float64), and the function that will be called when a message is received (callBack(data)).
+
+``` Python
+pub = rospy.Publisher('chatter', String, queue_size=QUEUE_SIZE)
+```
+Initialize the Publisher. State the name of the topic ('chatter'), the message type we will be publishing (String, which is actually in the class std_msgs.msg.String), and the queue size (1). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
+
+The callback function for a Subscriber looks something like this:
+
+``` Python
+def callback(data: Float64) -> None:
+    global pi 
+    pi = data.data
+```
+This function will get called when a new message has arrived on the topic `plot`. The message received by the Subscriber, sent by the Publisher, is denoted as `msg`.
+
+Publishing a message on a topic would look something like this:
+
+``` Python
+pi_str = "currently at %s" % pi
+pub.publish(hello_str)
+```
+
+To break this down,
+
+``` Python
+pi_str = "currently at %s" % pi
+```
+Create the message.
+
+``` Python
+pub.publish(hello_str)
+```
+Publish the message using the previously initialized Publisher `pub`.
+
+If you have glanced at the C++ example code, you may have noticed the function `ros::spinOnce()` and its differences with `ros::spin()`. Python only has `rospy.spin()`, which can be completely replaced by a for loop, which is why you do not see it in the Python example code.
 
 ## Running a Publisher and Subscriber
 Before you are able to run the example code, find the CMakeLists.txt file that is outside of the src directory but still inside of the topic_training directory. This file will include the the configurations, builds, and installs required to run your program as well as the files you will be running. Do not change anything in the file as it should already be set up for the demo files to work. 
@@ -52,14 +183,18 @@ In future projects, you might need to use other configurations, builds, and inst
 
 You can also check out the package.xml file, which you also may need to tailor for future projects. However, everything should already be set up correctly, so do not change anything. At the top of the file, it should name the creator of the package. Then, it will include the license regarding open source policies. Right now, it should not specify a license because the license for the package for the WRoverPlayground training trickles down to this package. At the bottom, there should be various dependencies that allow us to use ROS and ROS topics, similar to the CMakeLists.txt `find_package`.
 
-In the terminal, run the command `roscore`. In a new terminal window, change your current directory to be the catkin workspace. In this case, use `cd WRoverPlayground`. Then, use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and `source devel/setup.bash`. These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 
+In the terminal, run the command `roscore`. In a new terminal window, change your current directory to be the catkin workspace. In this case, use `cd WRoverPlayground`. Then, use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and `source devel/setup.bash` in this order. These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 
 
-With everything hopefully set up properly, you may now run `rosrun topic_training Demo` to execute the C++ version of the demo, or `rosrun topic_training Demo.py` to execute the Python version of the demo. In the terminal, you should see the program continually print "hello world {count} I heard: [hello world {count}]" until you exit the program by inputting `Ctrl+C` in the terminal or the program crashes.
+Now run the Publisher file using `rosrun topic_training PlotDemo` to execute the C++ version, or `rosrun topic_training PlotDemo.py` to execute the Python version. This should not print anything to the terminal.
+
+In a new terminal window, repeat the commands `cd WRoverPlayground`, `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`, and `source devel/setup.bash` in this order. 
+
+With everything hopefully set up properly, you may now run `rosrun topic_training Demo` to execute the C++ version of the demo, or `rosrun topic_training Demo.py` to execute the Python version of the demo. In the terminal, you should see the program continually print "currently at {next sine value}" until you exit the program by inputting `Ctrl+C` in the terminal or the program crashes.
 
 ### rqt_graph and rqt_plot
-In another terminal window, run `rosrun rqt_graph rqt_graph`. You should already be familiar with this command from the ROS Debug/Tools Training. Make sure the graph representation is what is expected. It should show *TODO: update this once the code examples are fixed*.
+In another terminal window, run `rosrun rqt_graph rqt_graph`. You should already be familiar with this command from the ROS Debug/Tools Training. Make sure the graph representation is what is expected. It should show "/PlotDemo" enclosed in a circle pointing to "/Demo" with an arrow named "/plot".
 
-You should have also learned about rqt_plot. Type Ctrl-C into the terminal to stop running Demo(.cpp or .py) and, instead, run `rosrun topic_training PlotDemo` or `rosrun topic_training PlotDemo.py`. Nothing should be printing in the terminal. If you run `rosrun rqt_plot rqt_plot`, you should see a sine graph being plotted onto the screen. Recall that rqt_plot can only be used with numerical values. Using it with the file Demo(.cpp or .py) would not have worked because that is dealing with Strings. Feel free to check this yourself.
+You should have also learned about rqt_plot. Type Ctrl-C into the terminal to stop running Demo(.cpp or .py) so only PlotDemo (.cpp or .py) is running. If you run `rosrun rqt_plot rqt_plot`, you should see a sine graph being plotted onto the screen. Recall that rqt_plot can only be used with numerical values. Using it with the file Demo(.cpp or .py) would not have worked because that is dealing with Strings. Feel free to check this yourself.
 
 You may also look through the file PlotDemo(.cpp or .py) to see how the math works and to see another example of a Publisher but with a different message type. For simplicity's sake, the comments in these files are only explaining the math since you should already understand the basic ROS functions from the previous section of this training.
 

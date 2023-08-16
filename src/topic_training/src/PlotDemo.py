@@ -4,7 +4,7 @@ from std_msgs.msg import Float64
 ''' Import math functions (such as sin). '''
 import math
 
-QUEUE_SIZE = 10
+QUEUE_SIZE = 1
 RATE = 10
 
 def main():

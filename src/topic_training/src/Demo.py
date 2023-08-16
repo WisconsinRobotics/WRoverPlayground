@@ -8,15 +8,17 @@ from std_msgs.msg import Float64
 QUEUE_SIZE = 1
 RATE = 10
 
+''' Variable for message. '''
 pi = 0.0
 
 '''
 This function will get called when a new message has 
-arrived on the topic.
+arrived on the topic 'plot.' The variable pi will be 
+set as the data received from the Publisher PlotDemo.py. 
+The values given will be near continuous sine values in 
+radians.
 '''
 def callback(data: Float64) -> None:
-    ''' Print out the message to the terminal. '''
-    # rospy.loginfo('I heard: [%s]', data.data)
     global pi 
     pi = data.data
 
@@ -26,46 +28,29 @@ Publisher, Subcriber, and topic. It also describes what
 we will do with the data/message. 
 '''
 def main():
-    ''' Initialize ROS and specify the name of the node 
-        (which is the name of the file in this case). '''
+    ''' Set up the ROS topic. '''
     rospy.init_node('Demo', anonymous=True)
-    
-    ''' Initialize the Subscriber. State the name of the 
-        topic ('chatter'), the message type we will be 
-        publishing (String, which is, again, actually in 
-        the class std_msgs.msg.String), and the function 
-        that will be called when a message is received 
-        (callBack(data)). '''
     rospy.Subscriber('plot', Float64, callback)
-
-    ''' Initialize the Publisher. State the name of the 
-        topic ('chatter'), the message type we will be 
-        publishing (String, which is actually in the 
-        class std_msgs.msg.String), and the queue size 
-        (1000). The queue size is the maximum number of 
-        messages kept as a buffer before throwing away 
-        old ones if we are publishing too quickly. '''
     pub = rospy.Publisher('chatter', String, queue_size=QUEUE_SIZE)
 
     ''' Specify the frequency we would like to loop at 
         (10Hz). '''
     rate = rospy.Rate(RATE)
 
-    ''' (Optional: a while loop is not required for
+    ''' The function is_shutdown() checks if the program 
+        should exit (Ctrl-C or another issue).
+        
+        (Optional: a while loop is not required for
         Publishers. Only used in this case to show the 
         continuous timing of publishing messages.) '''
     while not rospy.is_shutdown():
-        ''' The function is_shutdown() checks if the program 
-            should exit (Ctrl-C or another issue). '''
-        
-        ''' Create the message of type String. '''
-        hello_str = "currently at %s" % pi
-        ''' Print out the message to the terminal. '''
-        rospy.loginfo(hello_str)
+        ''' Create the message and print out the message 
+            to the terminal. '''
+        pi_msg = "currently at %s" % pi
+        rospy.loginfo(pi_msg)
 
-        ''' Publish the message to the topic for the 
-            Subscriber to receive. '''
-        pub.publish(hello_str)
+        ''' Publish the message. '''
+        pub.publish(pi_msg)
 
         ''' Use the function sleep() for the time 
             remaining until we reach our 10Hz publish 

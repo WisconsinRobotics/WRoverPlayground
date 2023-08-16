@@ -21,11 +21,15 @@
 constexpr int QUEUE_SIZE = 1;
 constexpr int FREQUENCY = 10;
 
+/* Variable for message. */
 float pi;
 
 /**
  * This function will get called when a new message has 
- * arrived on the topic.
+ * arrived on the topic 'plot.' The variable pi will be 
+   set as the data received from the Publisher 
+   PlotDemo.cpp. The values given will be near continuous
+   sine values in radians.
  * 
  * @param msg - the message received by the Subscriber, 
  *              sent by the Publisher
@@ -43,65 +47,39 @@ void chatterCallback(const std_msgs::Float64::ConstPtr& msg)
 int main(int argc, char **argv)
 {
 
-   /* Initialize ROS and specify the name of the node 
-      (which is the name of the file in this case). 
-      Requires the parameters from the main function 
-      header. */
+   /* Set up the ROS topic. */
    ros::init(argc, argv, "Demo");
-
-   /* Create a handle for the node. This will do the 
-      actually initialization of the node in the next 
-      few lines. */
    ros::NodeHandle nhandle;
-
-   /* Initialize the Publisher. The advertise() function 
-      is how we tell ROS we want to publish on a topic. 
-      State the message type we will be publishing 
-      (std_msgs::String), the name of the topic 
-      ("chatter"), and the queue size (1000). The queue 
-      size is the maximum number of messages kept as a 
-      buffer before throwing away old ones if we are 
-      publishing too quickly. */
-   ros::Publisher pub = nhandle.advertise<std_msgs::String>("chatter", QUEUE_SIZE);
-
-   /* Initialize the Subscriber. The subscriber() function 
-      is how we tell ROS we want to receive messages on 
-      a specific topic. State the name of the topic 
-      ("chatter"), the queue size (1000), and the function 
-      that will be called when a message is received 
-      (chatterCallBack(msg)). */
    ros::Subscriber sub = nhandle.subscribe("plot", QUEUE_SIZE, chatterCallback);
+   ros::Publisher pub = nhandle.advertise<std_msgs::String>("chatter", QUEUE_SIZE);
 
    /* Specify the frequency we would like to loop at 
       (10Hz). */
    ros::Rate loop_rate(FREQUENCY);
 
-   /* (Optional: a while loop is not required for
-      Publishers. Only used in this case to show the 
-      continuous timing of publishing messages.) */
-   while (ros::ok())
    /* The function ok() will return false if a SIGINT is 
       received (Ctrl-C), if a shutdown occurs, or if 
       another issue arises. Also, loops waiting for 
       'actual time' should always be conditioned on 
-      ros::ok. */
+      ros::ok.
+      
+      (Optional: a while loop is not required for
+      Publishers. Only used in this case to show the 
+      continuous timing of publishing messages.) */
+   while (ros::ok())
    {
-      /* Declare the message as the type we specified 
-         when we initialized the Publisher 
-         (std_msgs::String). */
-      std_msgs::String msg;
-
       /* Since we are publishing a message with type 
          String, we will be following the next few steps 
          using Stringstream. This will not be the case 
          if our message type is different. The basic 
-         idea is 0the same regardless of message type 
+         idea is the same regardless of message type 
          though.
          
          Declare and initialize the Stringstream with 
          the String (+count) we want to publish. Then, 
          set the data of the message to be the stream 
-         we just created.*/
+         we just created. */
+      std_msgs::String msg;
       std::stringstream sstream;
       sstream << "currently at " << pi;
       msg.data = sstream.str();
@@ -109,15 +87,9 @@ int main(int argc, char **argv)
       /* Print out the message to the terminal. */
       ROS_INFO("%s", msg.data.c_str());
 
-      /* Publish the message to the topic for the 
-         Subscriber to receive. */
+      /* Publish the message. */
       pub.publish(msg);
-    
-      /* The function spinOnce() allows us to have a 
-         Publisher and Subscriber in the same file. If it 
-         were not here, our callbacks would never get 
-         called. (Optional: only required if Publisher 
-         and Subscriber are separate) */
+
       ros::spinOnce();
 
       /* Use the function sleep() for the time remaining 

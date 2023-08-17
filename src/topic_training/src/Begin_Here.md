@@ -254,4 +254,9 @@ The location of an element in the array represents its position relative to the 
 
 Using this information, you will output speeds, on the interval [-1, 1], for the robot until it reaches its beacon. There will be two separate values controlling the speed of the left side and the speed of right side. To learn more about how the controllers are divided between the left and right side, refer back to the general description of the training.
 
+The general idea should be very similar to the PlotDemo and Demo examples. All within the same file, 
+1. the Subscriber should receive the sensor data from the LiDAR
+2. you will interpret the array and determine if the robot should go left, right, or straight ahead
+3. and the Publisher will send the speed values for the left and right motors to the rover.
+
 Go into the MotorChallenge(.cpp or .py) file. This is where you will be writing your code. Feel free to use the examples provided in this training and any other resources that will be useful. The CMakeLists.txt file should already be set up to run your code. 

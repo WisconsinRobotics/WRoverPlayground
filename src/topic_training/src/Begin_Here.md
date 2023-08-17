@@ -33,7 +33,7 @@ An example of a Publisher and Subscriber residing in the same file will be provi
 ## Setting up a Publisher and Subscriber
 Within this directory, you will find two files called Demo(.cpp or .py). These files will show a basic class containing both a Publisher and Subscriber. There will be comments throughout the files that explain the purpose of specific sections of the code.
 
-Note that there are quite a few sections of code that are marked as "Optional." You do not need to include everything in the examples when creating your own code. They are simply showing one way of setting up a Publisher and Subscriber in the same file.
+Note that there are a few sections of code that are marked as "Optional." You do not need to include everything in the examples when creating your own code. They are simply showing one way of setting up a Publisher and Subscriber in the same file.
 
 One file will be written in C++, and the other will be in Python. It is recommended that you choose the language you are most comfortable with to complete the training. Afterwards, you should discuss with one of the Software Leads to determine which part of the rover you would like to be assigned to. You will be given small tasks first, working your way up to more difficult projects. If these tasks/projects require a different language, then you can look through this training again or take what you know from the first time and learn as you go.
 
@@ -183,35 +183,65 @@ In future projects, you might need to use other configurations, builds, and inst
 
 You can also check out the package.xml file, which you also may need to tailor for future projects. However, everything should already be set up correctly, so do not change anything. At the top of the file, it should name the creator of the package. Then, it will include the license regarding open source policies. Right now, it should not specify a license because the license for the package for the WRoverPlayground training trickles down to this package. At the bottom, there should be various dependencies that allow us to use ROS and ROS topics, similar to the CMakeLists.txt `find_package`.
 
-In the terminal, run the command `roscore`. In a new terminal window, change your current directory to be the catkin workspace. In this case, use `cd WRoverPlayground`. Then, use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and `source devel/setup.bash` in this order. These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 
+Now, we will actually run the program.
 
-Now run the Publisher file using `rosrun topic_training PlotDemo` to execute the C++ version, or `rosrun topic_training PlotDemo.py` to execute the Python version. This should not print anything to the terminal.
+1. In the terminal, run the command `roscore`. 
 
-In a new terminal window, repeat the commands `cd WRoverPlayground`, `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`, and `source devel/setup.bash` in this order. 
+2. In a new terminal window, change your current directory to be the catkin workspace. 
+In this case, use `cd WRoverPlayground`. 
 
-With everything hopefully set up properly, you may now run `rosrun topic_training Demo` to execute the C++ version of the demo, or `rosrun topic_training Demo.py` to execute the Python version of the demo. In the terminal, you should see the program continually print "currently at {next sine value}" until you exit the program by inputting `Ctrl+C` in the terminal or the program crashes.
+3. Use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and `source devel/setup.bash` in this order. 
+These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 
+
+4. Run the Publisher file using `rosrun topic_training PlotDemo` to execute the C++ version, or `rosrun topic_training PlotDemo.py` to execute the Python version. 
+This should not print anything to the terminal.
+
+5. In a new terminal window, repeat the commands `cd WRoverPlayground`, `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`, and `source devel/setup.bash` in this order. 
+
+6. With everything hopefully set up properly, you may now run `rosrun topic_training Demo` to execute the C++ version of the demo, or `rosrun topic_training Demo.py` to execute the Python version of the demo. 
+In the terminal, you should see the program continually print "currently at {next sine value}" until you exit the program by inputting `Ctrl+C` in the terminal or the program crashes.
 
 ### rqt_graph and rqt_plot
-In another terminal window, run `rosrun rqt_graph rqt_graph`. You should already be familiar with this command from the ROS Debug/Tools Training. Make sure the graph representation is what is expected. It should show "/PlotDemo" enclosed in a circle pointing to "/Demo" with an arrow named "/plot".
+1. In another terminal window, run `rosrun rqt_graph rqt_graph`. 
+You should already be familiar with this command from the ROS Debug/Tools Training. 
 
-You should have also learned about rqt_plot. Type Ctrl-C into the terminal to stop running Demo(.cpp or .py) so only PlotDemo (.cpp or .py) is running. If you run `rosrun rqt_plot rqt_plot`, you should see a sine graph being plotted onto the screen. Recall that rqt_plot can only be used with numerical values. Using it with the file Demo(.cpp or .py) would not have worked because that is dealing with Strings. Feel free to check this yourself.
+2. Make sure the graph representation is what is expected. 
+It should show "/PlotDemo" enclosed in a circle pointing to "/Demo" with an arrow named "/plot".
 
-You may also look through the file PlotDemo(.cpp or .py) to see how the math works and to see another example of a Publisher but with a different message type. For simplicity's sake, the comments in these files are only explaining the math since you should already understand the basic ROS functions from the previous section of this training.
+You should have also learned about rqt_plot. 
 
-While developing your code for the challenge, use rqt_graph and rqt_plot to make sure your nodes are working as expected
+1. Type Ctrl-C into the terminal to stop running Demo(.cpp or .py) so only PlotDemo (.cpp or .py) is running. 
+
+2. Run `rosrun rqt_plot rqt_plot`. 
+You should see a sine graph being plotted onto the screen. Recall that rqt_plot can only be used with numerical values. Using it with the file Demo(.cpp or .py) would not have worked because that is dealing with Strings. Feel free to check this yourself.
+
+3. You may also look through the file PlotDemo(.cpp or .py) to see how the math works and to see another example of a Publisher but with a different message type. 
+For simplicity's sake, the comments in these files are only explaining the math since you should already understand the basic ROS functions from the previous section of this training.
+
+While developing your code for the challenge, use rqt_graph and rqt_plot to make sure your nodes are working as expected.
 
 ## Defining a Custom Topic Type
 A topic's type is determined by the type of the message being published. If you run the command `rostopic type chatter`, you should see the terminal print out "std_msgs/String" while roscore and rosrun are executing Demo(.cpp or .py). The command will print out "std_msgs/Float64" if you are executing PlotDemo(.cpp or .py).
 
 A topic can have messages of type int8, int16, int32, int64, uint*, float32, float64, String, time, duration, other msg files, and array[] of variable length or fixed length. To message a different type, just change where ever there would be a String in Demo(.cpp or .py) to your desired type and update the includes (C++) or imports (Python) at the top of the file. Remember though, use message types instead of variable types, that is, use std_msgs/String (for C++) or std_msgs.msg.String (for Python) instead of just String.
 
-Along with the types listed above, you can also create custom topic types. Custom topic types are defined in .msg files. In src/topic-training/src/msg/, find the CustomType.msg file. This file shows an example of a custom message type. The format is `{variable type} {variable name}`. As you can see, creating custom types allows us to have data that contains multiple fields/attributes. If you have experience with Object-oriented programming, this concept should be similar to Objects.
+Along with the types listed above, you can also create custom topic types. Custom topic types are defined in .msg files. 
 
-To use .msg files, you need to add the directive `add_message_files` in the CMakeLists.txt file and list the custom types needed for your program. Currently, it just lists the CustomType.msg file. In your actual code, you need to add `#include "{ROS package}/{msg file}.h"` for C++ or `from {ROS package}.msg import {msg file}` for Python. Using the provided example file, this would be `#include "topic_training/CustomType.h"` or `from topic_training.msg import CustomType`. 
+1. In src/topic-training/msg/, find the CustomType.msg file. 
+This file shows an example of a custom message type. The format is `{variable type} {variable name}`. As you can see, creating custom types allows us to have data that contains multiple fields/attributes. If you have experience with Object-oriented programming, this concept should be similar to Objects.
 
-To initialize your message, write `{ROS package}::{file name} msg;` for C++ or `msg = {file name}();` for Python. In this example, it would be `topic-training::CustomType msg;` or `msg = CustomType();`. Both languages use the syntax `msg.{variable name}`, such as `msg.player_name`, to access the different fields/attributes of the message type.
+Please know that this custom type is not used in any example code in this training. It is only here to show you how to use it and set it up for future projects. Do not actually change anything in the next few steps.
 
-Please know that this custom type is not used in any example code in this training. It is only here to show you how to use and set it up for future projects.
+2. To use .msg files, you need to add the directive `add_message_files` in the CMakeLists.txt file and list the custom types needed for your program. 
+It is already added for you and, currently, just lists the CustomType.msg file. 
+
+3. In your actual code, you need to add `#include "{ROS package}/{msg file}.h"` for C++ or `from {ROS package}.msg import {msg file}` for Python. 
+Using the provided example file, this would be `#include "topic_training/CustomType.h"` or `from topic_training.msg import CustomType`. 
+
+4. To initialize your message, write `{ROS package}::{file name} msg;` for C++ or `msg = {file name}();` for Python. 
+In this example, it would be `topic-training::CustomType msg;` or `msg = CustomType();`. 
+
+5. Both languages use the syntax `msg.{variable name}`, such as `msg.player_name`, to access the different fields/attributes of the message type.
 
 ## Challenge
 Once you have completed the training from WRoverPlayground, you should have some working code that will be put into a simulation. The simulation will include a rover that your code is meant to control using mock navigation data to reach some beacon. There will be multiple rounds of this, each round containing one beacon.
@@ -224,4 +254,4 @@ The location of an element in the array represents its position relative to the 
 
 Using this information, you will output speeds, on the interval [-1, 1], for the robot until it reaches its beacon. There will be two separate values controlling the speed of the left side and the speed of right side. To learn more about how the controllers are divided between the left and right side, refer back to the general description of the training.
 
-Go into the MotorChallenge(.cpp or .py) file. This is where you will be writing your code. Feel free to use the examples provided in this training and any other resources that will be useful. The CMakeLists.txt file should already be set up to run your code.
+Go into the MotorChallenge(.cpp or .py) file. This is where you will be writing your code. Feel free to use the examples provided in this training and any other resources that will be useful. The CMakeLists.txt file should already be set up to run your code. 

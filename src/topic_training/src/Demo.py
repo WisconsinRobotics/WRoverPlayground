@@ -54,7 +54,8 @@ def main():
 
         ''' Use the function sleep() for the time 
             remaining until we reach our 10Hz publish 
-            rate. '''
+            rate. (Optional: only used because we are 
+            looping.)'''
         rate.sleep()
 
 '''

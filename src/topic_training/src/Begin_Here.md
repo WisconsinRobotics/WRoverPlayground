@@ -65,12 +65,12 @@ Create a handle for the node. This will do the actually initialization of the no
 ``` C++
 ros::Subscriber sub = nhandle.subscribe("plot", QUEUE_SIZE, chatterCallback);
 ```
-Initialize the Subscriber. The subscribe() function is how we tell ROS we want to receive messages on a specific topic. State the name of the topic ("plot"), the queue size (1), and the function that will be called when a message is received (`chatterCallBack(msg)`). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
+Initialize the Subscriber. The subscribe() function is how we tell ROS we want to receive messages on a specific topic. State the name of the topic (`plot`), the queue size (1), and the function that will be called when a message is received (`chatterCallBack(msg)`). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
 
 ``` C++
 ros::Publisher pub = nhandle.advertise<std_msgs::String>("chatter", QUEUE_SIZE);
 ```
-Initialize the Publisher. The advertise() function is how we tell ROS we want to publish on a topic. State the message type we will be publishing (std_msgs::String), the name of the topic ("chatter"), and the queue size (1).
+Initialize the Publisher. The advertise() function is how we tell ROS we want to publish on a topic. State the message type we will be publishing (std_msgs::String), the name of the topic (`chatter`), and the queue size (1).
 
 The callback function for a Subscriber looks something like this:
 
@@ -133,12 +133,12 @@ Initialize ROS and specify the name of the node (which is the name of the file i
 ``` Python
 rospy.Subscriber('plot', Float64, callback)
 ```
-Initialize the Subscriber. State the name of the topic ('plot'), the message type we will be publishing (float, which is actually in the class std_msgs.msg.Float64), and the function that will be called when a message is received (callBack(data)).
+Initialize the Subscriber. State the name of the topic (`plot`), the message type we will be publishing (float, which is actually in the class std_msgs.msg.Float64), and the function that will be called when a message is received (callBack(data)).
 
 ``` Python
 pub = rospy.Publisher('chatter', String, queue_size=QUEUE_SIZE)
 ```
-Initialize the Publisher. State the name of the topic ('chatter'), the message type we will be publishing (String, which is actually in the class std_msgs.msg.String), and the queue size (1). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
+Initialize the Publisher. State the name of the topic (`chatter`), the message type we will be publishing (String, which is actually in the class std_msgs.msg.String), and the queue size (1). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
 
 The callback function for a Subscriber looks something like this:
 

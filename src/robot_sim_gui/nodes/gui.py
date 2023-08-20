@@ -1,29 +1,43 @@
+#!/usr/bin/env python3
 from tkinter import *
-
+import rospy
 from robot_sim_gui.RobotSimCanvas import RobotSimCanvas
+from robot_sim_gui.msg import DrivePower
 
-# Set up canvas
-window = Tk()
-window.geometry(f'{window.winfo_screenwidth()}x{window.winfo_screenheight()}')
+import math
+import random
 
-robotSimCanvas = RobotSimCanvas(window, window.winfo_screenwidth(), window.winfo_screenheight(), robot_init_x=100, robot_init_y=300)
+if __name__=='__main__':
 
-# Test RobotSimCanvas
-window.after(1, lambda: robotSimCanvas.updateRobotSpeeds( (2, 1) ))
-window.after(200, lambda: print(f'Robot position:\t{robotSimCanvas.getRobotPos()}'))
-window.after(300, lambda: print(f'Robot position:\t{robotSimCanvas.getRobotPos()}'))
-window.after(400, lambda: print(f'Robot position:\t{robotSimCanvas.getRobotPos()}'))
+    rospy.init_node(name='robot_sim_gui')
 
-window.after(1000, lambda: robotSimCanvas.addTarget())
-window.after(1001, lambda: print(f'Target position:\t{robotSimCanvas.getTargetPos()}'))
+    # Set up canvas
+    window = Tk()
+    window.geometry(f'{window.winfo_screenwidth()}x{window.winfo_screenheight()}')
 
-window.after(2000, lambda: robotSimCanvas.removeTarget())
-window.after(2001, lambda: print(f'Target position:\t{robotSimCanvas.getTargetPos()}'))
+    robotSimCanvas = RobotSimCanvas(window, window.winfo_screenwidth(), window.winfo_screenheight(), rospy.get_param('~resource_path'), robot_init_x=100, robot_init_y=300)
 
-window.after(3000, lambda: robotSimCanvas.addTarget(x_pos=100, y_pos=100))
-window.after(3001, lambda: print(f'Target position:\t{robotSimCanvas.getTargetPos()}'))
+    def setRobotPower(msg: DrivePower):
+        robotSimCanvas.updateRobotSpeeds([msg.leftPower, msg.rightPower])
+    powerSubscriber = rospy.Subscriber('/robot/drive_power', DrivePower, setRobotPower)
 
-window.after(6000, lambda: robotSimCanvas.updateRobotSpeeds( (1.5, 2) ))
-window.after(8000, lambda: robotSimCanvas.updateRobotSpeeds( (-1, -1) ))
+    def processTargets():
+        if robotSimCanvas.getTargetPos() == [None, None]:
+            return
+        
+        currTargetPos = robotSimCanvas.getTargetPos()
+        currRobotPos = robotSimCanvas.getRobotPos()
+        distToTarget = math.sqrt((currTargetPos[0] - currRobotPos[0]) ** 2 + (currTargetPos[1] - currRobotPos[1]) ** 2)
+        if distToTarget < 5:
+            robotSimCanvas.removeTarget()
+            robotSimCanvas.addTarget(random.randint(50,robotSimCanvas.canvas.winfo_width()-50), random.randint(50,robotSimCanvas.canvas.winfo_height()-50))
+    targetTimer = rospy.Timer(rospy.Duration(0.1), lambda _: processTargets())
+    robotSimCanvas.addTarget(random.randint(50,robotSimCanvas.canvas.winfo_width()-50), random.randint(50,robotSimCanvas.canvas.winfo_height()-50))
 
-window.mainloop()
+    # Stop Tk on ROS shutsdown
+    def stopTk():
+        window.quit()
+        window.destroy()
+    rospy.on_shutdown(stopTk)
+
+    window.mainloop()

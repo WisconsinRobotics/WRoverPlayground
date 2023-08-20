@@ -7,12 +7,13 @@ from typing import Tuple
 UPDATE_PERIOD = 10 # in ms
 
 class Robot:
-  def __init__(self, root:Tk, canvas:Canvas, init_x:int, init_y:int):
+  def __init__(self, root:Tk, canvas:Canvas, resource_path: str, init_x:int, init_y:int):
     self.root = root
     self.canvas = canvas
     self.canvas.update()
     self.canvas_width = self.canvas.winfo_width()
     self.canvas_height = self.canvas.winfo_height()
+    self.__resource_path = resource_path
     
     # Set initial robot position
     self.x_pos = init_x
@@ -24,7 +25,7 @@ class Robot:
     self.turn_speed = 0
 
     # Add robot image
-    self.image = Image.open('resources/SmallCar.png')
+    self.image = Image.open(f'{self.__resource_path}/SmallCar.png')
     self.tk_image = ImageTk.PhotoImage(self.image.rotate(self.angle))
     self.img_id = self.canvas.create_image(self.x_pos, self.y_pos, image=self.tk_image, anchor=NW)
 

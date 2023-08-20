@@ -1,17 +1,18 @@
 from tkinter import *
-from Robot import Robot
+from robot_sim_gui.Robot import Robot
 
 from typing import Tuple
 
 class RobotSimCanvas:
-  def __init__(self, root:Tk, canvas_width:int, canvas_height:int, robot_init_x:int = 0, robot_init_y:int = 0):
+  def __init__(self, root:Tk, canvas_width:int, canvas_height:int, resource_path:str, robot_init_x:int = 0, robot_init_y:int = 0):
     # Initialize canvas
     self.root = root
     self.canvas = Canvas(root, width=canvas_width, height=canvas_height)
     self.canvas.pack()
+    self.__resource_path = resource_path
 
     # Create robot
-    self.robot = Robot(root, self.canvas, init_x=robot_init_x, init_y=robot_init_y)
+    self.robot = Robot(root, self.canvas, resource_path, init_x=robot_init_x, init_y=robot_init_y)
 
     # Add target image
     self.target_tk_image = None
@@ -27,7 +28,7 @@ class RobotSimCanvas:
   def addTarget(self, x_pos=0, y_pos=0):
     # Open image is it hasn't been yet
     if self.target_tk_image is None:
-      self.target_tk_image = PhotoImage(file='resources/TrafficCone.png')
+      self.target_tk_image = PhotoImage(file=f'{self.__resource_path}/TrafficCone.png')
     
     # Generate new target position
     self.target_x_pos = x_pos

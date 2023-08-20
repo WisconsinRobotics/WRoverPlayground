@@ -2,6 +2,8 @@ from tkinter import *
 from PIL import Image, ImageTk
 import math
 
+from typing import Tuple
+
 UPDATE_PERIOD = 10 # in ms
 
 class Robot:
@@ -55,7 +57,7 @@ class Robot:
 
     self.root.after(UPDATE_PERIOD, lambda: self.updatePos())
   
-  def updateSpeeds(self, new_speeds: tuple[float, float]):
+  def updateSpeeds(self, new_speeds: Tuple[float, float]):
     '''
     Update left and right speed of robot.
     new_speeds = (<left_speed>, <right_speed>)
@@ -65,5 +67,5 @@ class Robot:
     self.forward_speed = right_speed + left_speed
     self.turn_speed = 2*(right_speed - left_speed)
 
-  def getPos(self) -> tuple[int,int]:
+  def getPos(self) -> Tuple[int,int]:
     return (self.x_pos, self.y_pos)

@@ -1,6 +1,8 @@
 from tkinter import *
 from Robot import Robot
 
+from typing import Tuple
+
 class RobotSimCanvas:
   def __init__(self, root:Tk, canvas_width:int, canvas_height:int, robot_init_x:int = 0, robot_init_y:int = 0):
     # Initialize canvas
@@ -15,7 +17,7 @@ class RobotSimCanvas:
     self.target_tk_image = None
     self.target_img_id = None
 
-  def updateRobotSpeeds(self, new_speeds: tuple[float, float]):
+  def updateRobotSpeeds(self, new_speeds: Tuple[float, float]):
     '''
     Update left and right speed of robot.
     new_speeds = (<left_speed>, <right_speed>)
@@ -47,9 +49,9 @@ class RobotSimCanvas:
       self.target_x_pos = None
       self.target_y_pos = None
   
-  def getRobotPos(self) -> tuple[int, int]:
+  def getRobotPos(self) -> Tuple[int, int]:
     return self.robot.getPos()
 
-  def getTargetPos(self) -> tuple[int,int]:
+  def getTargetPos(self) -> Tuple[int,int]:
     return (self.target_x_pos, self.target_y_pos)
   

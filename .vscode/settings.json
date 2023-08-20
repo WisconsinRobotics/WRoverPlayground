@@ -1,10 +1,12 @@
 {
     "python.autoComplete.extraPaths": [
         "/home/nomorenickels/Documents/WRover_Software/devel/lib/python3/dist-packages",
-        "/opt/ros/noetic/lib/python3/dist-packages"
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "${workspaceFolder}/src/robot_sim_gui/src"
     ],
     "python.analysis.extraPaths": [
         "/home/nomorenickels/Documents/WRover_Software/devel/lib/python3/dist-packages",
-        "/opt/ros/noetic/lib/python3/dist-packages"
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "${workspaceFolder}/src/robot_sim_gui/src"
     ]
 }

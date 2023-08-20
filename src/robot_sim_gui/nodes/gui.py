@@ -1,8 +1,6 @@
 from tkinter import *
-from PIL import Image, ImageTk
-import math
 
-from RobotSimCanvas import RobotSimCanvas
+from robot_sim_gui.RobotSimCanvas import RobotSimCanvas
 
 # Set up canvas
 window = Tk()

@@ -26,10 +26,15 @@ bool doubleServiceCallback(wrover_status_light::DoubleServiceRequest& req,
 
 int main(int argc, char** argv) {
     /*
-    Creates a new node called "double_server" and a new NodeHandle reference. NodeHandles provide 
-    functions for creating, managing, and interacting with ROS nodes.
+    The ros::init() function sets up the node and needs to be called before using any other parts 
+    of the ROS library. Here it takes in 3 arguments: argc, argv, and the name of this node. 
     */
     ros::init(argc, argv, "double_server");
+
+    /*
+    A NodeHandle is the main access point to communications with ROS in C++. Here it is used to 
+    create a new server.
+    */
     ros::NodeHandle nh;
 
     /*
@@ -39,7 +44,8 @@ int main(int argc, char** argv) {
     ros::ServiceServer service = nh.advertiseService("double_service", doubleServiceCallback);
 
     /*
-    Keeps the code running by entering a loop that listens for incoming requests.
+    The ros::spin() function and other versions of spin() keeps the code running by entering a 
+    loop that listens for incoming requests.
     */
     ros::spin();
     return 0;

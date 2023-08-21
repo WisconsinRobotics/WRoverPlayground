@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import rospy
 from wrover_status_light.srv import DoubleService
 from wrover_status_light.srv import DoubleServiceRequest
@@ -33,7 +35,8 @@ Initializes the node
 '''
 def double_service_server():
     '''
-    Creates a new node called "double_server"
+    Creates a new node called "double_server". Without this the code cannot communicate with ROS, 
+    and is usually declared at the beginning.
     '''
     rospy.init_node("double_server")
 
@@ -44,7 +47,8 @@ def double_service_server():
     s = rospy.Service("double_service", DoubleService, double_service_handler)
 
     '''
-    Keeps the code running by entering a loop that listens for incoming requests.
+    The rospy.spin() function and other versions of spin() keeps the code running by entering a 
+    loop that listens for incoming requests.
     '''
     rospy.spin()
 

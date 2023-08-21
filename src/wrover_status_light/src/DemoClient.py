@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import rospy
 from wrover_status_light.srv import DoubleService
 from wrover_status_light.srv import DoubleServiceRequest

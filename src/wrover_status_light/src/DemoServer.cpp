@@ -21,7 +21,7 @@ bool doubleServiceCallback(wrover_status_light::DoubleServiceRequest& req,
     return it. Instead, handler functions in C++ return a boolean to convey if the operation is 
     successful or not. 
     */
-    return true;
+    return res.output > 0;
 }
 
 int main(int argc, char** argv) {

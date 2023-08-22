@@ -189,7 +189,7 @@ To run the C++ code:
 5. To run the server code, in a new terminal, run `rosrun wrover_status_light DemoServer`.
 6. To see a list of all services, in a new terminal, run `rosservice list`. You should see `/double_service` listed. Now would also be a good opportunity to run `rosservice help` and familiarize yourself with all the `rosservice` commands.
 7. You can run the service manually from the command line using `rosservice call`. In this case, try running `rosservice call /double_service "input: [insert your number here]"`. You should see that the inputted number is doubled. 
-8. To run the client code, run `rosrun wrover_status_light DemoClient`. You should see powers of 2 being printed. Eventually the program will print a negative number before only printing 0s. This is because the response/request messages use a 64-bit integer, and as the number is doubled eventually we will reach integer overflow.
+8. To run the client code, run `rosrun wrover_status_light DemoClient`. You should see powers of 2 being printed. Eventually the program will print `Integer overflow encountered`. This is because the response/request messages use a 64-bit integer, and as the number is doubled eventually we will reach integer overflow.
 9. Use `Ctrl-C` to exit out of any programs
 
 ### Python
@@ -201,7 +201,7 @@ To run the Python code:
 5. To run the server code, in a new terminal, run `rosrun wrover_status_light DemoServer.py`.
 6. To see a list of all services, in a new terminal, run `rosservice list`. You should see `/double_service` listed. Now would also be a good opportunity to run `rosservice help` and familiarize yourself with all the `rosservice` commands.
 7. You can run the service manually from the command line using `rosservice call`. In this case, try running `rosservice call /double_service "input: [insert your number here]"`. You should see that the inputted number is doubled. 
-8. To run the client code, run `rosrun wrover_status_light DemoClient.py`. You should see powers of 2 being printed. Eventually the program will throw an exception. This is because the response/request messages use a 64-bit integer, and as the number is doubled eventually we will reach integer overflow.
+8. To run the client code, run `rosrun wrover_status_light DemoClient.py`. You should see powers of 2 being printed. Eventually the program will print `Integer overflow encountered`. This is because the response/request messages use a 64-bit integer, and as the number is doubled eventually we will reach integer overflow.
 9. Use `Ctrl-C` to exit out of any programs
 
 ## Challenge

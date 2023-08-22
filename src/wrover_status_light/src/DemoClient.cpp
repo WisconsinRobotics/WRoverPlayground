@@ -59,9 +59,9 @@ int main(int argc, char** argv) {
             rate.sleep();
         } else {
             /*
-            This code block is ran when the service call exits unsuccessfully. In this example it 
-            is not populated for simplicity. 
+            This code block is ran when the service call exits unsuccessfully.
             */
+            std::cout << "Integer overflow encountered" << std::endl;
         }
     }
 }

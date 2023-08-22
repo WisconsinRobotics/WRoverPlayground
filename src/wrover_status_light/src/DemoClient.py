@@ -32,17 +32,28 @@ def main():
     '''
     The funciton rospy.is_shutdown() checks if the module is still running or not. 
     '''
+    print(num)
     while not rospy.is_shutdown():
-        print(num)
 
         '''
-        Calls the service using the previously created service object and saves the response in 
-        a local variable. Similar to the server's handler function, here we simplify the code by 
-        not explicitly creating a new DoubleServiceRequest instance since it only contains one
-        field.
+        Here we use a try-except block to guard against any potential exceptions that might occur 
+        when interacting with the service. 
         '''
-        response:DoubleServiceResponse = double_service(num)
-        num = response.output
+        try:
+            '''
+            Calls the service using the previously created service object and saves the response in 
+            a local variable. Similar to the server's handler function, here we simplify the code by 
+            not explicitly creating a new DoubleServiceRequest instance since it only contains one
+            field.
+            '''
+            response:DoubleServiceResponse = double_service(num)
+            num = response.output
+            print(num)
+        except:
+            '''
+            If calling the service causes an exception, this code will run instead
+            '''
+            print("Integer overflow encountered")
 
         '''
         Waits for 100ms before resuming the program. This ensures that the loop runs at 10hz, 

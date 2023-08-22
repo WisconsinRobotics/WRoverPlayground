@@ -52,6 +52,9 @@ class RobotSimCanvas:
   
   def getRobotPos(self) -> Tuple[int, int]:
     return self.robot.getPos()
+  
+  def getRobotOrientation(self) -> float:
+    return self.robot.getOrientation()
 
   def getTargetPos(self) -> Tuple[int,int]:
     return (self.target_x_pos, self.target_y_pos)

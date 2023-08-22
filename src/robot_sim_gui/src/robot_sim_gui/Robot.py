@@ -51,6 +51,7 @@ class Robot:
       self.x_pos += x_speed
       self.y_pos += y_speed
       self.angle += self.turn_speed
+      self.angle = ((self.angle + 540) % 360) - 180
 
       self.canvas.delete(self.img_id)
       self.tk_image = ImageTk.PhotoImage(self.image.rotate(self.angle))
@@ -70,3 +71,6 @@ class Robot:
 
   def getPos(self) -> Tuple[int,int]:
     return (self.x_pos, self.y_pos)
+  
+  def getOrientation(self) -> float:
+    return self.angle

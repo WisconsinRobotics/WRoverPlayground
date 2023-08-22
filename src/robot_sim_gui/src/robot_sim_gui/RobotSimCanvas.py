@@ -1,5 +1,7 @@
 from tkinter import *
-from robot_sim_gui.Robot import Robot
+#from robot_sim_gui.Robot import Robot
+from Robot import Robot
+from StatusLight import StatusLight
 
 from typing import Tuple
 
@@ -17,6 +19,9 @@ class RobotSimCanvas:
     # Add target image
     self.target_tk_image = None
     self.target_img_id = None
+
+    # Add status light
+    self.status_light = StatusLight(self.canvas)
 
   def updateRobotSpeeds(self, new_speeds: Tuple[float, float]):
     '''
@@ -58,4 +63,13 @@ class RobotSimCanvas:
 
   def getTargetPos(self) -> Tuple[int,int]:
     return (self.target_x_pos, self.target_y_pos)
+
+  def setReachedTarget(self):
+    self.status_light.setReachedTarget()
+  
+  def setNavigatingToTarget(self):
+    self.status_light.setNavigatingToTarget()
+  
+  def getReachedTarget(self):
+    return self.status_light.getReachedTarget()
   

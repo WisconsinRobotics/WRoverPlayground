@@ -28,7 +28,7 @@ Here is a list of key components involved in services:
 
 While both services and topics work to allow communication between nodes, they differ in terms of their data exchange patterns and the types of interactions they support. 
 
-Unlike topics, which operate asynchronously, service calls provide synchronous communication. The client node waits for the server node to process the request and receive a response before continuing its execution. This synchronous behavior is beneficial in cases where a response is required before proceeding with the next steps of a program.  It is not acceptable for a server to not exist or to never return a response; these will generate exceptions for the service client to handle.
+Unlike topics, which operate asynchronously, service calls provide synchronous communication. The client node waits for the server node to process the request and receives a response before continuing its execution. This synchronous behavior is beneficial in cases where a response is required before proceeding with the next steps of a program.  It is not acceptable for a server to not exist or to never return a response; these will generate exceptions for the service client to handle.
 
 In addition, topics are designed for data streaming and broadcasting continuous streams of information, such as sensor data or robot state updates. They are ideal when nodes require a constant flow of information and do not require immediate responses. On the other hand, services are typically used for accessing functionality that is provided by another node. They are well-suited for situations where nodes need to invoke specific actions or request information from another node, and a response is expected.
 
@@ -205,7 +205,11 @@ To run the Python code:
 9. Use `Ctrl-C` to exit out of any programs
 
 ## Challenge
-**TODO**
+In a real world competition, once the rover naviagates to a point of interest, it should notify the operator to perform some action. In this training, we will mock this behavior by having two services that you should interact with. 
+
+Once the mock rover has reached a beacon, it should signal this by sending a request message to the `service_light` service with the `light_status` field set to `DONE`. When the server receives the message, it will automatically stop the motors. After waiting for a few seconds (think of this as the operator taking over control to perform tasks), the server will return a response containing a boolean `canContinue` field, which indicates if the rover should move onto the next beacon or not. 
+
+Your challenge is to implement the behavior described above in either `ServiceChallenge.cpp` or `ServiceChallenge.py` depending on your preferred language. You can also find `ServiceLight.srv` in the `srv` folder of this module. 
 
 ## Notes
 ROS's wiki page on services: http://wiki.ros.org/Services

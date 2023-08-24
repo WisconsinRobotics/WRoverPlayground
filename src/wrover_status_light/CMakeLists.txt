@@ -60,6 +60,7 @@ catkin_python_setup()
 add_service_files(
   FILES
   DoubleService.srv
+  ServiceLight.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -138,6 +139,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(DemoClient src/DemoClient.cpp)
 add_executable(DemoServer src/DemoServer.cpp)
+add_executable(ServiceChallenge src/ServiceChallenge.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -152,6 +154,7 @@ add_executable(DemoServer src/DemoServer.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(DemoClient ${catkin_LIBRARIES})
 target_link_libraries(DemoServer ${catkin_LIBRARIES})
+target_link_libraries(ServiceChallenge ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -165,6 +168,7 @@ target_link_libraries(DemoServer ${catkin_LIBRARIES})
 catkin_install_python(PROGRAMS
   src/DemoServer.py
   src/DemoClient.py
+  src/ServiceChallenge.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

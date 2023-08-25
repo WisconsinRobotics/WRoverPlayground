@@ -51,7 +51,7 @@ class Robot:
       self.x_pos += x_speed
       self.y_pos += y_speed
       self.angle += self.turn_speed
-      self.angle = ((self.angle + 540) % 360) - 180
+      self.angle %= 360
 
       self.canvas.delete(self.img_id)
       self.tk_image = ImageTk.PhotoImage(self.image.rotate(self.angle))

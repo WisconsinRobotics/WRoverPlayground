@@ -28,7 +28,6 @@ if __name__=='__main__':
     def placeTargetRandom():
         robotSimCanvas.addTarget(random.randint(150,robotSimCanvas.canvas.winfo_width()-150), random.randint(150,robotSimCanvas.canvas.winfo_height()-150))
 
-
     def processTargets():
         currTargetPos = deepcopy(robotSimCanvas.getTargetPos()) # copy-on-read to avoid race condition
         currRobotPos = robotSimCanvas.getRobotPos()
@@ -49,18 +48,21 @@ if __name__=='__main__':
         currTargetPos = deepcopy(robotSimCanvas.getTargetPos()) # copy-on-read to avoid race condition
         currRobotPos = robotSimCanvas.getRobotPos()
 
-        if currTargetPos == [None, None]:
+        # If there's no target, publish empty message
+        if None in currTargetPos:
             publisher.publish(IRSensorData(distances=startingMessage))
             return
 
         dY = currRobotPos[0] - currTargetPos[0]
         dX = currRobotPos[1] - currTargetPos[1]
         absAngle = math.degrees(math.atan2(dY, dX))
-        relAngle = absAngle - (robotSimCanvas.getRobotOrientation())
+        relAngle = (((absAngle - (robotSimCanvas.getRobotOrientation()))+ 540) % 360) - 180
 
+        # Get distance
         if abs(relAngle) < 90:
             ind = 90 - int(relAngle)
             startingMessage[ind] = math.sqrt((currTargetPos[0] - currRobotPos[0]) ** 2 + (currTargetPos[1] - currRobotPos[1]) ** 2)
+        # Publish final message
         publisher.publish(IRSensorData(distances=startingMessage))
     irPublisher = rospy.Publisher('/robot/ir_sensor', IRSensorData, queue_size=1)
     irTimer = rospy.Timer(rospy.Duration(0.1), lambda _: publishIRMessage(irPublisher))

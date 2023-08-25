@@ -1,7 +1,7 @@
 from tkinter import *
 #from robot_sim_gui.Robot import Robot
-from Robot import Robot
-from StatusLight import StatusLight
+from robot_sim_gui.Robot import Robot
+from robot_sim_gui.StatusLight import StatusLight
 
 from typing import Tuple
 

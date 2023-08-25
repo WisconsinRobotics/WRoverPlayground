@@ -3,10 +3,12 @@ from tkinter import *
 import rospy
 from robot_sim_gui.RobotSimCanvas import RobotSimCanvas
 from robot_sim_gui.msg import DrivePower, IRSensorData
+from robot_sim_gui.srv import LightStatus, LightStatusRequest, LightStatusResponse, ContinuationStatus, ContinuationStatusResponse
 
 import math
 import random
 from copy import deepcopy
+import threading
 
 if __name__=='__main__':
 
@@ -20,7 +22,10 @@ if __name__=='__main__':
 
     # Set drive power
     def setRobotPower(msg: DrivePower):
-        robotSimCanvas.updateRobotSpeeds([msg.leftPower, msg.rightPower])
+        if not robotSimCanvas.getReachedTarget():
+            robotSimCanvas.updateRobotSpeeds([msg.leftPower, msg.rightPower])
+        else:
+            robotSimCanvas.updateRobotSpeeds([0,0])
     powerSubscriber = rospy.Subscriber('/robot/drive_power', DrivePower, setRobotPower, queue_size=1)
 
 
@@ -28,7 +33,21 @@ if __name__=='__main__':
     def placeTargetRandom():
         robotSimCanvas.addTarget(random.randint(150,robotSimCanvas.canvas.winfo_width()-150), random.randint(150,robotSimCanvas.canvas.winfo_height()-150))
 
+    def processLight(msg: LightStatusRequest):
+        # print(f'HEAD MSG {msg.lightStatus}')
+        if msg.lightStatus: robotSimCanvas.status_light.setReachedTarget()
+        else: robotSimCanvas.status_light.setNavigatingToTarget()
+        return LightStatusResponse()
+    light_service = rospy.Service('/robot/status_light', LightStatus, processLight)    
+
+    canContinue = False
+    def processContinuation():
+        return ContinuationStatusResponse(canContinue=canContinue)
+    continuation_service = rospy.Service('/robot/continuation', ContinuationStatus, lambda _: processContinuation())
+
+    counter=0
     def processTargets():
+        global canContinue
         currTargetPos = deepcopy(robotSimCanvas.getTargetPos()) # copy-on-read to avoid race condition
         currRobotPos = robotSimCanvas.getRobotPos()
 
@@ -36,9 +55,21 @@ if __name__=='__main__':
             return
         
         distToTarget = math.sqrt((currTargetPos[0] - currRobotPos[0]) ** 2 + (currTargetPos[1] - currRobotPos[1]) ** 2)
-        if distToTarget < 100:
+        if distToTarget < 100 and robotSimCanvas.getReachedTarget():
+            canContinue = False
             robotSimCanvas.removeTarget()
             placeTargetRandom()
+            def resetContinue():
+                global canContinue
+                global counter
+                canContinue = True
+                counter += 1
+                print('CONTINUING...')
+                print(f'COMPLETE WITH {counter} TARGETS')
+            timer = threading.Timer(10, resetContinue)
+            timer.setDaemon = True
+            timer.start()
+
     targetTimer = rospy.Timer(rospy.Duration(0.1), lambda _: processTargets())
     placeTargetRandom()
 
@@ -71,5 +102,7 @@ if __name__=='__main__':
     def stopTk():
         window.quit()
     rospy.on_shutdown(stopTk)
+    t1 = threading.Thread(target=lambda: rospy.spin())
+    t1.start()
 
     window.mainloop()

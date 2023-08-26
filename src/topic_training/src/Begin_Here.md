@@ -26,7 +26,7 @@ The Publisher and Subscriber are both nodes that are connected by a topic, allow
 
 Topics do not need to have a one-to-one relationship. For example, it is possible for a topic to have multiple Subscribers, which allows a single node to communicate with other nodes.
 
-Also, Publishers and Subscribers do not need to be in separate files. In fact, if the Publisher and Subscriber rely on each other's data, it may be better to keep them in the same file. However, they should not be on the same topic as this would be incredibly inefficient. A way to do this would be to have the Subscriber receive data from one topic, the data to be manipulated in some way, and the Publisher to send the result on another topic. 
+Also, Publishers and Subscribers do not need to be in separate files. In fact, if the Publisher and Subscriber rely on each other's data, it may be better to keep them in the same file. However, a node should not publish to itself as this would be incredibly inefficient. A way to do this properly would be to have the Subscriber receive data from one topic, the data to be manipulated in some way, and the Publisher to send the result on another topic. 
 
 An example of a Publisher and Subscriber residing in the same file will be provided in the next section.
 

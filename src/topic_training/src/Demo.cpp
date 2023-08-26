@@ -17,10 +17,6 @@
    if the message is of type String)*/
 #include <sstream>
 
-/* Avoid unexplained literal numbers in code. */
-constexpr int QUEUE_SIZE = 1;
-constexpr int FREQUENCY = 10;
-
 /* Variable for message. */
 float pi;
 
@@ -46,6 +42,9 @@ void chatterCallback(const std_msgs::Float64::ConstPtr& msg)
  */
 int main(int argc, char **argv)
 {
+   /* Avoid unexplained literal numbers in code. */
+   constexpr int QUEUE_SIZE = 1;
+   constexpr int FREQUENCY = 10;
 
    /* Set up the ROS topic. */
    ros::init(argc, argv, "Demo");

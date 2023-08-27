@@ -1,4 +1,4 @@
-Checks: "bugprone-*,readability-*,cppcoreguidelines-*,clang-analyzer-*,-readability-braces-around-statements,-hicpp-braces-around-statements"
+Checks: "bugprone-*,performance-*,readability-*,modernize-*,hicpp-*,cppcoreguidelines-*,clang-analyzer-*,-modernize-use-trailing-return-type,-readability-braces-around-statements,-hicpp-braces-around-statements,-cppcoreguidelines-non-private-member-variables-in-classes"
 WarningsAsErrors:    ''
 HeaderFilterRegex:   ''
 CheckOptions:

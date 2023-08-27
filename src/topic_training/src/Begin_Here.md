@@ -31,7 +31,7 @@ Also, Publishers and Subscribers do not need to be in separate files. In fact, i
 An example of a Publisher and Subscriber residing in the same file will be provided in the next section.
 
 ## Setting up a Publisher and Subscriber
-Within this directory, you will find two files called Demo(.cpp or .py). These files will show a basic class containing both a Publisher and Subscriber. There will be comments throughout the files that explain the purpose of specific sections of the code.
+Within the directory /workspaces/WRoverPlayground/src/topic_training/src, you will find two files called Demo(.cpp or .py). These files will show a basic class containing both a Publisher and Subscriber. There will be comments throughout the files that explain the purpose of specific sections of the code.
 
 Note that there are a few sections of code that are marked as "Optional." You do not need to include everything in the examples when creating your own code. They are simply showing one way of setting up a Publisher and Subscriber in the same file.
 
@@ -171,7 +171,7 @@ Publish the message using the previously initialized Publisher `pub`.
 If you have glanced at the C++ example code, you may have noticed the function `ros::spinOnce()` and its differences with `ros::spin()`. Python only has `rospy.spin()`, which can be completely replaced by a for loop, which is why you do not see it in the Python example code.
 
 ## Running a Publisher and Subscriber
-Before you are able to run the example code, find the CMakeLists.txt file that is outside of the src directory but still inside of the topic_training directory. This file will include the the configurations, builds, and installs required to run your program as well as the files you will be running. Do not change anything in the file as it should already be set up for the demo files to work. 
+Before you are able to run the example code, find the CMakeLists.txt file in the directory /workspaces/WRoverPlayground/src/topic_training. This file will include the the configurations, builds, and installs required to run your program as well as the files you will be running. Do not change anything in the file as it should already be set up for the demo files to work. 
 
 The `find_package`, `catkin_package`, and `include_directories` specifications are required for both the C++ and Python files to work. These provide the packages and directories needed for running ROS and ROS topics. 
 
@@ -198,7 +198,7 @@ These commands adjust the catkin workspace based on the CMakeLists.txt and packa
 4. Run the Publisher file using `rosrun topic_training PlotDemo` to execute the C++ version, or `rosrun topic_training PlotDemo.py` to execute the Python version. 
 This should not print anything to the terminal.
 
-5. In a new terminal window, repeat the commands `cd WRoverPlayground`, `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`, and `source devel/setup.bash` in this order. 
+5. In a new terminal window, repeat the commands `cd /workspaces/WRoverPlayground`, `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON`, and `source devel/setup.bash` in this order. 
 
 6. With everything hopefully set up properly, you may now run `rosrun topic_training Demo` to execute the C++ version of the demo, or `rosrun topic_training Demo.py` to execute the Python version of the demo. 
 In the terminal, you should see the program continually print "currently at {next sine value}" until you exit the program by inputting `Ctrl+C` in the terminal or the program crashes.
@@ -229,7 +229,7 @@ A topic can have messages of type int8, int16, int32, int64, uint*, float32, flo
 
 Along with the types listed above, you can also create custom topic types. Custom topic types are defined in .msg files. 
 
-1. In src/topic-training/msg/, find the CustomType.msg file. 
+1. In /workspaces/WRoverPlayground/src/topic-training/msg/, find the CustomType.msg file. 
 This file shows an example of a custom message type. The format is `{variable type} {variable name}`. As you can see, creating custom types allows us to have data that contains multiple fields/attributes. If you have experience with Object-oriented programming, this concept should be similar to Objects.
 
 Please know that this custom type is not used in any example code in this training. It is only here to show you how to use it and set it up for future projects. Do not actually change anything in the next few steps.
@@ -261,4 +261,4 @@ The general idea should be very similar to the PlotDemo and Demo examples. All w
 2. you will interpret the array and determine if the robot should go left, right, or straight ahead
 3. and the Publisher will send the speed values for the left and right motors to the rover.
 
-Go into the MotorChallenge(.cpp or .py) file. This is where you will be writing your code. Feel free to use the examples provided in this training and any other resources that will be useful. The CMakeLists.txt file should already be set up to run your code. 
+Go into the MotorChallenge(.cpp or .py) file in the directory /workspaces/WRoverPlayground/src/topic_training/src. This is where you will be writing your code. Feel free to use the examples provided in this training and any other resources that will be useful. The CMakeLists.txt file should already be set up to run your code. 

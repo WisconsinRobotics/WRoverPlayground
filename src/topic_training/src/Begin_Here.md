@@ -188,7 +188,7 @@ Now, we will actually run the program.
 1. In the terminal, run the command `roscore`. 
 
 2. In a new terminal window, change your current directory to be the catkin workspace. 
-In this case, use `cd WRoverPlayground`. 
+In this case, use `cd /workspaces/WRoverPlayground`. 
 
 3. Use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and `source devel/setup.bash` in this order. 
 These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 

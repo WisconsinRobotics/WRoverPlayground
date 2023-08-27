@@ -193,7 +193,7 @@ In this case, use `cd /workspaces/WRoverPlayground`.
 3. Use the commands `catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=ON` and `source devel/setup.bash` in this order. 
 These commands adjust the catkin workspace based on the CMakeLists.txt and package.xml files. You must run these commands everytime you change these two files. 
 
-*Note: This year we decided to start using a Docker container, which should take care of this step automatically. It will not break anything if you run these commands, but they are redundant. The training still includes this step so that you know what is happening behind the scenes.*
+*Note: This year we decided to start using a Docker container, which should take care of step #3 automatically. It will not break anything if you run these commands, but they are redundant. The training still includes this step so that you know what is happening behind the scenes.*
 
 4. Run the Publisher file using `rosrun topic_training PlotDemo` to execute the C++ version, or `rosrun topic_training PlotDemo.py` to execute the Python version. 
 This should not print anything to the terminal.

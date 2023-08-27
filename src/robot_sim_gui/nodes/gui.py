@@ -18,6 +18,10 @@ if __name__=='__main__':
     window = Tk()
     window.geometry(f'{window.winfo_screenwidth()}x{window.winfo_screenheight()}')
 
+    # Set window icon
+    icon_tk_image = PhotoImage(file=f'{rospy.get_param("~resource_path")}/WRIcon.png')
+    window.wm_iconphoto(False, icon_tk_image)
+
     robotSimCanvas = RobotSimCanvas(window, window.winfo_screenwidth(), window.winfo_screenheight(), rospy.get_param('~resource_path'), robot_init_x=300, robot_init_y=500)
 
     # Set drive power

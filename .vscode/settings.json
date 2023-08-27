@@ -8,5 +8,6 @@
         "${workspaceFolder}/devel/lib/python3/dist-packages",
         "/opt/ros/noetic/lib/python3/dist-packages",
         "${workspaceFolder}/src/robot_sim_gui/src"
-    ]
+    ],
+    "cmake.sourceDirectory": "C:/Users/surao/OneDrive/Documents/Sushanth/Personal/Robotics/WRoverPlayground/src/robot_sim_gui"
 }

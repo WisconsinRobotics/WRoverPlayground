@@ -25,7 +25,7 @@ class Robot:
     self.turn_speed = 0
 
     # Add robot image
-    self.image = Image.open(f'{self.__resource_path}/SmallCar.png')
+    self.image = Image.open(f'{self.__resource_path}/SmallTank.png')
     self.tk_image = ImageTk.PhotoImage(self.image.rotate(self.angle))
     self.img_id = self.canvas.create_image(self.x_pos, self.y_pos, image=self.tk_image, anchor=NW)
 

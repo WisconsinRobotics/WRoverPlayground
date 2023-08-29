@@ -171,7 +171,7 @@ Publish the message using the previously initialized Publisher `pub`.
 If you have glanced at the C++ example code, you may have noticed the function `ros::spinOnce()` and its differences with `ros::spin()`. Python only has `rospy.spin()`, which can be completely replaced by a for loop, which is why you do not see it in the Python example code.
 
 ## Running a Publisher and Subscriber
-Before you are able to run the example code, find the CMakeLists.txt file in the directory `/workspaces/WRoverPlayground/src/topic_training`. This file will include the the configurations, builds, and installs required to run your program as well as the files you will be running. Do not change anything in the file as it should already be set up for the demo files to work. 
+Before you are able to run the example code, find the CMakeLists.txt file in the directory `/workspaces/WRoverPlayground/src/topic_training`. This file will include the the configurations, builds, and installs required to run your program as well as the files you will be running. Do not change anything in the file as it should already be set up for the demo files to work. You also do not need to understand anything in the file as it is way beyond the scope of this training.
 
 The `find_package`, `catkin_package`, and `include_directories` specifications are required for both the C++ and Python files to work. These provide the packages and directories needed for running ROS and ROS topics. 
 

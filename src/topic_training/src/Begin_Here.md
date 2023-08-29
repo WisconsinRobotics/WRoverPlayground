@@ -17,9 +17,11 @@ Once you complete this training, you should be familiar with:
 ## The Purpose of Topics
 Though possible, it is not feasible to have one node contain all the information a rover would need. We need to spread out the information into different files. This is where ROS topics come in. The word "topic" sounds very general, but it is actually a specific concept that allows ROS nodes to communicate with each other. They are a way to stream data in and out of a program.
 
-Using topics, our code now becomes 'hot-swappable.' Topics do not care which node is sending or receiving data, so we can easily create a node that serves data from a physical sensor as well as a mock node to test other nodes without needing to change those nodes. The reason is because the interfaces provided through the published data versus an actual sensor are equivalent.
+When discussing topics, nodes are divided into those that send data on a topic and those that receive data on a topic. This allows us to specialize nodes, so they can execute their own code/tasks, while also sending and receiving information. For example, we separate the motor driver programs from how we drive the motors from how we gather user input. Despite these all being related to the motors, they are separated for easier maintenance, division of tasks, and readability.
 
-This allows us to specialize nodes, so they can execute their own code/tasks, while also sending and receiving information. For example, we separate the motor driver programs from how we drive the motors from how we gather user input. Despite these all being related to the motors, they are separated for easier maintenance, division of tasks, and readability.
+This division of nodes means that our code now becomes 'hot-swappable.' This means that the software can be changed without the entire system being shut down Since the nodes are separated, they can be added, replaced, or removed without affecting other parts of the system.
+
+Also, topics do not care which node is sending or receiving data, so we can easily create a node that serves data from a physical sensor as well as a mock node to test other nodes without needing to change those nodes. The reason is because the interfaces provided through the published data versus an actual sensor are equivalent.
 
 ## Publisher/Subscriber Relationship
 The Publisher and Subscriber are both nodes that are connected by a topic, allowing them to send messages between each other. The Publisher node publishes messages on the topic, while the Subscriber node subscribes to the same topic to receive the Publisher's messages. 

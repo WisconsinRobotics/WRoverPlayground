@@ -70,7 +70,7 @@ Initialize the Subscriber. The `subscribe()` function is how we tell ROS we want
 ``` C++
 ros::Publisher pub = nhandle.advertise<std_msgs::String>("chatter", QUEUE_SIZE);
 ```
-Initialize the Publisher. The `advertise()` function is how we tell ROS we want to publish on a topic. State the message type we will be publishing (`std_msgs::String`), the name of the topic (`chatter`), and the queue size (1).
+Initialize the Publisher. The `advertise()` function creates a Publisher object that we can use to publish messages to a topic later on. State the message type we will be publishing (`std_msgs::String`), the name of the topic (`chatter`), and the queue size (1).
 
 The callback function for a Subscriber looks something like this:
 

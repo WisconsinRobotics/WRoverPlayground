@@ -60,7 +60,7 @@ Initialize ROS and specify the name of the node (which is the name of the file i
 ``` C++
 ros::NodeHandle nhandle;
 ```
-Create a handle for the node. This will do the actually initialization of the node in the next few lines.
+Create a handle for the node. This will allow us to create Subscriber and Publisher objects, which you will see in the next couple lines.
 
 ``` C++
 ros::Subscriber sub = nhandle.subscribe("plot", QUEUE_SIZE, chatterCallback);

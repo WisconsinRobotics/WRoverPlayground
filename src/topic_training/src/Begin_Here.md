@@ -55,7 +55,7 @@ To break this down,
 ``` C++
 ros::init(argc, argv, "Demo");
 ```
-Initialize ROS and specify the name of the node (which is the name of the file in this case). This requires the parameters from the main function header (argc and argv).
+Initialize ROS and specify the name of the node (which is the name of the file in this case). This requires the parameters from the main function header (`argc` and `argv`).
 
 ``` C++
 ros::NodeHandle nhandle;
@@ -65,12 +65,12 @@ Create a handle for the node. This will do the actually initialization of the no
 ``` C++
 ros::Subscriber sub = nhandle.subscribe("plot", QUEUE_SIZE, chatterCallback);
 ```
-Initialize the Subscriber. The subscribe() function is how we tell ROS we want to receive messages on a specific topic. State the name of the topic (`plot`), the queue size (1), and the function that will be called when a message is received (`chatterCallBack(msg)`). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
+Initialize the Subscriber. The `subscribe()` function is how we tell ROS we want to receive messages on a specific topic. State the name of the topic (`plot`), the queue size (1), and the function that will be called when a message is received (`chatterCallBack(msg)`). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
 
 ``` C++
 ros::Publisher pub = nhandle.advertise<std_msgs::String>("chatter", QUEUE_SIZE);
 ```
-Initialize the Publisher. The advertise() function is how we tell ROS we want to publish on a topic. State the message type we will be publishing (std_msgs::String), the name of the topic (`chatter`), and the queue size (1).
+Initialize the Publisher. The `advertise()` function is how we tell ROS we want to publish on a topic. State the message type we will be publishing (`std_msgs::String`), the name of the topic (`chatter`), and the queue size (1).
 
 The callback function for a Subscriber looks something like this:
 
@@ -119,8 +119,8 @@ A basic setup for ROS topics in Python would look something like this:
 
 ``` Python
 rospy.init_node('Demo', anonymous=True)
-rospy.Subscriber('plot', Float64, callback)
-pub = rospy.Publisher('chatter', String, queue_size=QUEUE_SIZE)
+rospy.Subscriber('plot', std_msgs.Float64, callback)
+pub = rospy.Publisher('chatter', std_msgs.String, queue_size=QUEUE_SIZE)
 ```
 
 To break this down,
@@ -131,19 +131,19 @@ rospy.init_node('Demo', anonymous=True)
 Initialize ROS and specify the name of the node (which is the name of the file in this case).
 
 ``` Python
-rospy.Subscriber('plot', Float64, callback)
+rospy.Subscriber('plot', std_msgs.Float64, callback)
 ```
-Initialize the Subscriber. State the name of the topic (`plot`), the message type we will be publishing (float, which is actually in the class std_msgs.msg.Float64), and the function that will be called when a message is received (callBack(data)).
+Initialize the Subscriber. State the name of the topic (`plot`), the message type we will be publishing (`std_msgs.Float64`), and the function that will be called when a message is received (`callBack(data)`).
 
 ``` Python
-pub = rospy.Publisher('chatter', String, queue_size=QUEUE_SIZE)
+pub = rospy.Publisher('chatter', std_msgs.String, queue_size=QUEUE_SIZE)
 ```
-Initialize the Publisher. State the name of the topic (`chatter`), the message type we will be publishing (String, which is actually in the class std_msgs.msg.String), and the queue size (1). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
+Initialize the Publisher. State the name of the topic (`chatter`), the message type we will be publishing (`std_msgs.String`), and the queue size (1). The queue size is the maximum number of messages kept as a buffer before throwing away old ones if we are publishing too quickly.
 
 The callback function for a Subscriber looks something like this:
 
 ``` Python
-def callback(data: Float64) -> None:
+def callback(data: std_msgs.Float64) -> None:
     global pi 
     pi = data.data
 ```
@@ -152,19 +152,19 @@ This function will get called when a new message has arrived on the topic `plot`
 Publishing a message on a topic would look something like this:
 
 ``` Python
-pi_str = "currently at %s" % pi
-pub.publish(hello_str)
+pi_msg = "currently at %s" % pi
+pub.publish(pi_msg)
 ```
 
 To break this down,
 
 ``` Python
-pi_str = "currently at %s" % pi
+pi_msg = "currently at %s" % pi
 ```
 Create the message.
 
 ``` Python
-pub.publish(hello_str)
+pub.publish(pi_msg)
 ```
 Publish the message using the previously initialized Publisher `pub`.
 

@@ -173,17 +173,7 @@ Publish the message using the previously initialized Publisher `pub`.
 If you have glanced at the C++ example code, you may have noticed the function `ros::spinOnce()` and its differences with `ros::spin()`. Python only has `rospy.spin()`, which can be completely replaced by a for loop, which is why you do not see it in the Python example code.
 
 ## Running a Publisher and Subscriber
-Before you are able to run the example code, find the CMakeLists.txt file in the directory `/workspaces/WRoverPlayground/src/topic_training`. This file will include the the configurations, builds, and installs required to run your program as well as the files you will be running. Do not change anything in the file as it should already be set up for the demo files to work. You also do not need to understand anything in the file as it is way beyond the scope of this training.
-
-The `find_package`, `catkin_package`, and `include_directories` specifications are required for both the C++ and Python files to work. These provide the packages and directories needed for running ROS and ROS topics. 
-
-To run the C++ files, you will need the `add_executable`, `add_dependencies`, and `target_link_libraries` specifications. There will be three of each, representing the three C++ files in this section. `add_executable` determines which file you will use with the command `rosrun`, `add_dependencies` shows what the executable file depends on, and `target_link_libraries` links libraries or executable targets that may be used in the program. In larger projects, these specifications may contain different names, but since the code examples in this training are simple, they are all the same.
-
-For the Python files, you will only need the `catkin_install_python` specification. This will list out the locations of the Python files being used.
-
-In future projects, you might need to use other configurations, builds, and installs, but for the purposes of this training, you only need these for the example code to run.
-
-You can also check out the package.xml file, which you also may need to tailor for future projects. However, everything should already be set up correctly, so do not change anything. At the top of the file, it should name the creator of the package. Then, it will include the license regarding open source policies. Right now, it should not specify a license because the license for the package for the WRoverPlayground training trickles down to this package. At the bottom, there should be various dependencies that allow us to use ROS and ROS topics, similar to the CMakeLists.txt `find_package`.
+Before you are able to run the example code, find the CMakeLists.txt file in the directory `/workspaces/WRoverPlayground/src/topic_training`. This file will include the the configurations, builds, and installs required to run your program as well as the files you will be running. Do not change anything in the file as it should already be set up for the demo files to work. This file will be covered in the Setup Training You can also check out the package.xml file in the same directory, which should already be set up as well.
 
 Now, we will actually run the program.
 

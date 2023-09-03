@@ -49,7 +49,7 @@ def main():
             response:DoubleServiceResponse = double_service(num)
             num = response.output
             print(num)
-        except:
+        except rospy.ServiceException as _:
             '''
             If calling the service causes an exception, this code will run instead
             '''

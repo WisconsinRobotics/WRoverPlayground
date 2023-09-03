@@ -49,6 +49,12 @@ insert your fields for response messages here as follows:
 ```
 Fields are listed in the srv file each on its individual line, with a `---` separating the request fields from the response fields. Both requests and responses can have a single field, multiple fields, or no fields at all. All srv files for a module should be located in the `/srv` folder for proper complication. 
 
+In addition to fields, you can also define constants in srv files in request or response with:
+```
+[data type] [field name] = [value]
+```
+An example use case for using constants is if you want to have an enum as a field. Since ROS doesn't support enums as a data type for services, you can mock an enum by defining all the possible values as constants.
+
 After defining a message and building this project, ROS would convert a srv file into three classes: service definition, request messages, and response messages. Suppose we have `ExampleService.srv` in an package called `ExamplePackage`, then the names of these packages would be:
 |                   | C++                                     | Python                                    |
 |---                 | ---                                     | ---   |

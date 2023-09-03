@@ -5,7 +5,7 @@ ROS packages are a way to organize code within a ROS project.
 
 ## Creating your own ROS package
 
-In the `src` folder, run `catkin_create_pkg wrover_test`.
+In the `/workspaces/WRoverPlayground/src` folder, run `catkin_create_pkg wrover_test`.
 
 This creates a `wrover_test` directory with a `CMakeLists.txt` and `package.xml`.
 You may have noticed that there are some other directories and files in the packages that you have worked in.
@@ -28,10 +28,13 @@ Some common directories and files in a ROS package are:
 
 * `CMakeLists.txt` CMake build file
 * `package.xml` Defines package information and dependencies
+
+The following are optional and only needed if the package uses these:
 * `src/` contains code
 * `msg/` contains message files
 * `srv/` contains service files
 * `launch/` contains launch files that define ways to start nodes
+* `node/` helpful for separating executable files from backing libraries, mainly for Python 
 
 ## Editing `CMakeLists.txt` and `package.xml`
 
@@ -54,6 +57,7 @@ find_package(catkin REQUIRED COMPONENTS
    message_generation
 )
 ```
+If you need messages, services, or libraries from other packages, they should also go in this list.
 
 To specify messages from the `msg/` folder of a package, find and uncomment the following lines:
 ```CMake

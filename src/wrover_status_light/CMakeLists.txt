@@ -61,6 +61,7 @@ add_service_files(
   FILES
   DoubleService.srv
   ServiceLight.srv
+  ContinueNavigation.srv
 )
 
 ## Generate actions in the 'action' folder

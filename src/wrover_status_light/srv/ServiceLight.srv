@@ -2,4 +2,3 @@ int8 DONE = 0
 int8 NOT_DONE = 1
 int8 light_status
 ---
-bool canContinue

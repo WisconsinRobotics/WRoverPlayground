@@ -184,7 +184,7 @@ This calls the service with a request message as input, and saves the returned r
 To run the C++ code:
 1. Navigate to this repository using `cd {your file path}/WRoverPlayground`.
 2. Run `catkin_make` to build the project if you haven't yet.
-3. Run `source devel/setup.bash` to source the project if you haven't yet. Also keep in mind that you have to resource every time you open a new terminal. 
+3. Run `source devel/setup.bash` to source the project if you haven't yet. Also keep in mind that you have to rerun the command every time you open a new terminal. 
 4. Run `roscore` to start ROS master.
 5. To run the server code, in a new terminal, run `rosrun wrover_status_light DemoServer`.
 6. To see a list of all services, in a new terminal, run `rosservice list`. You should see `/double_service` listed. Now would also be a good opportunity to run `rosservice help` and familiarize yourself with all the `rosservice` commands.

@@ -64,16 +64,22 @@ Read through the demo files to understand how to write server and client nodes. 
 ### C++ Server
 A basic server node can be initialized in C++ with:
 ``` C++
+bool doubleServiceCallback(wrover_status_light::DoubleServiceRequest& req, wrover_status_light::DoubleServiceResponse& res) {
+    ...
+}
+
 ros::init(argc, argv, "double_server");
 ros::NodeHandle nh;
 ros::ServiceServer service = nh.advertiseService("double_service", doubleServiceCallback);
 ros::spin();
-
+```
+To break the code down:
+```C++
 bool doubleServiceCallback(wrover_status_light::DoubleServiceRequest& req, wrover_status_light::DoubleServiceResponse& res) {
     ...
 }
 ```
-To break the code down:
+This defines the handler function of the server, which will be called every time the server receives a new request message. Handler functions for services in C++ always takes in two arguments, one for the request message and one for the response message, and returns a boolean to indicate if the operation is successful or has failed. 
 ``` C++
 ros::init(argc, argv, "double_server");
 ros::NodeHandle nh;
@@ -87,12 +93,6 @@ This creates a new service with the name `double_service` and callback function 
 ros::spin();
 ```
 This ensures that the code will run continuously and the service will be available unless the code crashed or is exited. 
-```C++
-bool doubleServiceCallback(wrover_status_light::DoubleServiceRequest& req, wrover_status_light::DoubleServiceResponse& res) {
-    ...
-}
-```
-This defines the handler function of the server, which will be called every time the server receives a new request message. Handler functions for services in C++ always takes in two arguments, one for the request message and one for the response message, and returns a boolean to indicate if the operation is successful or has failed. 
 
 ### C++ Client
 A basic client node can be initialized in C++ with:

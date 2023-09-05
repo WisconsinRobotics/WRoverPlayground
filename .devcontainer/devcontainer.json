@@ -37,6 +37,7 @@
 	"postAttachCommand": "sudo chown -R devcontainer /workspaces/WRoverPlayground;/workspaces/WRoverPlayground/onStart.sh",
 
 	"runArgs": [
+		"--network=host",
 		"-e DISPLAY",
 		"--env=QT_X11_NO_MITSHM=1"
 	]

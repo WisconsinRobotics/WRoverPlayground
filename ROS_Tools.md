@@ -57,6 +57,8 @@ Now, let's start another node.
 Run `rosrun turtlesim turtlesim_node`.
 You should see a GUI window with a turtle in the middle.
 
+![TurtleSim GUI](/images/turtlesim_1.png)
+
 In a new terminal, run `rosnode list`.
 You should see the following output: 
 ```
@@ -120,6 +122,8 @@ Now, let's publish to a topic.
 Run the command `rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[1.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'`.
 The turtle in the GUI window should move to the right.
 
+![TurtleSim GUI](/images/turtlesim_2.png)
+
 Let's find out more about the `geometry_msgs/Twist` message we just published.
 Run `rosmsg show geometry_msgs/Twist`.
 You should see the following output:
@@ -137,6 +141,8 @@ geometry_msgs/Vector3 angular
 We can also publish to topics at a specified rate.
 Run `rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'`.
 The turtle should be moving in a circle.
+
+![TurtleSim GUI](/images/turtlesim_3.png)
 
 ### Interacting with services
 
@@ -159,7 +165,33 @@ This means the service takes 3 float32 values as the request message and returns
 Run `rosservice call /turtle1/teleport_absolute 0.0 0.0 0.0`.
 The turtle should be moved to the bottom left of the GUI window.
 
+![TurtleSim GUI](/images/turtlesim_4.png)
+
 ### ROS Parameters
+
+We can see what parameters are currently on the Parameter Server by running `rosparam list`.
+This should output the following:
+```
+/rosdistro
+/roslaunch/uris/host_ros_desktop__33381
+/rosversion
+/run_id
+/turtlesim/background_b
+/turtlesim/background_g
+/turtlesim/background_r
+```
+
+Let's get the value of `/turtlesim/background_b` parameter.
+Run `rosparam get /turtlesim/background_b`.
+This should output `255`.
+
+Now, let's set the value of the `/turtlesim/background_b` parameter to 0.
+Run `rosparam set /turtlesim/background_b 0`.
+Then, we call the `/clear` service to tell `turtlesim_node` to redraw the background.
+Run `rosservice call /clear`.
+The background should now be a shade of green.
+
+![TurtleSim GUI](/images/turtlesim_5.png)
 
 ## RQT Tools
 

@@ -195,22 +195,80 @@ The background should now be a shade of green.
 
 ## RQT Tools
 
+ROS also provides GUI tools for debugging.
+
+### rqt_graph
+
+Run `rqt_graph`. This tool lets us visualize the ROS node graph.
+
+![rqt_graph](/images/rqt_graph_1.png)
+
+So far, we only have one node running.
+Let's start a new node that communicates with `/turtlesim`.
+In a new terminal, run `rosrun turtlesim turtle_teleop_key`.
+Then, refresh `rqt_graph` by pressing the button in the top left corner.
+
+![rqt_graph](/images/rqt_graph_2.png)
+
+Now, we see a new node, `/teleop_turtle`, which publishes to the `/turtle1/cmd_vel` topic.
+As we saw previously, the `/turtlesim` node subscribes to the `/turtle1/cmd_vel` topic.
+
+Let's start another node to listen to the `/turtle1/cmd_vel`.
+We can do this by using `rostopic echo`.
+In a new terminal, run `rostopicc echo /turtle1/cmd_vel`, and refresh `rqt_graph`.
+
+![rqt_graph](/images/rqt_graph_3.png)
+
+### rqt_plot
+
+Another useful GUI debugging tool is `rqt_plot`.
+In a new terminal, run `rqt_plot`.
+You may need to resize the window.
+
+![rqt_plot](/images/rqt_plot_1.png)
+
+Now, let's graph the turtle's position.
+In the "Topic" text box, type `/turtle1/pose/x`, and click the "+" button.
+Then, do the same for `/turtle1/pose/y`.
+
+![rqt_plot](/images/rqt_plot_2.png)
+
+Then, return to the terminal window where you ran `rosrun turtlesim teleop_key`.
+Use arrow keys to move the turtle around.
+You should see the changes of the x and y positions of the turtle in `rqt_plot`.
+
+![rqt_plot](/images/rqt_plot_3.png)
+
 ## ROS Launching
 
 ## WRoverPlayground Outline
 
+- [X] Set up Development Environment
+- [X] ROS Concepts and Debugging Tools Training
+- [ ] [ROS Topic Training](src/topic_training/src/Begin_Here.md)
+- [ ] ROS Service Training
+- [ ] ROS Setup Training
+
 ## References
 
-http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes
+https://wiki.ros.org/ROS/Tutorials/UnderstandingNodes
 
-http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams
+https://wiki.ros.org/ROS/Tutorials/UnderstandingTopics
 
-http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch
+https://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams
 
-http://wiki.ros.org/Nodes
+https://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch
 
-http://wiki.ros.org/Topics
+https://wiki.ros.org/Nodes
 
-http://wiki.ros.org/Services
+https://wiki.ros.org/Topics
 
-http://wiki.ros.org/Parameter%20Server
+https://wiki.ros.org/Services
+
+https://wiki.ros.org/Parameter%20Server
+
+https://wiki.ros.org/rqt_graph
+
+https://wiki.ros.org/rqt_plot
+
+https://wiki.ros.org/rqt_console

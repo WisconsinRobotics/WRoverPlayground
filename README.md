@@ -79,7 +79,6 @@ Unable to execute git push or pull in container: https://superuser.com/questions
 
 ### Mac
 
-TODO (@Tzanccc): how to do this on mac
 #### Tools:
 
 * [git](https://git-scm.com/)
@@ -88,5 +87,12 @@ TODO (@Tzanccc): how to do this on mac
 * [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 #### Instructions:
+
+1. Install tools
+2. Set up SSH keys
+3. Clone the repository
+4. Open the repository with VSCode
+5. Launch Docker Desktop
+6. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
 
 #### Troubleshooting:

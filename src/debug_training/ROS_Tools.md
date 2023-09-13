@@ -57,7 +57,7 @@ Now, let's start another node.
 Run `rosrun turtlesim turtlesim_node`.
 You should see a GUI window with a turtle in the middle.
 
-![TurtleSim GUI](/images/turtlesim_1.png)
+![TurtleSim GUI](./images/turtlesim_1.png)
 
 In a new terminal, run `rosnode list`.
 You should see the following output: 
@@ -122,7 +122,7 @@ Now, let's publish to a topic.
 Run the command `rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[1.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'`.
 The turtle in the GUI window should move to the right.
 
-![TurtleSim GUI](/images/turtlesim_2.png)
+![TurtleSim GUI](./images/turtlesim_2.png)
 
 Let's find out more about the `geometry_msgs/Twist` message we just published.
 Run `rosmsg show geometry_msgs/Twist`.
@@ -142,7 +142,7 @@ We can also publish to topics at a specified rate.
 Run `rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'`.
 The turtle should be moving in a circle.
 
-![TurtleSim GUI](/images/turtlesim_3.png)
+![TurtleSim GUI](./images/turtlesim_3.png)
 
 ### Interacting with services
 
@@ -165,7 +165,7 @@ This means the service takes 3 float32 values as the request message and returns
 Run `rosservice call /turtle1/teleport_absolute 0.0 0.0 0.0`.
 The turtle should be moved to the bottom left of the GUI window.
 
-![TurtleSim GUI](/images/turtlesim_4.png)
+![TurtleSim GUI](./images/turtlesim_4.png)
 
 ### ROS Parameters
 
@@ -191,7 +191,7 @@ Then, we call the `/clear` service to tell `turtlesim_node` to redraw the backgr
 Run `rosservice call /clear`.
 The background should now be a shade of green.
 
-![TurtleSim GUI](/images/turtlesim_5.png)
+![TurtleSim GUI](./images/turtlesim_5.png)
 
 ## RQT Tools
 
@@ -201,14 +201,14 @@ ROS also provides GUI tools for debugging.
 
 Run `rqt_graph`. This tool lets us visualize the ROS node graph.
 
-![rqt_graph](/images/rqt_graph_1.png)
+![rqt_graph](./images/rqt_graph_1.png)
 
 So far, we only have one node running.
 Let's start a new node that communicates with `/turtlesim`.
 In a new terminal, run `rosrun turtlesim turtle_teleop_key`.
 Then, refresh `rqt_graph` by pressing the button in the top left corner.
 
-![rqt_graph](/images/rqt_graph_2.png)
+![rqt_graph](./images/rqt_graph_2.png)
 
 Now, we see a new node, `/teleop_turtle`, which publishes to the `/turtle1/cmd_vel` topic.
 As we saw previously, the `/turtlesim` node subscribes to the `/turtle1/cmd_vel` topic.
@@ -217,7 +217,7 @@ Let's start another node to listen to the `/turtle1/cmd_vel`.
 We can do this by using `rostopic echo`.
 In a new terminal, run `rostopicc echo /turtle1/cmd_vel`, and refresh `rqt_graph`.
 
-![rqt_graph](/images/rqt_graph_3.png)
+![rqt_graph](./images/rqt_graph_3.png)
 
 ### rqt_plot
 
@@ -225,29 +225,69 @@ Another useful GUI debugging tool is `rqt_plot`.
 In a new terminal, run `rqt_plot`.
 You may need to resize the window.
 
-![rqt_plot](/images/rqt_plot_1.png)
+![rqt_plot](./images/rqt_plot_1.png)
 
 Now, let's graph the turtle's position.
 In the "Topic" text box, type `/turtle1/pose/x`, and click the "+" button.
 Then, do the same for `/turtle1/pose/y`.
 
-![rqt_plot](/images/rqt_plot_2.png)
+![rqt_plot](./images/rqt_plot_2.png)
 
 Then, return to the terminal window where you ran `rosrun turtlesim teleop_key`.
 Use arrow keys to move the turtle around.
 You should see the changes of the x and y positions of the turtle in `rqt_plot`.
 
-![rqt_plot](/images/rqt_plot_3.png)
+![rqt_plot](./images/rqt_plot_3.png)
 
-## ROS Launching
+## ROS Launch
 
-## WRoverPlayground Outline
+In most cases, we are starting up many nodes at once.
+It would be tedious to try to start each node individually.
+ROS provides `roslaunch` to automatically start `roscore` and start multiple nodes at once.
 
-- [X] Set up Development Environment
-- [X] ROS Concepts and Debugging Tools Training
-- [ ] [ROS Topic Training](src/topic_training/src/Begin_Here.md)
-- [ ] ROS Service Training
-- [ ] ROS Setup Training
+At this point you can close/kill the ROS services started previously.
+
+Run `roslaunch debug_training turtlemimic.launch`.
+You should see 2 turtlesim windows open.
+
+![turtlemimic.launch](./images/roslaunch_1.png)
+
+Now, let's look at the launch file: [`turtlemimic.launch`](./launch/turtlemimic.launch)
+This is an XML file.
+
+```XML
+  <group ns="turtlesim1">
+    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+  </group>
+
+  <group ns="turtlesim2">
+    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+  </group>
+```
+
+This section defines two namespaces for the instances of `turtlesim_node`, so we are able to start 2 nodes with the same name.
+
+```XML
+  <node pkg="turtlesim" name="mimic" type="mimic">
+    <remap from="input" to="turtlesim1/turtle1"/>
+    <remap from="output" to="turtlesim2/turtle1"/>
+  </node>
+```
+
+This section starts a `mimic` node.
+This node reads from the `/input` topic and publishes to the `/output` node so that the `/output` mimics `/input`.
+The remap tags allow us to change to change the topic that a node is subscribing or publishing to.
+In this case, the `/input` topic is mapped to the `/turtlesim1/turtle1` topic, and the `/output` topic is mapped to the `/turtlesim2/turtle1` topic.
+
+We can see this with `rqt_graph`:
+
+![turtlemimic.launch](./images/roslaunch_rqt_graph.png)
+
+To test the `mimic` node, let's publish to the `/turtlesim1/turtle1/cmd_vel` topic.
+In a new terminal, run `rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'`.
+Both turtles should move in a circle.
+
+![turtlemimic.launch](./images/roslaunch_2.png)
 
 ## References
 
@@ -272,3 +312,5 @@ https://wiki.ros.org/rqt_graph
 https://wiki.ros.org/rqt_plot
 
 https://wiki.ros.org/rqt_console
+
+https://wiki.ros.org/roslaunch

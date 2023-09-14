@@ -88,11 +88,27 @@ Unable to execute git push or pull in container: https://superuser.com/questions
 
 #### Instructions:
 
-1. Install tools
+1. Install tools (beware that install XQuartz requires a logout/login, so save any local changes on your computer before installing XQuartz)
 2. Set up SSH keys
 3. Clone the repository
 4. Open the repository with VSCode
 5. Launch Docker Desktop
 6. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
 
+To ensure docker works with graphing tools, run `roscore` in VSCode's terminal and `rqt_plot` in another terminal. Follow instructions below if a new window fails to start and the terminal outputs something similar to:
+```
+could not connect to display 
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, xcb.
+```
+1. Start XQuartz with `open -a XQuartz`
+2. Under the security section of settings, check "Allow connections from network clients"
+3. Restart your Mac and start XQuartz again
+4. Ensure that XQuartz is running correctly with `ps aux | grep Xquartz`. There should be a line that is similar to `/opt/X11/bin/Xquartz :0 -listen tcp`. Make sure it is not `–nolisten tcp`.
+5. Allow X11 forwarding with `xhost +` to allow any client to connect or `xhost +localhost` to limit clients to localhost. Note that `xhost +` is not a persistent setting, so you would have to rerun it every time you restart X11
+6. Go back to your docker environment and try running `rqt_plot` again, this time the display should show. 
+
 #### Troubleshooting:
+
+Unable to display `rqt` tools or other graphics: https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088

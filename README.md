@@ -1,6 +1,8 @@
 # WRoverPlayground
 
-Welcome to WRoverPlayground! These learning modules will help you become somewhat proficient in using the Robot Operating System (ROS). Each module builds on the previous ones. When you are finished, you will have built software for a robot named WRunt. This robot will be able to autonomously navigate through a course of infrared (IR) beacons from a starting location. *Add a picture of the course for illustrative purposes. A GIF of WRunt completing a course would be even better*
+Welcome to WRoverPlayground! These learning modules will help you become somewhat proficient in using the Robot Operating System (ROS). Each module builds on the previous ones. When you are finished, you will have built software for a robot named WRunt. This robot will be able to autonomously navigate through a course of infrared (IR) beacons from a starting location.
+
+![WRunt](./images/robot_sim_gui.png)
 
 Your software will allow WRunt to detect beacons and navigate between them. The only instructions that can be given to WRunt during operation are to tell it to go to the next beacon in the course. Once a beacon is reached WRunt will let us know that it has arrived by lighting up its status light. Below are more detailed descriptions of how WRunt will be controlled using ROS. Don't worry if this doesn't make sense now! The modules will walk you through this step by step.
 
@@ -31,7 +33,18 @@ Once WRunt has reached the first beacon, you will need to give it a manual signa
 
 ## How To Open The Project
 
-This project uses Docker to efficiently containerize the workspace and make cross-platform development easier.  Find your host platform below to see how to start development:
+This project uses git and GitHub for version control.
+If you are new to using git or need a refesher you can check out https://learngitbranching.js.org.
+We recommend doing the "Introduction Sequence" in the Main section and "Push & Pull -- Git Remotes!" in the Remote section.
+
+To set up SSH keys, refer to the following GitHub documentation pages:
+* https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+* https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+
+This project uses Docker to efficiently containerize the workspace and make cross-platform development easier.
+The first time you launch the workspace Docker container, it may take a few minutes for Docker to download the ROS Docker image and project dependencies.
+
+Find your host platform below to see how to start development:
 
 ### Linux
 
@@ -51,7 +64,7 @@ These instructions are written for Ubuntu, steps may vary if using a different d
 4. Set up SSH keys
 5. Clone the repository
 6. Open the repository with VSCode
-7. Reopen the folder in container
+7. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
 
 #### Troubleshooting:
 
@@ -70,8 +83,8 @@ These instructions are written for Ubuntu, steps may vary if using a different d
 2. Set up SSH keys on Windows and in WSL
 3. Clone the repository inside WSL
 4. Open the repository with VSCode
-5. Launch Docker
-6. Reopen the folder in container
+5. Launch Docker Desktop
+6. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
 
 #### Troubleshooting:
 
@@ -95,7 +108,7 @@ Unable to execute git push or pull in container: https://superuser.com/questions
 5. Launch Docker Desktop
 6. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
 
-To ensure docker works with graphing tools, run `roscore` in VSCode's terminal and `rqt_plot` in another terminal. Follow instructions below if a new window fails to start and the terminal outputs something similar to:
+To ensure docker works with GUI tools, run `roscore` in VSCode's terminal and `rqt_plot` in another terminal. Follow instructions below if a new window fails to start and the terminal outputs something similar to:
 ```
 could not connect to display 
 This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.

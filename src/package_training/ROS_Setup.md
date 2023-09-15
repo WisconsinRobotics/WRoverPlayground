@@ -38,6 +38,8 @@ The following are optional and only needed if the package uses these:
 
 ## Editing `CMakeLists.txt` and `package.xml`
 
+Copy the `msg/`, `src/`, and `srv/` folders from this folder to the `wrover_test` package.
+
 In `package.xml`, find and uncommment the following lines to use messages and services in the package:
 ```XML
 <!--   <build_depend>message_generation</build_depend> -->
@@ -88,6 +90,18 @@ Finally, uncomment the following lines:
 ```
 
 You should now be able to run `catkin_make` to generate message and service header files.
+
+To test that this works, start `roscore & rosrun wrover_test main.py`.
+Then, open a new terminal and run `rostopic echo /hello_world`.
+You should see output similar to:
+```
+hello: "Hello World!"
+iteration: 3
+---
+hello: "Hello World!"
+iteration: 4
+---
+```
 
 ## References
 

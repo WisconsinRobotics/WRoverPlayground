@@ -6,7 +6,7 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
-        "/home/nomorenickels/Documents/WRover_Software/devel/include/**",
+        "${workspace}/devel/include/**",
         "/opt/ros/noetic/include/**",
         "/usr/include/**"
       ],

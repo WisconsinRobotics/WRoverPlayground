@@ -1,0 +1,53 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "WRoverPlayground Docker Development Container",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "${localWorkspaceFolder}",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../tools/docker/Dockerfile",
+		"target": "devel"
+	},
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"llvm-vs-code-extensions.vscode-clangd",
+				"ms-azuretools.vscode-docker",
+				"ms-vscode.cpptools",
+				"ms-python.python",
+				"ms-vscode.cmake-tools",
+				"ms-iot.vscode-ros",
+				"josetr.cmake-language-support-vscode",
+				"redhat.vscode-xml",
+				"redhat.vscode-yaml"
+			],
+			"settings": {
+    			"terminal.integrated.defaultProfile.linux": "bash",
+    			"cmake.languageSupport.dotnetPath": "/usr/share/dotnet/dotnet"
+			}
+		}
+	},
+
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "devcontainer",
+
+	"postAttachCommand": "sudo chown -R devcontainer /workspaces/WRoverPlayground;/workspaces/WRoverPlayground/onStart.sh",
+
+	"runArgs": [
+		"--network=host",
+		"-e DISPLAY",
+		"--env=QT_X11_NO_MITSHM=1"
+	]
+}

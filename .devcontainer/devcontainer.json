@@ -25,9 +25,18 @@
 			"extensions": [
 				"llvm-vs-code-extensions.vscode-clangd",
 				"ms-azuretools.vscode-docker",
+				"ms-vscode.cpptools",
+				"ms-python.python",
 				"ms-vscode.cmake-tools",
-				"josetr.cmake-language-support-vscode"
-			]
+				"ms-iot.vscode-ros",
+				"josetr.cmake-language-support-vscode",
+				"redhat.vscode-xml",
+				"redhat.vscode-yaml"
+			],
+			"settings": {
+    			"terminal.integrated.defaultProfile.linux": "bash",
+    			"cmake.languageSupport.dotnetPath": "/usr/share/dotnet/dotnet"
+			}
 		}
 	},
 

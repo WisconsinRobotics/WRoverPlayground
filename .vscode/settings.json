@@ -1,11 +1,11 @@
 {
     "python.autoComplete.extraPaths": [
-        "/home/nomorenickels/Documents/WRover_Software/devel/lib/python3/dist-packages",
+        "${workspaceFolder}/devel/lib/python3/dist-packages",
         "/opt/ros/noetic/lib/python3/dist-packages"
     ],
     "python.analysis.extraPaths": [
-        "/home/nomorenickels/Documents/WRover_Software/devel/lib/python3/dist-packages",
+        "${workspaceFolder}/devel/lib/python3/dist-packages",
         "/opt/ros/noetic/lib/python3/dist-packages"
     ],
-    "terminal.integrated.defaultProfile.linux": "bash"
+    "C_Cpp.intelliSenseEngine": "disabled"
 }

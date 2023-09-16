@@ -1,5 +1,17 @@
 # WRoverPlayground - ROS Tools
 
+This training introduces the following ROS concepts: nodes, topics, services, and the Parameter Server.
+Then, it explains how to use ROS command-line and GUI debug tools.
+Lastly, roslaunch will be shown as a method for starting multiple nodes together.
+
+The goal of this training is to become familiar with ROS concepts and the following debug tools:
+- `rosnode`
+- `rostopic`
+- `rosservice`
+- `rosparam`
+- `rqt_graph`
+- `rqt_plot`
+
 ## ROS Concepts Crash Course
 
 ROS nodes are processes that use ROS to communicate with other nodes.
@@ -10,8 +22,8 @@ Publisher nodes generate data and publish that data to a topic.
 Subscriber nodes subscribe to a topic to use data that is published to a topic.
 A topic can have multiple publisher and subscriber nodes.
 Topics are intended for unidirectional communication.
-If a response is expected from a request, a service should be used instead.
 
+If a response is expected from a node, a service should be used instead.
 ROS services allow nodes to return data to other nodes.
 Server nodes define the service request and response.
 Client nodes call the service by sending a request and await the response.
@@ -22,13 +34,16 @@ For a service, a request and a response message must be defined.
 
 ROS topics and services will be covered in more detail in the next training modules.
 
-The final method of communication between ROS nodes is the Parameter Service.
+The final method of communication between ROS nodes is the Parameter Server.
 This is essentially a shared dictionary that can be used to store and retrieve variables at runtime.
 It is usually used for configuration since it is not designed for high performance.
 
 ## ROS Command Line
 
 ### Starting nodes
+
+Let's start by running a ROS node.
+You can focus on the commands here rather than what the nodes do/contain.
 
 Open a terminal window and run `roscore`.
 This starts the ROS master node.
@@ -50,11 +65,17 @@ Services:
  * /rosout/get_loggers
  * /rosout/set_logger_level
 ```
-This shows that the `/rosout` node publishes to the `/rosout_agg` topic and subscribes sto the `/rosout` topic.
+This shows that the `/rosout` node publishes to the `/rosout_agg` topic and subscribes to the `/rosout` topic.
 Also, the `/rosout` node provides the `/rosout/get_loggers` and `/rosout/set_logger_level` services.
 
 Now, let's start another node.
 Run `rosrun turtlesim turtlesim_node`.
+
+This starts `turtlesim_node` from the `turtlesim` package.
+Packages are how code is organized in a ROS project.
+They will be covered further in a later training.
+If you get an error `[rospack] Error: package 'turtlesim' not found`, install `turtlesim` by running `sudo apt install ros-noetic-ros-tutorials`.
+
 You should see a GUI window with a turtle in the middle.
 
 ![TurtleSim GUI](./images/turtlesim_1.png)
@@ -90,6 +111,11 @@ Services:
  * /turtlesim/get_loggers
  * /turtlesim/set_logger_level
 ```
+
+As you can see, the `/turtlesim` node publishes to 3 topics, and subscribes to the `/turtle1/cmd_vel`.
+It also provides a set of services.
+
+ROS debug tools allow us to interact with these topics and services without having to write a separate node for debugging.
 
 ### Interacting with Topics
 

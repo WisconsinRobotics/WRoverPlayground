@@ -1,41 +1,56 @@
 from tkinter import *
+from tkinter import ttk
 
-STATUS_BOX_UPPER_LEFT = (10, 10)
-STATUS_BOX_DIMENSIONS = (160, 70)
-STATUS_BOX_LOWER_RIGHT = (STATUS_BOX_UPPER_LEFT[0] + STATUS_BOX_DIMENSIONS[0],
-                   STATUS_BOX_UPPER_LEFT[1] + STATUS_BOX_DIMENSIONS[1])
+FRAME_TOP_LEFT = (10, 10)
+FRAME_DIM = (160, 70)
 
-STATUS_LIGHT_UPPER_LEFT = (20, 50)
-STATUS_LIGHT_DIMENSIONS = (20, 20)
-STATUS_LIGHT_LOWER_RIGHT = (STATUS_LIGHT_UPPER_LEFT[0] + STATUS_LIGHT_DIMENSIONS[0],
-                            STATUS_LIGHT_UPPER_LEFT[1] + STATUS_LIGHT_DIMENSIONS[1])
-
-STATUS_HEADING_COORDS = (80, 30)
-STATUS_MSG_COORDS = (100, 60)
+LIGHT_DIAM = 20
+LIGHT_DIMEN = (LIGHT_DIAM, LIGHT_DIAM)
 
 class StatusLight:
   def __init__(self, canvas:Canvas, reachedTargetInitVal:bool = False):
     self.canvas = canvas
     self.reachedTarget = reachedTargetInitVal
 
-    self.initializeStatusLight()
+    # Create Style object to configure styles
+    s = ttk.Style()
 
-  def initializeStatusLight(self):
-    self.canvas.create_rectangle(*STATUS_BOX_UPPER_LEFT, *STATUS_BOX_LOWER_RIGHT, fill='white', outline='black')
-    self.canvas.create_text(*STATUS_HEADING_COORDS, text='Robot Status', font=('TkHeadingFont', 16))
+    # Create status light frame
+    s.configure('StatusFrame.TFrame', background='white', relief='solid')
+    self.frame = ttk.Frame(self.canvas, width=FRAME_DIM[0], height=FRAME_DIM[1], style='StatusFrame.TFrame')
+    self.frame['padding'] = 5
+    
+    # Create status heading
+    s.configure('StatusLabel.TLabel', background='white', anchor=NW)
+    self.status_heading = ttk.Label(self.frame, text='Robot Status', font=('TkHeadingFont', 16), style='StatusLabel.TLabel')
 
-    self.status_light = self.canvas.create_oval(*STATUS_LIGHT_UPPER_LEFT, *STATUS_LIGHT_LOWER_RIGHT, fill='red', outline='black')
-    self.status_msg = self.canvas.create_text(*STATUS_MSG_COORDS, text='Navigating to target')
+    # Create status light
+    self.light_canvas = Canvas(self.frame, width=LIGHT_DIMEN[0] + 5, height=LIGHT_DIMEN[1] + 5, bg='white')
+    self.light_canvas.configure(highlightthickness=0, borderwidth=0)
+    self.status_light = self.light_canvas.create_oval(0, 0, *LIGHT_DIMEN, fill='red', outline='black')
+
+    # Create status message
+    self.status_msg = ttk.Label(self.frame, text='Navigating to target', style='StatusLabel.TLabel')
+
+    # Arrange status light contents within frame
+    self.status_heading.grid(column=0, row=0, columnspan=2, sticky=NW)
+    self.light_canvas.grid(column=0, row=1, sticky=NW)
+    self.status_msg.grid(column=1, row=1, sticky=NW)
+    self.frame.grid_columnconfigure(1, minsize=120)
+
+    # Add frame of status light to parent Canvas
+    self.canvas.create_window(*FRAME_TOP_LEFT, anchor=NW, window=self.frame)
 
   def setReachedTarget(self):
-    self.canvas.itemconfig(self.status_light, fill='green')
-    self.canvas.itemconfig(self.status_msg, text='Reached target')
+    self.light_canvas.itemconfig(self.status_light, fill='green')
+    self.status_msg['text'] = 'Reached target'
     self.reachedTarget = True
   
   def setNavigatingToTarget(self):
-    self.canvas.itemconfig(self.status_light, fill='red')
-    self.canvas.itemconfig(self.status_msg, text='Navigating to target')
+    self.light_canvas.itemconfig(self.status_light, fill='red')
+    self.status_msg['text'] = 'Navigating to target'
     self.reachedTarget = False
   
   def getReachedTarget(self) -> bool:
     return self.reachedTarget
+  

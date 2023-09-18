@@ -9,5 +9,6 @@
         "/opt/ros/noetic/lib/python3/dist-packages",
         "${workspaceFolder}/src/robot_sim_gui/src"
     ],
+    "C_Cpp.intelliSenseEngine": "disabled",
     "cmake.sourceDirectory": "${workspaceFolder}/src/robot_sim_gui"
 }

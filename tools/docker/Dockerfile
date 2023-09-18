@@ -1,4 +1,4 @@
-FROM osrf/ros:noetic-desktop-full AS base
+FROM docker.io/osrf/ros:noetic-desktop-full AS base
 
 RUN apt update
 RUN apt upgrade -y

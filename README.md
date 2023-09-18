@@ -68,6 +68,15 @@ These instructions are written for Ubuntu, steps may vary if using a different d
 
 #### Troubleshooting:
 
+**NOTE**: Please do not commit [`devcontainer.json`](./.devcontainer/devcontainer.json) if you need to modify it according to the following troubleshooting steps.
+
+1. After trying to run a GUI app, the following error is encountered: `Authorization required, but no authorization protocol specified`.
+To fix this, try `xhost +localhost`, and see if the issue is resolved. If not, run `xhost +`.
+Since these command allow connections to your local X server, you may want to revert them with the corresponding `xhost -localhost` or `xhost -` after you are done using the devcontainer.
+2. After opening the devcontainer, a SELinux AVC denial is encountered. The workaround is running `chcon -Rt svirt_sandbox_file_t /path/to/WRoverPlayground`. Documented here: https://github.com/microsoft/vscode-remote-release/issues/1333
+3. After trying to run a GUI app, a SELinux AVC denial is encountered. To fix this, add `"--security-opt=label=type:container_runtime_t"` to the `runArgs` in [`devcontainer.json`](./.devcontainer/devcontainer.json).
+3. If you are using podman, you will need to add `"--userns=keep-id"`  to the `runArgs` in [`devcontainer.json`](./.devcontainer/devcontainer.json). Podman is not officially supported.
+
 ### Windows
 
 #### Tools:

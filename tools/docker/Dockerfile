@@ -16,6 +16,9 @@ RUN apt update
 
 # Install build dependencies
 RUN apt install -y g++ git cmake sudo curl dotnet-sdk-6.0 unzip
+# Install python dependencies
+RUN apt install -y python-is-python3 python3-pip python3-venv python3-tk
+
 RUN apt autoremove -y
 
 # Install clangd for code completion
@@ -28,6 +31,7 @@ RUN echo "devcontainer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
 # Configure bash to set up ROS environment and project
 RUN echo "source /opt/ros/noetic/setup.bash" >> /home/devcontainer/.bashrc
 RUN echo "source /workspaces/WRoverPlayground/devel/setup.bash" >> /home/devcontainer/.bashrc
+RUN echo "if [ -d /workspaces/WRoverPlayground/venv ]; then source /workspaces/WRoverPlayground/venv/bin/activate; fi" >> /home/devcontainer/.bashrc
 RUN echo "export PATH=$PATH:/home/devcontainer/clangd/clangd_16.0.2/bin" >> /home/devcontainer/.profile
 
 USER devcontainer

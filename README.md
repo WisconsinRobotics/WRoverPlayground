@@ -134,3 +134,21 @@ Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, 
 #### Troubleshooting:
 
 Unable to display `rqt` tools or other graphics: https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088
+
+## Next Steps:
+Once you are done with enviorment setup, you are ready to begin the tutorial! Inside the `src` folder you should see modules `debug_training`, `topic_training`, `service_training` and `package_training` (among other modules), each with a markdown file. You should go through the trainings in the following order:
+- Debug Training @ [`src/debug_training/ROS_Tools.md`](https://github.com/WisconsinRobotics/WRoverPlayground/blob/master/src/debug_training/ROS_Tools.md)
+- Topic Training @ [`src/topic_training/Topic_Training.md`](https://github.com/WisconsinRobotics/WRoverPlayground/blob/master/src/topic_training/Topic_Training.md)
+- Service Training @ [`src/service_training/Service_Training.md`](https://github.com/WisconsinRobotics/WRoverPlayground/blob/master/src/service_training/Service_Training.md)
+- Package Training @ [`src/package_training/ROS_Setup.md`](https://github.com/WisconsinRobotics/WRoverPlayground/blob/master/src/package_training/ROS_Setup.md)
+
+ROS uses either C++ or Python. If you are unfamiliar with either languages, here are some online resources to help you learn these languages. Feel free to take as much time as you need to go through them.
+
+#### Python:
+
+[The Python Tutorial](https://docs.python.org/3/tutorial/): only need to be familiar with topics up to and including chapter 7 (Input and Output).
+
+[Think Python](https://greenteapress.com/wp/think-python-2e/): only need to be familiar with topics in chapter 2, 3, 5, 6, 7, 10 and 11. 
+
+#### C++:
+[Cornell C++ Tutorials](https://www.cs.cornell.edu/courses/cs5152/2022sp/resources/cpp/): only need to be familiar with topics in videos 1-3.

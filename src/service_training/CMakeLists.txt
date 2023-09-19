@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(wrover_status_light)
+project(service_training)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -109,7 +109,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES wrover_status_light
+#  LIBRARIES service_training
 #  CATKIN_DEPENDS message_generation roscpp rospy std_msgs
  DEPENDS message_runtime
 )
@@ -127,7 +127,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/wrover_status_light.cpp
+#   src/${PROJECT_NAME}/service_training.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -206,7 +206,7 @@ catkin_install_python(PROGRAMS
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_wrover_status_light.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_service_training.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

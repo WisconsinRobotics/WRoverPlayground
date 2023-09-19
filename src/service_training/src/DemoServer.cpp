@@ -1,6 +1,6 @@
 #include "ros/ros.h"
 #include "ros/init.h"
-#include <wrover_status_light/DoubleService.h>
+#include <service_training/DoubleService.h>
 
 /*
 The handler function of the service. It will be called whenever this server receives a new 
@@ -8,8 +8,8 @@ request message. Handler functions are responsible for carrying out the actual l
 service and send a response back to the client. Handler functions in C++ always takes in a 
 reference to the request and a reference to the response as arguments.
 */
-bool doubleServiceCallback(wrover_status_light::DoubleServiceRequest& req,
-                        wrover_status_light::DoubleServiceResponse& res) {
+bool doubleServiceCallback(service_training::DoubleServiceRequest& req,
+                        service_training::DoubleServiceResponse& res) {
     /*
     Here the handler functions doubles the input field for the requets and sets it as the output 
     field for the response.

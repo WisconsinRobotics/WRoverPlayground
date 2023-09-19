@@ -4,4 +4,7 @@
     <node pkg="robot_sim_gui" type="gui.py" name="robot_sim_gui" output="screen">
         <param name="resource_path" value="$(find robot_sim_gui)/resources" />
     </node>
+
+    <include file="$(find topic_training)/launch/topic_training.launch" />
+    <include file="$(find service_training)/launch/service_training.launch" />
 </launch>

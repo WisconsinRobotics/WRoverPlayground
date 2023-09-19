@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="service_training" type="ServiceChallenge.py" name="service_challenge_py" output="screen" />
+    <node pkg="service_training" type="ServiceChallenge" name="service_challenge_cpp" output="screen" />
+</launch>

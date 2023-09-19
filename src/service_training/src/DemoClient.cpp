@@ -6,7 +6,7 @@
 #include <iostream>
 #include <iterator>
 #include <ostream>
-#include <wrover_status_light/DoubleService.h>
+#include <service_training/DoubleService.h>
 
 int main(int argc, char** argv) {
     /*
@@ -23,16 +23,16 @@ int main(int argc, char** argv) {
 
     /*
     Creates a new client instance using the NodeHandle. Here it specifies the service type 
-    "wrover_status_light::DoubleService" and service name "double_service".
+    "service_training::DoubleService" and service name "double_service".
     */
-    ros::ServiceClient client = nh.serviceClient<wrover_status_light::DoubleService>("double_service");
+    ros::ServiceClient client = nh.serviceClient<service_training::DoubleService>("double_service");
 
     /*
     Initializes various local variables. rate specifies the frequency we would want to run at, and 
     srv is an object for the service (which envelopes accessing the request and response fields).
     */
     ros::Duration rate = ros::Duration(0.1);
-    wrover_status_light::DoubleService srv;
+    service_training::DoubleService srv;
     srv.request.input = 1;
 
     /*

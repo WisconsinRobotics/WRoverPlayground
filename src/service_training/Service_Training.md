@@ -24,7 +24,7 @@ Here is a list of key components involved in services:
 * Server node: the server node receives and handles the service request calls from client nodes. It retrieves data from the request message, performs the necessary actions, and generates a response message which is sent back to the client. 
 * Request and response messages: these messages are structured data containers that are defined by the service definition. The client and server use these messages to exchange information.
 
-## Why do we use Services when there's already Topics?
+## Why do we Use Services when there's Already Topics?
 
 While both services and topics work to allow communication between nodes, they differ in terms of their data exchange patterns and the types of interactions they support. 
 
@@ -62,7 +62,7 @@ After defining a message and building this project, ROS would convert a srv file
 | Request message    |`ExamplePackage::ExampleService::Request` |`ExamplePackage.srv.ExampleServiceRequest` |
 | Response message   |`ExamplePackage::ExampleService::Response`|`ExamplePackage.srv.ExampleServiceResponse`|
 
-## Writing Server and Client nodes
+## Writing Server and Client Nodes
 Inside this module are two demo code files in the `src` folder, one in Python and one in C++. The server code creates a service server node that takes in an interger and doubles it. The client code creates a service client node that uses the server to double a number on repeat. Note that since the service uses `int64` (a integer with 64 bits), running the client code will eventually reach an integer overflow. 
 
 Read through the demo files to understand how to write server and client nodes. Come back to this file and continue when you are ready.  
@@ -70,7 +70,7 @@ Read through the demo files to understand how to write server and client nodes. 
 ### C++ Server
 A basic server node can be initialized in C++ with:
 ``` C++
-bool doubleServiceCallback(wrover_status_light::DoubleServiceRequest& req, wrover_status_light::DoubleServiceResponse& res) {
+bool doubleServiceCallback(service_training::DoubleServiceRequest& req, service_training::DoubleServiceResponse& res) {
     ...
 }
 
@@ -81,7 +81,7 @@ ros::spin();
 ```
 To break the code down:
 ```C++
-bool doubleServiceCallback(wrover_status_light::DoubleServiceRequest& req, wrover_status_light::DoubleServiceResponse& res) {
+bool doubleServiceCallback(service_training::DoubleServiceRequest& req, service_training::DoubleServiceResponse& res) {
     ...
 }
 ```
@@ -105,9 +105,9 @@ A basic client node can be initialized in C++ with:
 ``` C++
 ros::init(argc, argv, "double_client");
 ros::NodeHandle nh;
-ros::ServiceClient client = nh.serviceClient<wrover_status_light::DoubleService>("double_service");
+ros::ServiceClient client = nh.serviceClient<service_training::DoubleService>("double_service");
 ros::service::waitForService("double_service");
-wrover_status_light::DoubleService srv;
+service_training::DoubleService srv;
 client.call(...)
 ```
 To break the code down:
@@ -117,15 +117,15 @@ ros::NodeHandle nh;
 ```
 This creates a new node called `double_client` and a new NodeHandle reference. NodeHandles provide functions for creating, managing, and interacting with ROS nodes.
 ``` C++
-ros::ServiceClient client = nh.serviceClient<wrover_status_light::DoubleService>("double_service");
+ros::ServiceClient client = nh.serviceClient<service_training::DoubleService>("double_service");
 ```
-This creates a new client to the service with the name `double_service` that is defined by the service class `wrover_status_light::DoubleService`. 
+This creates a new client to the service with the name `double_service` that is defined by the service class `service_training::DoubleService`. 
 ``` C++
 ros::service::waitForService("double_service");
 ```
 This waits until the service is created and ready. 
 ``` C++
-wrover_status_light::DoubleService srv;
+service_training::DoubleService srv;
 client.call(...)
 ```
 This creates a new object for the service and uses the previously made client object to call the service. 
@@ -185,17 +185,17 @@ response:DoubleServiceResponse = double_service(...)
 ```
 This calls the service with a request message as input, and saves the returned response message. 
 
-## Running Server and Client nodes
+## Running Server and Client Nodes
 ### C++
 To run the C++ code:
 1. Navigate to this repository using `cd {your file path}/WRoverPlayground`.
 2. Run `catkin_make` to build the project if you haven't yet.
 3. Run `source devel/setup.bash` to source the project if you haven't yet. Also keep in mind that you have to rerun the command every time you open a new terminal. 
 4. Run `roscore` to start ROS master.
-5. To run the server code, in a new terminal, run `rosrun wrover_status_light DemoServer`.
+5. To run the server code, in a new terminal, run `rosrun service_training DemoServer`.
 6. To see a list of all services, in a new terminal, run `rosservice list`. You should see `/double_service` listed. Now would also be a good opportunity to run `rosservice help` and familiarize yourself with all the `rosservice` commands.
 7. You can run the service manually from the command line using `rosservice call`. In this case, try running `rosservice call /double_service "input: [insert your number here]"`. You should see that the inputted number is doubled. 
-8. To run the client code, run `rosrun wrover_status_light DemoClient`. You should see powers of 2 being printed. Eventually the program will print `Integer overflow encountered`. This is because the response/request messages use a 64-bit integer, and as the number is doubled eventually we will reach integer overflow.
+8. To run the client code, run `rosrun service_training DemoClient`. You should see powers of 2 being printed. Eventually the program will print `Integer overflow encountered`. This is because the response/request messages use a 64-bit integer, and as the number is doubled eventually we will reach integer overflow.
 9. Use `Ctrl-C` to exit out of any programs
 
 ### Python
@@ -204,20 +204,22 @@ To run the Python code:
 2. Run `catkin_make` to build the project if you haven't yet.
 3. Run `source devel/setup.bash` to source the project if you haven't yet. Also keep in mind that you have to resource every time you open a new terminal. 
 4. Run `roscore` to start ROS master.
-5. To run the server code, in a new terminal, run `rosrun wrover_status_light DemoServer.py`.
+5. To run the server code, in a new terminal, run `rosrun service_training DemoServer.py`.
 6. To see a list of all services, in a new terminal, run `rosservice list`. You should see `/double_service` listed. Now would also be a good opportunity to run `rosservice help` and familiarize yourself with all the `rosservice` commands.
 7. You can run the service manually from the command line using `rosservice call`. In this case, try running `rosservice call /double_service "input: [insert your number here]"`. You should see that the inputted number is doubled. 
-8. To run the client code, run `rosrun wrover_status_light DemoClient.py`. You should see powers of 2 being printed. Eventually the program will print `Integer overflow encountered`. This is because the response/request messages use a 64-bit integer, and as the number is doubled eventually we will reach integer overflow.
+8. To run the client code, run `rosrun service_training DemoClient.py`. You should see powers of 2 being printed. Eventually the program will print `Integer overflow encountered`. This is because the response/request messages use a 64-bit integer, and as the number is doubled eventually we will reach integer overflow.
 9. Use `Ctrl-C` to exit out of any programs
 
 ## Challenge
 In a real world competition, once the rover naviagates to a point of interest, it should notify the operator to perform some action. In this training, we will mock this behavior by having two services that you should interact with. 
 
-Once the mock rover has reached a beacon, it should signal this by sending a request message to the `service_light` service with the `light_status` field set to `DONE`. When the server receives the message, it will automatically stop the motors. After waiting for a few seconds (think of this as the operator taking over control to perform tasks), the server will return a response containing a boolean `canContinue` field, which indicates if the rover should move onto the next beacon or not. 
+Once the mock rover has reached a beacon, it should signal this by sending a request message to the `LightStatus` service with the `lightStatus` field set to `DONE`. When the server receives the message, it will automatically stop the motors. The rover should then continuously poll the `ContinuationStatus` service until the `canContinue` field becomes true, which should be a few seconds later. This indicates that the rover is ready to move on to the next beacon. 
 
-Your challenge is to implement the behavior described above in either `ServiceChallenge.cpp` or `ServiceChallenge.py` depending on your preferred language. You can also find `ServiceLight.srv` in the `srv` folder of this module. 
+Your challenge is to implement the behavior described above in either `ServiceChallenge.cpp` or `ServiceChallenge.py` depending on your preferred language. You can also find `LightStatus.srv` and `ContinuationStatus.srv` in the `srv` folder of the `robot_sim_gui` module. 
 
 ## Notes
 ROS's wiki page on services: http://wiki.ros.org/Services
+
 ROS tutorial on writing a service and client in C++: http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28c%2B%2B%29
+
 ROS tutorial on writing a service and client in Python: http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29

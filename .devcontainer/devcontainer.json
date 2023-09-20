@@ -34,8 +34,9 @@
 				"redhat.vscode-yaml"
 			],
 			"settings": {
-    			"terminal.integrated.defaultProfile.linux": "bash",
-    			"cmake.languageSupport.dotnetPath": "/usr/share/dotnet/dotnet"
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"cmake.languageSupport.dotnetPath": "/usr/share/dotnet/dotnet",
+				"python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python"
 			}
 		}
 	},

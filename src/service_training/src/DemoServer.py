@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import rospy
-from wrover_status_light.srv import DoubleService
-from wrover_status_light.srv import DoubleServiceRequest
-from wrover_status_light.srv import DoubleServiceResponse
+from service_training.srv import DoubleService
+from service_training.srv import DoubleServiceRequest
+from service_training.srv import DoubleServiceResponse
 
 
 '''

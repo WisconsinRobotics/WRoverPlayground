@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="topic_training" type="MotorChallenge.py" name="motor_challenge_py" output="screen" />
+    <node pkg="topic_training" type="MotorChallenge" name="motor_challenge_cpp" output="screen" />
+</launch>

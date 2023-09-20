@@ -1,4 +1,4 @@
-# ROS Setup
+# ROS Packages
 
 This covers the ROS package structure and how to make your own ROS packages.
 ROS packages are a way to organize code within a ROS project.

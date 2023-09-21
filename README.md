@@ -64,7 +64,8 @@ These instructions are written for Ubuntu, steps may vary if using a different d
 4. Set up SSH keys
 5. Clone the repository
 6. Open the repository with VSCode
-7. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
+7. Install the VSCode [Dev Containers Extension](vscode:extension/ms-vscode-remote.remote-containers)
+8. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
 
 #### Troubleshooting:
 
@@ -92,8 +93,9 @@ Since these command allow connections to your local X server, you may want to re
 2. Set up SSH keys on Windows and in WSL
 3. Clone the repository inside WSL
 4. Open the repository with VSCode
-5. Launch Docker Desktop
-6. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
+5. Install the VSCode [Dev Containers Extension](vscode:extension/ms-vscode-remote.remote-containers)
+6. Launch Docker Desktop
+7. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
 
 #### Troubleshooting:
 
@@ -114,8 +116,9 @@ Unable to execute git push or pull in container: https://superuser.com/questions
 2. Set up SSH keys
 3. Clone the repository
 4. Open the repository with VSCode
-5. Launch Docker Desktop
-6. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
+5. Install the VSCode [Dev Containers Extension](vscode:extension/ms-vscode-remote.remote-containers)
+6. Launch Docker Desktop
+7. In VSCode's command palette (F1), run `Dev Containers: Open Folder in Container`
 
 To ensure docker works with GUI tools, run `roscore` in VSCode's terminal and `rqt_plot` in another terminal. Follow instructions below if a new window fails to start and the terminal outputs something similar to:
 ```

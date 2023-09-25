@@ -18,7 +18,7 @@ set as the data received from the Publisher PlotDemo.py.
 The values given will be near continuous sine values in 
 radians.
 '''
-def callback(data: std_msgs.Float64) -> None:
+def callback(data: Float64) -> None:
     global pi 
     pi = data.data
 
@@ -30,8 +30,8 @@ we will do with the data/message.
 def main():
     ''' Set up the ROS topic. '''
     rospy.init_node('Demo', anonymous=True)
-    rospy.Subscriber('plot', std_msgs.Float64, callback)
-    pub = rospy.Publisher('chatter', std_msgs.String, queue_size=QUEUE_SIZE)
+    rospy.Subscriber('plot', Float64, callback)
+    pub = rospy.Publisher('chatter', String, queue_size=QUEUE_SIZE)
 
     ''' Specify the frequency we would like to loop at 
         (10Hz). '''

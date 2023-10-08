@@ -38,9 +38,12 @@ if __name__=='__main__':
         robotSimCanvas.addTarget(random.randint(150,robotSimCanvas.canvas.winfo_width()-150), random.randint(150,robotSimCanvas.canvas.winfo_height()-150))
 
     def processLight(msg: LightStatusRequest):
+        global canContinue
         # print(f'HEAD MSG {msg.lightStatus}')
         if msg.lightStatus: robotSimCanvas.status_light.setReachedTarget()
-        else: robotSimCanvas.status_light.setNavigatingToTarget()
+        else:
+            canContinue = False
+            robotSimCanvas.status_light.setNavigatingToTarget()
         return LightStatusResponse()
     light_service = rospy.Service('/robot/status_light', LightStatus, processLight)    
 
@@ -70,7 +73,7 @@ if __name__=='__main__':
                 counter += 1
                 print('CONTINUING...')
                 print(f'COMPLETE WITH {counter} TARGETS')
-            timer = threading.Timer(10, resetContinue)
+            timer = threading.Timer(3, resetContinue)
             timer.setDaemon = True
             timer.start()
 

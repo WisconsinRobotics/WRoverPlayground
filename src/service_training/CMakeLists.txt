@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   std_srvs
+  robot_sim_gui
 )
 
 ## System dependencies are found with CMake's conventions

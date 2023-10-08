@@ -15,6 +15,7 @@ find_package(catkin REQUIRED
    rospy
    std_msgs
    message_generation
+   robot_sim_gui
 )
 
 ## Generate messages in the 'msg' folder
